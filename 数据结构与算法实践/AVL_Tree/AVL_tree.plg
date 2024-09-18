@@ -1,0 +1,53 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: AVL_tree - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1534.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/AVL_tree.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\pfcourse\数据结构\AVL_tree\AVL_node.cpp"
+"D:\pfcourse\数据结构\AVL_tree\AVL_tree.cpp"
+"D:\pfcourse\数据结构\AVL_tree\Binary_node.cpp"
+"D:\pfcourse\数据结构\AVL_tree\Binary_tree.cpp"
+"D:\pfcourse\数据结构\AVL_tree\Main.cpp"
+"D:\pfcourse\数据结构\AVL_tree\MyStack.cpp"
+"D:\pfcourse\数据结构\AVL_tree\Record.cpp"
+"D:\pfcourse\数据结构\AVL_tree\Search_tree.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1534.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1535.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/AVL_tree.pdb" /debug /machine:I386 /out:"Debug/AVL_tree.exe" /pdbtype:sept 
+".\Debug\AVL_node.obj"
+".\Debug\AVL_tree.obj"
+".\Debug\Binary_node.obj"
+".\Debug\Binary_tree.obj"
+".\Debug\Main.obj"
+".\Debug\MyStack.obj"
+".\Debug\Record.obj"
+".\Debug\Search_tree.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp\RSP1535.tmp"
+<h3>Output Window</h3>
+Compiling...
+AVL_node.cpp
+AVL_tree.cpp
+Binary_node.cpp
+Binary_tree.cpp
+Main.cpp
+MyStack.cpp
+Record.cpp
+Search_tree.cpp
+Linking...
+
+
+
+<h3>Results</h3>
+AVL_tree.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
