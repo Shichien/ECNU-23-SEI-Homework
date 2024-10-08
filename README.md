@@ -1,2 +1,11 @@
-# ECNU-23-SEI-Homework
-Contains My Own Homework
+# ECNU-23-SEI-Homework                      
+## 数据结构与算法实践                        
+- 包含栈、队列、二叉树、二叉搜索树、AVL 树的实现                                    
+- 实现八皇后问题、Game Of Life、Tic-Tac-Toe 等游戏              
+- 实现约瑟夫环、波兰式计算器                      
+## 计算机系统的局限性           
+- 含有一篇相关论文，涉及角谷猜想                 
+## 计算机系统             
+- 含有对应的课程作业与5个Lab实验，平时分为 100 满分      
+- 得分情况：Lab1 110/100，Lab2 113/100，Lab3 108/100，Lab4 109/100，Lab5 96/100
+   
