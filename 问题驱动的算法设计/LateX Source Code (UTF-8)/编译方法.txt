@@ -1,0 +1,1 @@
+在命令行中使用 latexmk -xelatex Finalthesis 来编译, 才能正确显示参考文献的编号顺序。
