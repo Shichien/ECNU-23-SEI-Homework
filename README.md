@@ -1,4 +1,5 @@
-# ECNU-23-SEI-Homework                      
+# ECNU-23-SEI-Homework
+记录我在华东师范大学软件工程学院攻读时的成长作业过程
 ## 数据结构与算法实践                        
 - 包含栈、队列、二叉树、二叉搜索树、AVL 树的实现                                    
 - 实现八皇后问题、Game Of Life、Tic-Tac-Toe 等游戏              
