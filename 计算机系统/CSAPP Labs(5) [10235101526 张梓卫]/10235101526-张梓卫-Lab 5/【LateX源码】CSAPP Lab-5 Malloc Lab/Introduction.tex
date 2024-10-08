@@ -1,0 +1,24 @@
+\subsection{实验目的}
+本实验是$CSAPP$的$Malloc\ Lab$，目的是通过实现一个动态内存分配器，加深对内存分配和管理的理解。
+
+\subsection{实验前置准备}
+
+\subsection{实验要求}
+\begin{itemize}
+    \item 不允许在 $mm.c$ 程序中定义任何全局或静态复合数据结构，例如数组、结构、树或列表等规则。
+    \item 在本实验中，我们将为C程序编写一个动态存储分配器（$malloc$、$free$和$realloc$例程，
+    实现一个正确，高效和快速的分配器。
+    \item 本实验性能指标有两个方面，内存利用率和吞吐量，我们定义的分配器需要平衡这两个指标，以获取更高的分数。
+    \item 我们需要完善以下函数：
+    \begin{lstlisting}[language = C , title = { Function List } ]
+    int mm_init(void);
+    void *mm_malloc(size_t size);
+    void mm_free(void *ptr);
+    void *mm_realloc(void *ptr, size_t size);
+    \end{lstlisting}
+    \item 实验工具：$mdriver$工具，可以检测正确性和性能。
+\end{itemize}
+
+
+
+
