@@ -1,0 +1,27 @@
+\contentsline {section}{\numberline {一 \hspace {0pt}}实验简介}{1}{section.1}%
+\contentsline {section}{\numberline {二 \hspace {0pt}}实验前置准备}{2}{section.2}%
+\contentsline {section}{\numberline {三 \hspace {0pt}}实验分析及过程}{2}{section.3}%
+\contentsline {subsection}{\numberline {1 \hspace {0pt}}$Touch 1$}{2}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {1 \hspace {0pt}.1}getbuf 汇编代码分析}{2}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {1 \hspace {0pt}.2}$Touch 1$ 汇编代码分析}{3}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {1 \hspace {0pt}.3}$ Touch 1$ 汇编代码解释}{3}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {1 \hspace {0pt}.4}$Touch 1$ 漏洞注入}{3}{subsubsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {1 \hspace {0pt}.5}代码运行过程}{3}{subsubsection.3.1.5}%
+\contentsline {subsubsection}{\numberline {1 \hspace {0pt}.6}实验结果}{4}{subsubsection.3.1.6}%
+\contentsline {subsection}{\numberline {2 \hspace {0pt}}$Touch 2$}{4}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {2 \hspace {0pt}.1}$Touch 2$ 漏洞注入}{5}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {2 \hspace {0pt}.2}实验结果}{6}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3 \hspace {0pt}}Touch3}{6}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3 \hspace {0pt}.1}实验要求与思路}{6}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3 \hspace {0pt}.2}汇编代码分析}{6}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3 \hspace {0pt}.3}实验结果}{7}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {4 \hspace {0pt}}rtarget.c}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {5 \hspace {0pt}}Part A}{7}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {5 \hspace {0pt}.1}攻击方案分析}{8}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {5 \hspace {0pt}.2}Answers}{9}{subsubsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {5 \hspace {0pt}.3}实验结果}{10}{subsubsection.3.5.3}%
+\contentsline {subsection}{\numberline {6 \hspace {0pt}}Part B}{10}{subsection.3.6}%
+\contentsline {subsubsection}{\numberline {6 \hspace {0pt}.1}攻击前置知识}{10}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {6 \hspace {0pt}.2}攻击分析步骤}{11}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {6 \hspace {0pt}.3}Answers}{11}{subsubsection.3.6.3}%
+\contentsline {section}{\numberline {四 \hspace {0pt}}Result}{12}{section.4}%
