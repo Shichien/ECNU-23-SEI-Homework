@@ -1,0 +1,298 @@
+\documentclass[UTF8]{homework}
+% \date{May 14, 2024}
+% \author{Deralive / Shichien}
+% \title{华东师范大学软件学院实验报告模板}
+% 注意事项：编译两次，以确保目录、页码完整显示
+% 模板文件：https://github.com/Shichien/ECNU-LateX-Template
+
+\def\allfiles{}
+
+% \documentclass[14pt,a4paper,UTF8,twoside]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{longtable}
+% \usepackage{geometry} 
+\usepackage{ctex}
+\usepackage{booktabs} % 表格库
+\usepackage{titlesec} % 标题库
+\usepackage{fancyhdr} % 页眉页脚库
+\usepackage{lastpage} % 页码数库
+\usepackage{listings} % 代码块包
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{fontspec} % 允许设置字体
+\usepackage{unicode-math} % 允许数学公式使用特定字体
+\usepackage{mwe}
+\usepackage{zhlipsum} % 中文乱数文本
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{float} % 浮动体环境
+\usepackage{subcaption} % 子图包
+\usepackage{forest}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\date{} % 留空，以让编译时去除日期
+
+%———————————————注意事项—————————————————%
+
+% 1、如果编译显示失败，但没有错误信息，就是 filename.pdf 正在被占用
+% 2、在文件夹中的终端使用 Windows > xelatex filename.tex 也可编译
+
+%—————————————华东师范大学———————————————%
+
+% 论文制作时须加页眉，页眉从中文摘要开始至论文末
+% 偶数页码内容为：华东师范大学硕士学位论文，奇数页码内容为学位论文题目
+
+%————————定义 \section 的标题样式————————%
+
+% 注意：\chapter 等命令，内部使用的是 \thispagestyle{plain} 的排版格式
+% 若需要自己加上页眉，实际是在用 \thispagestyle{fancy} 的排版格式
+% 加上下面这一段指令，就能够让 \section 也使用 fancy 的排版格式
+% 本质就是让目录、第一页也能够显示页眉、页脚
+
+\fancypagestyle{plain}{
+  \pagestyle{fancy}
+}
+
+\pagestyle{fancy} % 设置 plain style 的属性
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\newcommand{\hmwkTitle}{Homework\ \#1}
+\newcommand{\hmwkDueDate}{October 04, 2021}
+\newcommand{\hmwkClass}{Course Name}
+\newcommand{\hmwkAuthorName}{Author Name}
+
+\newcommand{\hmwkTitleCN}{作业\#2：\\ Hinton、五年后的软件产品}
+\newcommand{\hmwkDueDateCN}{2024年10月23日}
+\newcommand{\hmwkAuthorNameCN}{张梓卫}
+\newcommand{\hmwkAuthorIDCN}{10235101526}
+
+\if\hmwkCoverPage 1
+    \title{
+        \vspace{3in}
+        \if\hmwkLanguage E
+            \huge{\textbf{\hmwkClass}}\\
+            \vspace{0.4in}
+            \huge{\textbf{\hmwkTitle}}\\
+            \vspace{0.4in}
+            \normalsize{Due on \hmwkDueDate}\\
+        \else
+            \Huge{\textbf{\hmwkClassCN}}\\
+            \vspace{0.3in}
+            \Huge{\textbf{\hmwkTitleCN}}\\
+            \vspace{0.4in}
+            \normalsize{截止日期：\hmwkDueDateCN}\\
+        \fi
+        \vspace{2.4in}
+    }
+
+    \if\hmwkLanguage E
+        \author{\hmwkAuthorName}
+    \else
+        \author{\hmwkAuthorNameCN (学号：\hmwkAuthorIDCN)}
+    \fi
+    \date{}
+\else
+    \title{
+        \if\hmwkLanguage E
+            \huge{\textbf{\hmwkClass}}\\
+            \vspace{0.05in}
+            \huge{\textbf{\hmwkTitle}}\\
+            \vspace{0.2in}
+            \normalsize{Due on \hmwkDueDate}\\
+        \else
+            \Huge{\textbf{\hmwkClassCN}}\\
+            \vspace{0.05in}
+            \Huge{\textbf{\hmwkTitleCN}}\\
+            \vspace{0.2in}
+            \normalsize{截止日期：\hmwkDueDateCN}\\
+        \fi
+    }
+
+    \if\hmwkLanguage E
+        \author{\hmwkAuthorName}
+    \else
+        \author{\hmwkAuthorNameCN (学号：\hmwkAuthorIDCN)}
+    \fi
+    \date{}
+\fi
+
+% 设置页脚：在每页的右下脚以斜体显示书名
+
+\fancyfoot[RO,RE]{\it Lab Report By \LaTeX} % 使用意大利斜体显示
+\renewcommand{\footrulewidth}{0.5pt} % 页脚水平线宽度
+
+% 设置页码：在底部居中显示页码
+
+\pagestyle{fancy}
+\fancyfoot[C]{\kaishu 第 \thepage 页 \ 共 \pageref{LastPage} 页} % LastPage 需要二次编译以获取总页数
+
+%——————————————代码块设置———————————————%
+
+\lstset {
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+    basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=bl,                   % sets the caption-position to bottom
+    commentstyle=\color{mygreen},    % comment style
+    deletekeywords={...},            % if you want to delete keywords from the given language
+    escapeinside={\%*}{*},           % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    frame=single,                    % adds a frame around the code
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    % language=Python,               % the language of the code
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    stringstyle=\color{orange},      % string literal style
+    tabsize=2,                       % sets default tabsize to 2 spaces
+    % title=Python Code              % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\linespread{1.2}
+
+%———————————————超链接设置——————————————%
+
+\hypersetup{
+    pdfstartview=FitH, % 设置PDF文档打开时的初始视图为页面宽度适应窗口宽度（即页面水平适应）
+    CJKbookmarks=true, % 用对CJK（中文、日文、韩文）字符的书签支持，确保这些字符在书签中正确显示
+    bookmarksnumbered=true, % 书签带有章节编号。这对有章节编号的文档很有用
+    bookmarksopen=true, % 文档打开时，书签树是展开的，方便查看所有书签
+    colorlinks, % 启用彩色链接。这样，链接在PDF中会显示为彩色，而不是默认的方框
+    pdfborder=001, % 设置PDF文档中链接的边框样式。001 表示链接周围没有边框，仅在单击时显示一个矩形
+    linkcolor=blue, % 设置文档内部链接（如目录中的章节链接）的颜色为蓝色
+    anchorcolor=blue, % 设置锚点链接（即目标在同一文档内的链接）的颜色为蓝色
+    citecolor=blue, % 设置引用（如文献引用）的颜色为蓝色
+}
+
+% 
+
+\begin{document}
+
+\maketitle
+\if\hmwkCoverPage 1
+    \pagebreak
+\fi
+
+
+%
+% first problem, id is automatically set to 1
+%
+\begin{homeworkProblem}
+
+1. 请阅读Geoffrey Hinton的科研经历，分析为什么Hinton能获得图灵奖和诺贝尔奖。（800-1200字。）    
+
+\solution
+
+\section{为什么Hinton能获得图灵奖和诺贝尔奖}
+
+\subsection{丰富的科研经历}
+
+他在计算机科学和数学领域做出了革命性的贡献，尤其在计算理论和人工智能方面。显然这些工作不仅深远影响学科发展，还开辟了全新的研究方向。
+众多的研究工作不仅具有很强的理论深度，还为现代计算机科学的许多核心概念打下了坚实的基础。
+
+作为一个领域的领军人物，他的研究不仅取得了突破性的成果，还对后续许多现代技术的发展有所启发。
+
+\subsection{学科交叉融合的基础}
+
+Hinton没有仅限于计算机，他的研究成果还影响了数学、逻辑学、认知科学等多个领域，具有广泛的应用价值，推动了各种学科的交叉融合发展。
+在剑桥大学读大一的一年里，Hinton是唯一一位同时修读物理学和生理学的学生。
+
+\subsection{孤影独行的笃定}
+
+1970年，Marvin Minsky和Seymour Papert都说神经网络前途渺茫，但Hinton仍然坚持下去，在这一条科研道路上，他本人也感觉很孤独。
+他通过重用神经元和使用快速权重（Fash Weight）实现了递归调用。
+
+\subsection{官方经费的支持}
+
+Hinton 于多伦多大学达成授课协议后，许多公司看重了他的讲座课程的内容，愿意赞助经费。
+而州政府也给过一笔研究经费，DNN-research的拍卖使得Hinton注意到了自己研究内容的价值性。
+
+\subsection{具有学术前瞻性}
+
+Hinton 认为，下一个 AI 大事件一定是脉冲神经网络的学习算法，并且认为深度学习
+一直在不断向前发展。比如随机失活（dropout）和现在的很多研究，但这一切离不开强大算力、海量数据以及随机梯度下降。 
+ 
+\subsection{好奇心驱动的研究}
+
+在神经网络领域，几乎所有的进步都源于数学推演时萌生的直觉。
+Hinton 喜欢按照直觉行事，喜欢在研究时用类比，他具有良好的心态：
+如果你不会因为成功而感到兴奋，也不会因为失败而感到沮丧，那算不上真正意义上的研究者。
+
+他认为，必须有好奇心的驱动才能做出最好的基础研究。只有这样，你才有动力去忽视那些明显的障碍，去预估自己会取得怎样的结果。
+如果能弄清一大批聪明人正在研究什么，然后再去做不一样的研究，总是一个好主意。
+
+\subsection{社会贡献}
+
+作为该领域的领军人物，他通过发表大量具有开创性的论文和书籍，
+指导了后续研究的方向。文章提到他的学术领导地位极高，
+他不仅引领了学术前沿的研究，还推动了科学界在处理复杂问题时的方法创新。
+
+文章中也提到了他在社会层面的贡献，他致力于将科学技术用于改善社会福祉，
+并积极参与科技伦理的讨论。他不仅推动了科学技术的发展，
+还参与制定了许多有关科技应用和伦理的政策，确保科技进步能造福人类。
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+
+2. 结合操作系统的发展趋势，想象一下你想开发的五年后的一款软件产品，并分析为什么这款产品五年后会出现。（500-800字） 
+
+\section{产品背景}
+
+目前，物联网设备数量的急剧增长以及设备间的相互感知需求，促使操作系统必须支持更智能的环境感知和互动能力。
+而我之前了解到的 WiFi CSI 技术，可以通过提取 WiFi 信号中的细微变化，能够感知设备周围的物理环境变化，
+如物体移动、手势识别、甚至是人体生命体征的检测。
+我曾经尝试部署过ESP32中ESP-IDF环境下的WiFi CSI技术，深度嵌入嵌入式操作系统，
+于是，我所设想的软件 SmartWiFiOS 应运而生。它可以实现精准和智能的物联网互动能力，
+不再依赖于昂贵的传感器设备（一切都基于 Radar、Router、Client等），同时降低功耗和成本。
+
+\subsection{产品功能设想}
+
+\subsubsection{WiFi CSI 环境感知与互动}
+SmartWiFiOS 将利用 WiFi CSI 技术，实现设备对环境的实时感知和响应。
+这将广泛应用于智能家居中的无接触控制（如老人跌倒检测）等场景。
+其余的应用也显而易见。利用深度学习框架可以训练一个识别Wifi CSI 信道变化的AI，在智能家居环境中，
+用户只需通过简单的手势便能控制家中的电器设备，而无需通过手机或遥控器操作。
+
+\subsubsection{AI 驱动的智能决策优化}
+SmartWiFiOS 内置的人工智能模块能够根据 WiFi CSI 数据和用户习惯进行智能决策。
+如操作系统感知到用户的离开或靠近，便自动调整家居设备的状态，就像开关灯和空调、风扇之类的设备。
+
+\subsubsection{模块化和可定制化设计}
+为适应不同IoT设备的需求，SmartWiFiOS 将采用模块化设计。
+开发者可以根据设备的具体应用场景，选择 WiFi CSI 环境感知模块或其他必要的功能模块。
+
+\subsection{五年后产品出现的原因分析}
+
+\subsubsection{物联网设备的广泛普及}
+未来五年，物联网设备将深入到人们生活的方方面面，智能家居、智能交通、健康监测等领域的设备数量将成倍增长。
+
+\subsubsection{智能化和用户体验的提升}
+传统的物理按键或移动 App 操作方式已经逐渐落后，各种大厂都将精力集中于手势控制、自动感知等无接触交互方式。
+它们必将成为未来IoT行业的主流发展趋势。
+
+\end{homeworkProblem}
+
+\bibliographystyle{abbrv}
+\bibliography{references.bib}
+
+\end{document}
