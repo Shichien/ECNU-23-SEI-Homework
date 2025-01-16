@@ -1,0 +1,381 @@
+\documentclass[UTF8]{homework}
+% \date{May 14, 2024}
+% \author{Deralive / Shichien}
+% \title{华东师范大学软件学院实验报告模板}
+% 注意事项：编译两次，以确保目录、页码完整显示
+% 模板文件：https://github.com/Shichien/ECNU-LateX-Template
+
+\def\allfiles{}
+
+% \documentclass[14pt,a4paper,UTF8,twoside]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{longtable}
+% \usepackage{geometry} 
+\usepackage{ctex}
+\usepackage{booktabs} % 表格库
+\usepackage{titlesec} % 标题库
+\usepackage{fancyhdr} % 页眉页脚库
+\usepackage{lastpage} % 页码数库
+\usepackage{listings} % 代码块包
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{fontspec} % 允许设置字体
+\usepackage{unicode-math} % 允许数学公式使用特定字体
+\usepackage{mwe}
+\usepackage{zhlipsum} % 中文乱数文本
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{float} % 浮动体环境
+\usepackage{subcaption} % 子图包
+\usepackage{forest}
+\usepackage{tikz}
+\usepackage{pgfgantt}
+
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\date{} % 留空，以让编译时去除日期
+
+%———————————————注意事项—————————————————%
+
+% 1、如果编译显示失败，但没有错误信息，就是 filename.pdf 正在被占用
+% 2、在文件夹中的终端使用 Windows > xelatex filename.tex 也可编译
+
+%—————————————华东师范大学———————————————%
+
+% 论文制作时须加页眉，页眉从中文摘要开始至论文末
+% 偶数页码内容为：华东师范大学硕士学位论文，奇数页码内容为学位论文题目
+
+%————————定义 \section 的标题样式————————%
+
+% 注意：\chapter 等命令，内部使用的是 \thispagestyle{plain} 的排版格式
+% 若需要自己加上页眉，实际是在用 \thispagestyle{fancy} 的排版格式
+% 加上下面这一段指令，就能够让 \section 也使用 fancy 的排版格式
+% 本质就是让目录、第一页也能够显示页眉、页脚
+
+\fancypagestyle{plain}{
+  \pagestyle{fancy}
+}
+
+\pagestyle{fancy} % 设置 plain style 的属性
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\newcommand{\hmwkTitle}{Homework\ \#1}
+\newcommand{\hmwkDueDate}{October 04, 2021}
+\newcommand{\hmwkClass}{Course Name}
+\newcommand{\hmwkAuthorName}{Author Name}
+
+\newcommand{\hmwkTitleCN}{作业\#3：\\ 241118 进程调度}
+\newcommand{\hmwkDueDateCN}{2024年11月27日}
+\newcommand{\hmwkAuthorNameCN}{张梓卫}
+\newcommand{\hmwkAuthorIDCN}{10235101526}
+
+\if\hmwkCoverPage 1
+    \title{
+        \vspace{3in}
+        \if\hmwkLanguage E
+            \huge{\textbf{\hmwkClass}}\\
+            \vspace{0.4in}
+            \huge{\textbf{\hmwkTitle}}\\
+            \vspace{0.4in}
+            \normalsize{Due on \hmwkDueDate}\\
+        \else
+            \Huge{\textbf{\hmwkClassCN}}\\
+            \vspace{0.3in}
+            \Huge{\textbf{\hmwkTitleCN}}\\
+            \vspace{0.4in}
+            \normalsize{截止日期：\hmwkDueDateCN}\\
+        \fi
+        \vspace{2.4in}
+    }
+
+    \if\hmwkLanguage E
+        \author{\hmwkAuthorName}
+    \else
+        \author{\hmwkAuthorNameCN (学号：\hmwkAuthorIDCN)}
+    \fi
+    \date{}
+\else
+    \title{
+        \if\hmwkLanguage E
+            \huge{\textbf{\hmwkClass}}\\
+            \vspace{0.05in}
+            \huge{\textbf{\hmwkTitle}}\\
+            \vspace{0.2in}
+            \normalsize{Due on \hmwkDueDate}\\
+        \else
+            \Huge{\textbf{\hmwkClassCN}}\\
+            \vspace{0.05in}
+            \Huge{\textbf{\hmwkTitleCN}}\\
+            \vspace{0.2in}
+            \normalsize{截止日期：\hmwkDueDateCN}\\
+        \fi
+    }
+
+    \if\hmwkLanguage E
+        \author{\hmwkAuthorName}
+    \else
+        \author{\hmwkAuthorNameCN (学号：\hmwkAuthorIDCN)}
+    \fi
+    \date{}
+\fi
+
+% 设置页脚：在每页的右下脚以斜体显示书名
+
+\fancyfoot[RO,RE]{\it Lab Report By \LaTeX} % 使用意大利斜体显示
+\renewcommand{\footrulewidth}{0.5pt} % 页脚水平线宽度
+
+% 设置页码：在底部居中显示页码
+
+\pagestyle{fancy}
+\fancyfoot[C]{\kaishu 第 \thepage 页 \ 共 \pageref{LastPage} 页} % LastPage 需要二次编译以获取总页数
+
+%——————————————代码块设置———————————————%
+
+\lstset {
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+    basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=bl,                   % sets the caption-position to bottom
+    commentstyle=\color{mygreen},    % comment style
+    deletekeywords={...},            % if you want to delete keywords from the given language
+    escapeinside={\%*}{*},           % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    frame=single,                    % adds a frame around the code
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    % language=Python,               % the language of the code
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    stringstyle=\color{orange},      % string literal style
+    tabsize=2,                       % sets default tabsize to 2 spaces
+    % title=Python Code              % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\linespread{1.2}
+
+%———————————————超链接设置——————————————%
+
+\hypersetup{
+    pdfstartview=FitH, % 设置PDF文档打开时的初始视图为页面宽度适应窗口宽度（即页面水平适应）
+    CJKbookmarks=true, % 用对CJK（中文、日文、韩文）字符的书签支持，确保这些字符在书签中正确显示
+    bookmarksnumbered=true, % 书签带有章节编号。这对有章节编号的文档很有用
+    bookmarksopen=true, % 文档打开时，书签树是展开的，方便查看所有书签
+    colorlinks, % 启用彩色链接。这样，链接在PDF中会显示为彩色，而不是默认的方框
+    pdfborder=001, % 设置PDF文档中链接的边框样式。001 表示链接周围没有边框，仅在单击时显示一个矩形
+    linkcolor=blue, % 设置文档内部链接（如目录中的章节链接）的颜色为蓝色
+    anchorcolor=blue, % 设置锚点链接（即目标在同一文档内的链接）的颜色为蓝色
+    citecolor=blue, % 设置引用（如文献引用）的颜色为蓝色
+}
+
+% 
+
+\begin{document}
+
+\maketitle
+\if\hmwkCoverPage 1
+    \pagebreak
+\fi
+
+
+%
+% first problem, id is automatically set to 1
+%
+\begin{homeworkProblem}
+
+\section{5.6}
+
+轮转调度程序的一个变种是回归轮转(regressiveround-robin)调度程序。这个调度程序为每个进
+程分配时间片和优先级。时间片的初值为50ms。然而，如果一个进程获得CPU并用完它的整个
+时间片(不会因I/0而阻塞)，那么它的时间片会增加10ms并且它的优先级会提升。(进程的时
+间片可以增加到最多100ms。)如果一个进程在用完它的整个时间片之前阻塞，那么它的时间片
+会降低5ms而它的优先级不变。回归轮转调度程序会偏爱哪类进程(CPU密集型的或IO密集型
+的)?请解释。
+
+\solution
+
+回归轮转调度程序会偏爱 CPU 密集型的进程,
+这种调度器将有利于CPU受限的进程，因为它们会获得更长的时间量以及
+每当它们消耗整个时间量时，优先级就会提高。因为它们能够连续完成分配的时间片，时间片和优先级会逐渐提高。
+此调度程序不会惩罚I/O限制进程，因为它们在消耗全部时间之前可能会阻塞I/O，但它们的优先级保持不变。
+
+\section{5.7}
+
+假设有如下 1 组进程，它们的 CPU 执行时间可以毫秒来计算：
+\[
+\begin{array}{|c|c|c|}
+\hline
+\text{进程} & \text{执行时间} & \text{优先级} \\
+\hline
+P_1 & 2 & 2 \\
+P_2 & 1 & 1 \\
+P_3 & 8 & 4 \\
+P_4 & 4 & 2 \\
+P_5 & 5 & 3 \\
+\hline
+\end{array}
+\]
+
+假设进程按 $P_1$, $P_2$, $P_3$, $P_4$, $P_5$ 顺序在时刻 0 到达。
+
+\begin{enumerate}
+    \item[(a)] 画出 4 个 Gantt 图，分别演示采用每种调度算法（FCFS、SJF、非抢占优先级调度（一个较大优先级数值意味着更高优先级）和 RR（时间片 $=2$））的进程执行。
+    \item[(b)] 每个进程在 (a) 里的每种调度算法下的周转时间是多少？
+    \item[(c)] 每个进程在 (a) 里的每种调度算法下的等待时间是多少？
+    \item[(d)] 哪一种调度算法的平均等待时间（对所有进程）最小？
+\end{enumerate}
+
+\solution
+
+\begin{figure}[H]
+    \begin{center}
+    
+    \begin{ganttchart}[y unit title=0.4cm,
+    y unit chart=0.5cm,
+    vgrid,hgrid, 
+    title label anchor/.style={below=-1.6ex},
+    title left shift=.05,
+    title right shift=-.05,
+    title height=1,
+    progress label text={},
+    bar height=0.7,
+    group right shift=0,
+    group top shift=.6,
+    group height=.3]{1}{20}
+    %labels
+    \gantttitle{Cycle}{20} \\
+    %tasks
+    \ganttbar{FCFS}{1}{2}
+    \ganttbar{FCFS}{3}{3}
+    \ganttbar{FCFS}{4}{11}
+    \ganttbar{FCFS}{12}{15}
+    \ganttbar{FCFS}{16}{20} \\ 
+    \ganttbar{SJF}{1}{1}
+    \ganttbar{SJF}{2}{3}
+    \ganttbar{SJF}{4}{7}
+    \ganttbar{SJF}{8}{12}
+    \ganttbar{SJF}{13}{20} \\
+    \ganttbar{Priority}{1}{8}
+    \ganttbar{Priority}{9}{13}
+    \ganttbar{Priority}{14}{15}
+    \ganttbar{Priority}{16}{19} 
+    \ganttbar{Priority}{20}{20} \\
+    \ganttbar{RR}{1}{2}
+    \ganttbar{RR}{3}{3}
+    \ganttbar{RR}{4}{5}
+    \ganttbar{RR}{6}{7}
+    \ganttbar{RR}{8}{9}
+    \ganttbar{RR}{10}{11}
+    \ganttbar{RR}{12}{13}
+    \ganttbar{RR}{14}{15}
+    \ganttbar{RR}{16}{17}
+    \ganttbar{RR}{18}{18}
+    \ganttbar{RR}{19}{20} \\
+    \end{ganttchart}
+    \end{center}
+    \caption{Gantt Chart}
+
+\end{figure}
+
+\textbf{(b) 周转时间 = 完成时间 - 到达时间}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}l|ccccc@{}}
+    \toprule
+              & \textbf{P1} & \textbf{P2} & \textbf{P3} & \textbf{P4} & \textbf{P5} \\ \midrule
+    \textbf{FCFS}       & 2ms  & 3ms  & 11ms & 15ms & 20ms \\
+    \textbf{SJF}        & 3ms  & 1ms  & 20ms & 7ms  & 12ms \\
+    \textbf{非抢占优先级} & 15ms & 20ms & 8ms  & 19ms & 13ms \\
+    \textbf{RR}         & 2ms  & 3ms  & 20ms & 13ms & 18ms \\ \bottomrule
+    \end{tabular}
+    \end{table}
+    
+    \vspace{1cm}
+    
+    \textbf{(c) 等待时间 = 周转时间 - 执行时间}
+    
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{@{}l|ccccc@{}}
+    \toprule
+              & \textbf{P1} & \textbf{P2} & \textbf{P3} & \textbf{P4} & \textbf{P5} \\ \midrule
+    \textbf{FCFS}       & 0ms  & 2ms  & 3ms  & 11ms & 15ms \\
+    \textbf{SJF}        & 1ms  & 0ms  & 12ms & 3ms  & 7ms  \\
+    \textbf{非抢占优先级} & 13ms & 19ms & 0ms  & 15ms & 8ms  \\
+    \textbf{RR}         & 0ms  & 2ms  & 12ms & 9ms  & 13ms \\ \bottomrule
+    \end{tabular}
+    \end{table}
+
+\vspace{1cm}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{@{}l|c@{}}
+    \toprule
+    \textbf{调度算法} & \textbf{平均等待时间} \\ \midrule
+    \textbf{FCFS}       & 6.2ms \\
+    \textbf{SJF}        & 4.6ms \\
+    \textbf{非抢占优先级} & 11.0ms \\
+    \textbf{RR}         & 7.2ms \\ \bottomrule
+    \end{tabular}
+    \caption{各调度算法的平均等待时间}
+    \end{table}
+    
+
+\textbf{(d) Shortest Job First}
+\begin{itemize}
+    \item Shortest Job First (SJF) minimizes the average waiting time.
+\end{itemize}
+
+\section{5.12}
+
+现有运行10个IO密集型任务和1个CPU密集型任务的一个系统。假设IO密集型任务每1ms
+的 CPU计算就进行一次 I/0操作，并且每个I/0操作需要10ms来完成。另假设上下文切换开
+销是0.1ms，所有进程都是长时间运行的任务。请讨论在下列条件下轮转调度程序的CPU利
+用率:
+
+\begin{itemize}
+    \item (a) 时间片为 1ms
+    \item (b) 时间片为 10ms
+\end{itemize}
+
+\solution
+
+\subsection{a}
+
+时间量为1毫秒：无论调度哪个进程，调度器每次切换上下文，都会产生0.1毫秒的上下文切换成本。
+这导致CPU利用率为 $ \frac{1 ms}{1ms + 0.1 ms} \times 100 \% \approx 90.91 \% $. 
+
+\subsection{b}
+
+时间量为10毫秒：I/O受限的任务在仅使用1毫秒后就会发生上下文切换
+毫秒的时间量。因此，循环完成所有流程所需的时间为 $ 10 \times 1.1 +
+10.1 $（因为每个I/O绑定任务执行1毫秒，然后引发上下文切换任务，而
+CPU限制的任务在引发上下文切换之前执行10毫秒）。CPU利用率为 $ \frac{20ms}{21.1ms} \times 100 \% \approx 94.79 \% $.
+
+\end{homeworkProblem}
+
+\bibliographystyle{abbrv}
+\bibliography{references.bib}
+
+\end{document}

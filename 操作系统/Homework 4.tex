@@ -1,0 +1,668 @@
+\documentclass[UTF8]{homework}
+% \date{May 14, 2024}
+% \author{Deralive / Shichien}
+% \title{华东师范大学软件学院实验报告模板}
+% 注意事项：编译两次，以确保目录、页码完整显示
+% 模板文件：https://github.com/Shichien/ECNU-LateX-Template
+
+\def\allfiles{}
+
+% \documentclass[14pt,a4paper,UTF8,twoside]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{longtable}
+% \usepackage{geometry} 
+\usepackage{ctex}
+\usepackage{booktabs} % 表格库
+\usepackage{titlesec} % 标题库
+\usepackage{fancyhdr} % 页眉页脚库
+\usepackage{lastpage} % 页码数库
+\usepackage{listings} % 代码块包
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{fontspec} % 允许设置字体
+\usepackage{unicode-math} % 允许数学公式使用特定字体
+\usepackage{mwe}
+\usepackage{zhlipsum} % 中文乱数文本
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{float} % 浮动体环境
+\usepackage{subcaption} % 子图包
+\usepackage{forest}
+\usepackage{tikz}
+\usepackage{pgfgantt}
+
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\date{} % 留空，以让编译时去除日期
+
+%———————————————注意事项—————————————————%
+
+% 1、如果编译显示失败，但没有错误信息，就是 filename.pdf 正在被占用
+% 2、在文件夹中的终端使用 Windows > xelatex filename.tex 也可编译
+
+%—————————————华东师范大学———————————————%
+
+% 论文制作时须加页眉，页眉从中文摘要开始至论文末
+% 偶数页码内容为：华东师范大学硕士学位论文，奇数页码内容为学位论文题目
+
+%————————定义 \section 的标题样式————————%
+
+% 注意：\chapter 等命令，内部使用的是 \thispagestyle{plain} 的排版格式
+% 若需要自己加上页眉，实际是在用 \thispagestyle{fancy} 的排版格式
+% 加上下面这一段指令，就能够让 \section 也使用 fancy 的排版格式
+% 本质就是让目录、第一页也能够显示页眉、页脚
+
+\fancypagestyle{plain}{
+  \pagestyle{fancy}
+}
+
+\pagestyle{fancy} % 设置 plain style 的属性
+
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\newcommand{\hmwkTitle}{Homework\ \#1}
+\newcommand{\hmwkDueDate}{October 04, 2021}
+\newcommand{\hmwkClass}{Course Name}
+\newcommand{\hmwkAuthorName}{Author Name}
+
+\newcommand{\hmwkTitleCN}{作业\#3：\\ 241210 死锁}
+\newcommand{\hmwkDueDateCN}{2024年12月11日}
+\newcommand{\hmwkAuthorNameCN}{张梓卫}
+\newcommand{\hmwkAuthorIDCN}{10235101526}
+
+\if\hmwkCoverPage 1
+    \title{
+        \vspace{3in}
+        \if\hmwkLanguage E
+            \huge{\textbf{\hmwkClass}}\\
+            \vspace{0.4in}
+            \huge{\textbf{\hmwkTitle}}\\
+            \vspace{0.4in}
+            \normalsize{Due on \hmwkDueDate}\\
+        \else
+            \Huge{\textbf{\hmwkClassCN}}\\
+            \vspace{0.3in}
+            \Huge{\textbf{\hmwkTitleCN}}\\
+            \vspace{0.4in}
+            \normalsize{截止日期：\hmwkDueDateCN}\\
+        \fi
+        \vspace{2.4in}
+    }
+
+    \if\hmwkLanguage E
+        \author{\hmwkAuthorName}
+    \else
+        \author{\hmwkAuthorNameCN (学号：\hmwkAuthorIDCN)}
+    \fi
+    \date{}
+\else
+    \title{
+        \if\hmwkLanguage E
+            \huge{\textbf{\hmwkClass}}\\
+            \vspace{0.05in}
+            \huge{\textbf{\hmwkTitle}}\\
+            \vspace{0.2in}
+            \normalsize{Due on \hmwkDueDate}\\
+        \else
+            \Huge{\textbf{\hmwkClassCN}}\\
+            \vspace{0.05in}
+            \Huge{\textbf{\hmwkTitleCN}}\\
+            \vspace{0.2in}
+            \normalsize{截止日期：\hmwkDueDateCN}\\
+        \fi
+    }
+
+    \if\hmwkLanguage E
+        \author{\hmwkAuthorName}
+    \else
+        \author{\hmwkAuthorNameCN (学号：\hmwkAuthorIDCN)}
+    \fi
+    \date{}
+\fi
+
+% 设置页脚：在每页的右下脚以斜体显示书名
+
+\fancyfoot[RO,RE]{\it Lab Report By \LaTeX} % 使用意大利斜体显示
+\renewcommand{\footrulewidth}{0.5pt} % 页脚水平线宽度
+
+% 设置页码：在底部居中显示页码
+
+\pagestyle{fancy}
+\fancyfoot[C]{\kaishu 第 \thepage 页 \ 共 \pageref{LastPage} 页} % LastPage 需要二次编译以获取总页数
+
+%——————————————代码块设置———————————————%
+
+\lstset {
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+    basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=bl,                   % sets the caption-position to bottom
+    commentstyle=\color{mygreen},    % comment style
+    deletekeywords={...},            % if you want to delete keywords from the given language
+    escapeinside={\%*}{*},           % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    frame=single,                    % adds a frame around the code
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    % language=Python,               % the language of the code
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    stringstyle=\color{orange},      % string literal style
+    tabsize=2,                       % sets default tabsize to 2 spaces
+    % title=Python Code              % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\linespread{1.2}
+
+%———————————————超链接设置——————————————%
+
+\hypersetup{
+    pdfstartview=FitH, % 设置PDF文档打开时的初始视图为页面宽度适应窗口宽度（即页面水平适应）
+    CJKbookmarks=true, % 用对CJK（中文、日文、韩文）字符的书签支持，确保这些字符在书签中正确显示
+    bookmarksnumbered=true, % 书签带有章节编号。这对有章节编号的文档很有用
+    bookmarksopen=true, % 文档打开时，书签树是展开的，方便查看所有书签
+    colorlinks, % 启用彩色链接。这样，链接在PDF中会显示为彩色，而不是默认的方框
+    pdfborder=001, % 设置PDF文档中链接的边框样式。001 表示链接周围没有边框，仅在单击时显示一个矩形
+    linkcolor=blue, % 设置文档内部链接（如目录中的章节链接）的颜色为蓝色
+    anchorcolor=blue, % 设置锚点链接（即目标在同一文档内的链接）的颜色为蓝色
+    citecolor=blue, % 设置引用（如文献引用）的颜色为蓝色
+}
+
+% 
+
+\begin{document}
+
+\maketitle
+\if\hmwkCoverPage 1
+    \pagebreak
+\fi
+
+
+%
+% first problem, id is automatically set to 1
+%
+\begin{homeworkProblem}
+
+\section{7.7}
+
+假设一个系统有4个相同类型的资源，并由三个进程共享。每个进程最多需要2个资源，证明这个系统不会死锁。
+
+\solution
+
+四个资源，三个进程，必然有一个进程持有至少两个资源，该进程可以完成，完成后释放这两个资源，其余进程都可以完成。不会死锁。
+
+数学证明：
+
+\begin{itemize}
+    \item 总资源数为 $R$；进程数为 $N$；每个进程最多需要的资源为 $K$。
+\end{itemize}
+
+系统不会死锁的条件是：
+\[
+R \geq (N - 1) \cdot K + 1
+\]
+
+
+$(N-1) \cdot K$ 是防止死锁的关键部分：即使 $N-1$ 个进程各占用最多的 $K$ 个资源，系统仍需要保留至少 1 个资源，来破坏循环等待条件。
+
+
+在本题中：
+\begin{itemize}
+    \item $R = 4$（系统有 4 个资源）；$N = 3$（系统有 3 个进程）；$K = 2$（每个进程最多需要 2 个资源）。
+\end{itemize}
+
+\[
+R \geq (3 - 1) \cdot 2 + 1 = 4
+\]
+
+$R = 4$ 满足该条件，因此系统不会死锁。
+
+\section{7.12}
+
+假设一个系统具有如下快照：
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.5} % 设置行高
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{进程} & \multicolumn{4}{|c|}{\textbf{Allocation}} & \multicolumn{4}{|c|}{\textbf{Max}} \\ \hline
+ & A & B & C & D & A & B & C & D \\ \hline
+$P_0$ & 3 & 0 & 1 & 4 & 5 & 1 & 1 & 7 \\ \hline
+$P_1$ & 2 & 2 & 1 & 0 & 3 & 2 & 1 & 1 \\ \hline
+$P_2$ & 3 & 1 & 2 & 1 & 3 & 3 & 2 & 1 \\ \hline
+$P_3$ & 0 & 5 & 1 & 0 & 4 & 6 & 1 & 2 \\ \hline
+$P_4$ & 4 & 2 & 1 & 2 & 6 & 3 & 2 & 5 \\ \hline
+\end{tabular}
+\caption{系统资源快照}
+\end{table}
+
+采用银行家算法，确定如下每个状态是否安全的。如果状态是安全的，那么说明进程可以完成
+的顺序。否则，说明为什么状态是不安全的。
+
+\begin{itemize}
+    \item a.Available=(0,3,0,1)
+    \item b.Available=(1,0,0,2)
+\end{itemize}
+
+\solution
+
+Need矩阵为：
+
+\[
+\begin{array}{c|cccc}
+\hline
+   & A & B & C & D \\ \hline
+P_0 & 2 & 1 & 0 & 3 \\
+P_1 & 1 & 0 & 0 & 1 \\
+P_2 & 0 & 2 & 0 & 0 \\
+P_3 & 4 & 1 & 0 & 2 \\
+P_4 & 2 & 1 & 1 & 3 \\ \hline
+\end{array}
+\]
+
+按银行家算法的安全性检查步骤：
+
+1. 找满足 $\text{Need}(P_i) \leq \text{Work}$ 的未完成进程。
+
+   \[
+   \text{Need}(P_2) = (0,2,0,0) \leq (0,3,0,1) \quad \checkmark
+   \]
+   \[
+   \text{Work} = \text{Work} + \text{Allocation}(P_2) = (0,3,0,1) + (3,1,2,1) = (3,4,2,2)
+   \]
+   \[
+   \text{Finish}[P_2] = T
+   \]
+
+2. 现在 $\text{Work} = (3,4,2,2)$，继续找下一个可执行的进程。
+
+   \[
+   \text{Need}(P_1) = (1,0,0,1) \leq (3,4,2,2) \quad \checkmark
+   \]
+   \[
+   \text{Work} = (3,4,2,2) + (2,2,1,0) = (5,6,3,2)
+   \]
+   \[
+   \text{Finish}[P_1] = T
+   \]
+
+3. 继续，$\text{Work} = (5,6,3,2)$。
+
+   \[
+   \text{Need}(P_3) = (4,1,0,2) \leq (5,6,3,2) \quad \checkmark
+   \]
+   \[
+   \text{Work} = (5,6,3,2) + (0,5,1,0) = (5,11,4,2)
+   \]
+   \[
+   \text{Finish}[P_3] = T
+   \]
+
+4. 现在 $\text{Work} = (5,11,4,2)$，剩下 $P_0$ 和 $P_4$ 未完成。
+
+   \[
+   \text{Need}(P_4) = (2,1,1,3) \leq (5,11,4,2)\,？ 
+   \]
+   前三项满足，但最后一项 $3 \leq 2$ 不成立，无法执行 $P_4$。
+
+\[
+\text{Finish} = [F,T,T,T,F]
+\]
+
+仍有未完成进程（$P_0,P_4$均无法得到所需资源），因此该状态不安全。
+
+\textbf{故：当 $\text{Available}=(0,3,0,1)$ 时，状态不安全。}
+
+\subsection*{(b) $\text{Available} = (1,0,0,2)$}
+
+\[
+\text{Work} = \text{Available} = (1,0,0,2),\quad \text{Finish}=[F,F,F,F,F]
+\]
+
+   
+   \[
+   \text{Need}(P_1)=(1,0,0,1) \leq (1,0,0,2) \quad \checkmark
+   \]
+   \[
+   \text{Work} = (1,0,0,2)+(2,2,1,0) = (3,2,1,2)
+   \]
+   \[
+   \text{Finish}[P_1]=T
+   \]
+
+2. $\text{Work}=(3,2,1,2)$，检查 $P_2$:
+   \[
+   \text{Need}(P_2)=(0,2,0,0) \leq (3,2,1,2) \quad \checkmark
+   \]
+   \[
+   \text{Work}=(3,2,1,2)+(3,1,2,1)=(6,3,3,3)
+   \]
+   \[
+   \text{Finish}[P_2]=T
+   \]
+
+3. $\text{Work}=(6,3,3,3)$，检查 $P_3$:
+   \[
+   \text{Need}(P_3)=(4,1,0,2) \leq (6,3,3,3) \quad \checkmark
+   \]
+   \[
+   \text{Work}=(6,3,3,3)+(0,5,1,0)=(6,8,4,3)
+   \]
+   \[
+   \text{Finish}[P_3]=T
+   \]
+
+4. $\text{Work}=(6,8,4,3)$，检查 $P_4$:
+   \[
+   \text{Need}(P_4)=(2,1,1,3) \leq (6,8,4,3) \quad \checkmark
+   \]
+   \[
+   \text{Work}=(6,8,4,3)+(4,2,1,2)=(10,10,5,5)
+   \]
+   \[
+   \text{Finish}[P_4]=T
+   \]
+
+   \[
+   \text{Need}(P_0)=(2,1,0,3) \leq (10,10,5,5) \quad \checkmark
+   \]
+   \[
+   \text{Work}=(10,10,5,5)+(3,0,1,4)=(13,10,6,9)
+   \]
+   \[
+   \text{Finish}[P_0]=T
+   \]
+
+此时：
+\[
+\text{Finish}=[T,T,T,T,T]
+\]
+
+所有进程均能完成。
+
+执行顺序为 $P_1 \rightarrow P_2 \rightarrow P_3 \rightarrow P_4 \rightarrow P_0$。
+
+\textbf{结论：当 $\text{Available}=(1,0,0,2)$ 时，状态安全，可行的安全序列为：$(P_1, P_2, P_3, P_4, P_0)$。}
+
+
+\section{7.13}
+
+假设一个系统具有如下快照：
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.5} % 设置行高
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \textbf{进程} & \multicolumn{4}{|c|}{\textbf{Allocation}} & \multicolumn{4}{|c|}{\textbf{Max}} & \textbf{Available} \\ \hline
+     & A & B & C & D & A & B & C & D & A, B, C, D \\ \hline
+    $P_0$ & 2 & 0 & 0 & 1 & 4 & 2 & 1 & 2 & 3, 3, 2, 1 \\ \hline
+    $P_1$ & 3 & 1 & 2 & 1 & 5 & 2 & 5 & 2 & \\ \hline
+    $P_2$ & 2 & 1 & 0 & 3 & 2 & 3 & 1 & 6 & \\ \hline
+    $P_3$ & 1 & 3 & 1 & 2 & 1 & 4 & 2 & 4 & \\ \hline
+    $P_4$ & 1 & 4 & 3 & 2 & 3 & 6 & 6 & 5 & \\ \hline
+    \end{tabular}
+    \caption{系统资源快照}
+    \end{table}
+
+采用银行家算法，回答下面的问题：
+
+\begin{enumerate}
+    \item[a.] 通过进程可以完成执行的顺序，说明系统处于安全状态。
+    \item[b.] 当进程 $P_1$ 的请求为 $(1, 1, 0, 0)$ 时，能否立即允许这一请求？
+    \item[c.] 当进程 $P_4$ 的请求为 $(0, 0, 2, 0)$ 时，能否立即允许这一请求？
+\end{enumerate}
+
+\solution
+
+$\text{Need}$ 矩阵为：
+\[
+\begin{array}{c|cccc}
+\hline
+   & A & B & C & D \\ \hline
+P_0 & 2 & 2 & 1 & 1 \\
+P_1 & 2 & 1 & 3 & 1 \\
+P_2 & 0 & 2 & 1 & 3 \\
+P_3 & 0 & 1 & 1 & 2 \\
+P_4 & 2 & 2 & 3 & 3 \\
+\hline
+\end{array}
+\]
+
+
+初始：
+\[
+\text{Work} = \text{Available} = (3,3,2,1), \quad \text{Finish} = [F,F,F,F,F]
+\]
+
+检查可满足的进程（Need $\leq$ Work）：
+
+   \[
+   \text{Need}(P_0) = (2,2,1,1) \leq (3,3,2,1)\, \checkmark
+   \]
+   \[
+   \text{Work} = (3,3,2,1) + \text{Allocation}(P_0) = (3,3,2,1)+(2,0,0,1) = (5,3,2,2)
+   \]
+   \[
+   \text{Finish}[P_0] = T
+   \]
+
+2. 现在 $\text{Work}=(5,3,2,2)$，检查其他进程：
+   
+   \[
+   \text{Need}(P_3)=(0,1,1,2) \leq (5,3,2,2)\, \checkmark
+   \]
+   \[
+   \text{Work}=(5,3,2,2) + (1,3,1,2) = (6,6,3,4)
+   \]
+   \[
+   \text{Finish}[P_3] = T
+   \]
+
+3. $\text{Work}=(6,6,3,4)$，继续：
+   
+   \[
+   \text{Need}(P_2)=(0,2,1,3) \leq (6,6,3,4)\, \checkmark
+   \]
+   \[
+   \text{Work}=(6,6,3,4) + (2,1,0,3) = (8,7,3,7)
+   \]
+   \[
+   \text{Finish}[P_2] = T
+   \]
+
+4. $\text{Work}=(8,7,3,7)$，检查 $P_1$:
+   \[
+   \text{Need}(P_1)=(2,1,3,1) \leq (8,7,3,7)\, \checkmark
+   \]
+   \[
+   \text{Work}=(8,7,3,7) + (3,1,2,1) = (11,8,5,8)
+   \]
+   \[
+   \text{Finish}[P_1]=T
+   \]
+
+5. $\text{Work}=(11,8,5,8)$，最后检查 $P_4$:
+   \[
+   \text{Need}(P_4)=(2,2,3,3) \leq (11,8,5,8)\, \checkmark
+   \]
+   \[
+   \text{Work}=(11,8,5,8) + (1,4,3,2)=(12,12,8,10)
+   \]
+   \[
+   \text{Finish}[P_4]=T
+   \]
+
+所有进程均可完成：
+\[
+\text{Finish}=[T,T,T,T,T]
+\]
+
+安全序列为：
+\[
+(P_0 \rightarrow P_3 \rightarrow P_2 \rightarrow P_1 \rightarrow P_4).
+\]
+
+故系统处于安全状态。
+
+\section*{(b) 当进程 $P_1$ 的请求为 $(1,1,0,0)$ 时，能否立即允许这一请求？}
+
+请求向量为 $R_1=(1,1,0,0)$。
+
+检查：
+1. 请求是否不超过其需要：
+   \[
+   \text{Need}(P_1)=(2,1,3,1), \quad R_1=(1,1,0,0)
+   \]
+   \[
+   (1 \leq 2,\,1 \leq 1,\,0 \leq 3,\,0 \leq 1)\, \checkmark
+   \]
+
+2. 请求是否不超过当前可用：
+   \[
+   \text{Available}=(3,3,2,1),\; R_1=(1,1,0,0)
+   \]
+   \[
+   (1 \leq 3,\,1 \leq 3,\,0 \leq 2,\,0 \leq 1)\, \checkmark
+   \]
+
+可尝试分配：  
+分配后更新：
+\[
+\text{Available}_{new} = (3,3,2,1)-(1,1,0,0)=(2,2,2,1)
+\]
+\[
+\text{Allocation}(P_1)_{new}=(3+1,1+1,2+0,1+0)=(4,2,2,1)
+\]
+\[
+\text{Need}(P_1)_{new}=(2-1,1-1,3-0,1-0)=(1,0,3,1)
+\]
+
+在此新状态下重复安全性检查：
+
+\[
+\text{Work}=(2,2,2,1)
+\]
+
+- 检查 $P_0$: Need$(P_0)=(2,2,1,1)\leq(2,2,2,1)$？ 是的。执行 $P_0$：
+  \[
+  \text{Work}=(2,2,2,1)+(2,0,0,1)=(4,2,2,2)
+  \]
+
+- 检查 $P_3$: Need$(P_3)=(0,1,1,2) \leq (4,2,2,2)$？ 是的。执行 $P_3$：
+  \[
+  \text{Work}=(4,2,2,2)+(1,3,1,2)=(5,5,3,4)
+  \]
+
+- 检查 $P_2$: Need$(P_2)=(0,2,1,3)\leq(5,5,3,4)$？ 是的。执行 $P_2$：
+  \[
+  \text{Work}=(5,5,3,4)+(2,1,0,3)=(7,6,3,7)
+  \]
+
+- 检查更新后 $P_1$: Need$(P_1)=(1,0,3,1)\leq(7,6,3,7)$？ 是的。执行 $P_1$：
+  \[
+  \text{Work}=(7,6,3,7)+(4,2,2,1)=(11,8,5,8)
+  \]
+
+- 检查 $P_4$: Need$(P_4)=(2,2,3,3)\leq(11,8,5,8)$？ 是的。执行 $P_4$：
+  \[
+  \text{Work}=(11,8,5,8)+(1,4,3,2)=(12,12,8,10)
+  \]
+
+所有进程均可完成，状态仍然安全。
+
+\textbf{结论：对于 $P_1$ 的请求 $(1,1,0,0)$ 可以立即满足。}
+
+\section*{(c) 当进程 $P_4$ 的请求为 $(0,0,2,0)$ 时能否立即满足？}
+
+检查 $P_4$ 的请求 $R_4=(0,0,2,0)$：
+
+1. 请求是否不超过其需要：
+   \[
+   \text{Need}(P_4)=(2,2,3,3), \quad R_4=(0,0,2,0)
+   \]
+   \[
+   (0 \leq 2,\,0 \leq 2,\,2 \leq 3,\,0 \leq 3)\, \checkmark
+   \]
+
+2. 请求是否不超过当前可用：
+   \[
+   \text{Available}=(3,3,2,1), \quad R_4=(0,0,2,0)
+   \]
+   \[
+   (0 \leq 3,\,0 \leq 3,\,2 \leq 2,\,0 \leq 1) \, \checkmark
+   \]
+
+可暂时分配该请求：
+
+更新后：
+\[
+\text{Available}_{new}=(3,3,2,1)-(0,0,2,0)=(3,3,0,1)
+\]
+\[
+\text{Allocation}(P_4)_{new}=(1,4,3+2,2)=(1,4,5,2)
+\]
+\[
+\text{Need}(P_4)_{new}=(2,2,3-2,3)=(2,2,1,3)
+\]
+
+再次进行安全性检查：
+
+\[
+\text{Work}=(3,3,0,1)
+\]
+
+依次检查进程：
+
+- $P_0$: Need$(P_0)=(2,2,1,1)\leq(3,3,0,1)$？
+  
+  检查C资源：Need C=1 $\leq$ Work C=0？ 不成立。$P_0$无法执行。
+
+- $P_3$: Need$(P_3)=(0,1,1,2)\leq(3,3,0,1)$？
+  
+  Need C=1 $\leq$0？ 不成立。$P_3$无法执行。
+
+- $P_2$: Need$(P_2)=(0,2,1,3)\leq(3,3,0,1)$？
+  
+  Need C=1 $\leq$0？ 不成立。$P_2$无法执行。
+
+- $P_1$: Need$(P_1)=(2,1,3,1)\leq(3,3,0,1)$？
+  
+  Need C=3 $\leq$0？ 不成立。$P_1$无法执行。
+
+- $P_4$: Need$(P_4)_{new}=(2,2,1,3)\leq(3,3,0,1)$？
+  
+  Need C=1 $\leq$0？ 不成立。$P_4$无法执行。
+
+没有任何进程可以执行，系统进入死锁状态，故不安全。
+
+\textbf{对于 $P_4$ 的请求 $(0,0,2,0)$ 不可立即满足，否则系统不安全。}
+
+
+
+\end{homeworkProblem}
+
+\bibliographystyle{abbrv}
+\bibliography{references.bib}
+
+\end{document}

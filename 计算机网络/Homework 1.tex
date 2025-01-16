@@ -1,0 +1,489 @@
+% \date{May 14, 2024}
+% \author{Deralive}
+% \title{华东师范大学软件学院实验报告模板}
+% 注意事项：编译两次，以确保目录、页码完整显示
+
+\def\allfiles{}
+
+%————————————多文件编译————————————%
+% \ifx\allfiles\undefined
+% 	    \begin{document}
+% \else
+% \fi
+
+% Content
+
+% \ifx\allfiles\undefined
+% 	    \end{document}
+% 	\else
+% 	\fi
+%—————————————————————————————————%
+
+\documentclass[14pt,a4paper,UTF8,twoside]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry} 
+\usepackage{ctex}
+\usepackage{booktabs} % 表格库
+\usepackage{titlesec} % 标题库
+\usepackage{fancyhdr} % 页眉页脚库
+\usepackage{lastpage} % 页码数库
+\usepackage{listings} % 代码块包
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{fontspec} % 允许设置字体
+\usepackage{unicode-math} % 允许数学公式使用特定字体
+\usepackage{mwe}
+\usepackage{zhlipsum} % 中文乱数文本
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{float} % 浮动体环境
+\usepackage{subcaption} % 子图包
+\usepackage{biblatex}
+\addbibresource{references.bib} % 指定你的.bib文件名称
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\date{} % 留空，以让编译时去除日期
+
+%———————————————注意事项—————————————————%
+
+% 1、如果编译显示失败，但没有错误信息，就是 filename.pdf 正在被占用
+% 2、在文件夹中的终端使用 Windows > xelatex filename.tex 也可编译
+
+%—————————————华东师范大学———————————————%
+
+% 论文制作时须加页眉，页眉从中文摘要开始至论文末
+% 偶数页码内容为：华东师范大学硕士学位论文，奇数页码内容为学位论文题目
+
+%————————定义 \section 的标题样式————————%
+
+% 注意：\chapter 等命令，内部使用的是 \thispagestyle{plain} 的排版格式
+% 若需要自己加上页眉，实际是在用 \thispagestyle{fancy} 的排版格式
+% 加上下面这一段指令，就能够让 \section 也使用 fancy 的排版格式
+% 本质就是让目录、第一页也能够显示页眉、页脚
+
+\fancypagestyle{plain}{
+  \pagestyle{fancy}
+}
+
+\title{华东师范大学软件学院实验报告} % 模板
+\titleformat{\section}
+    {\normalfont\bfseries\Large} % 字体大小、字体系列（\bfseries 为加粗）
+    {\thesection}{1em}{}
+
+% 设置章节的中文格式
+\renewcommand\thesection{\chinese{section} \hspace{0pt}}
+\renewcommand\thesubsection{\arabic{subsection} \hspace{0pt}}
+% \renewcommand\thesubsubsection{\alph{subsubsection} \hspace{0pt}} % 字母编号
+% \hspace{0pt} 是为了确保在章节编号和章节题目之间不要有空格，使得排版更为美观
+    
+%—————————————页面基础设置———————————————%
+
+\geometry{left=10mm, right=10mm, top=20mm, bottom=20mm}
+
+%————————————设置页眉、页脚——————————————%
+
+\pagestyle{fancy} % 设置 plain style 的属性
+
+% 设置页眉
+
+\fancyhead[RE]{\leftmark} % Right Even 偶数页右侧显示章名 \leftmark 最高级别章名
+\fancyhead[LO]{\rightmark} % Left Odd 奇数页左侧显示节名 \rightmark 第二级别节名
+\fancyhead[C]{华东师范大学软件学院实验报告} % Center 居中显示
+\fancyhead[LE,RO]{~\thepage~} % 在偶数页的左侧，奇数页的右侧显示页码
+\renewcommand{\headrulewidth}{1.2pt} % 页眉与正文之间的水平线粗细
+
+% 设置页脚：在每页的右下脚以斜体显示书名
+
+\fancyfoot[RO,RE]{\it Lab Report By \LaTeX} % 使用意大利斜体显示
+\renewcommand{\footrulewidth}{0.5pt} % 页脚水平线宽度
+
+% 设置页码：在底部居中显示页码
+
+\pagestyle{fancy}
+\fancyfoot[C]{\kaishu 第 \thepage 页 \ 共 \pageref{LastPage} 页} % LastPage 需要二次编译以获取总页数
+
+%——————————————代码块设置———————————————%
+
+\lstset {
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+    basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=bl,                   % sets the caption-position to bottom
+    commentstyle=\color{mygreen},    % comment style
+    deletekeywords={...},            % if you want to delete keywords from the given language
+    escapeinside={\%*}{*},           % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    frame=single,                    % adds a frame around the code
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    % language=Python,               % the language of the code
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    stringstyle=\color{orange},      % string literal style
+    tabsize=2,                       % sets default tabsize to 2 spaces
+    % title=Python Code              % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% 注释掉的部分用于后续插入代码，参数可调整，格式如下：
+
+% 1、直接插入
+% \begin{lstlisting}[language = ? , title = { ? } ]
+%       Your code here.
+% \end{lstlisting}
+
+% 2、文件插入
+% \lstinputlisting[language = C , title = ?.c] {filename.c}
+
+%———————————————字体设置————————————————%
+
+% \setCJKmainfont{SimSun} % 设置正文罗马族的 CJK 字体
+% \renewcommand{\normalsize}{\fontsize{12pt}{15pt}\selectfont} % 设置正文字号
+\linespread{1.2}
+
+%——————————————————————————————————————%
+
+\newcommand{\C}[2]{$ C_{#1}^{#2} $}
+
+%——————————————导言区结束，进入正文部分———————————————%
+
+%——————————————————————————————————————%
+
+\begin{document}
+
+\maketitle
+
+\begin{center} % \extracolsep{\fill} 拉伸到页面最大宽度前，保证居中显示
+
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l  l  l }
+    \hline
+    实验课程：计算机网络 &  年级：2023级本科  &  实验成绩： \\
+    实验名称：Week - 1 & 姓名：张梓卫 \\
+    实验编号：（1） & 学号：10235101526 & 实验日期： \\
+    指导老师： & 组号： \\
+    \hline
+  \end{tabular*}
+
+\end{center}
+
+\tableofcontents % 目录也需要二次编译
+
+\section{1-1}
+
+\C{5}{3}
+
+\subsection{问题与翻译}
+
+Five routers are to be connected in a point-to-point subnet . Between each pair of routers, the designers may put a high-speed line, a medium-speed line, a low-speed line, or no line. If it takes 100 ms of computer time to generate and inspect each topology, how long will it take to inspect all of them?
+
+五台路由器需要在一个点对点子网中连接。设计者可能在每对路由器之间放置一条高速线、中速线、低速线或没有线。如果每个拓扑结构生成和检查需要 100 毫秒的计算机时间，检查所有拓扑结构需要多长时间？
+
+\subsection{解答与翻译}
+
+There are five routers, and between each pair of routers, four options are available: a high-speed, medium-speed, low-speed, or no line. The number of possible topologies is $4^{10} = 1,048,576$. If each topology takes 100 ms to inspect, the total time will be $1,048,576 \times 100 , ms = 104,857,600 , ms$, which equals approximately 29.1 hours.
+
+五台路由器之间的可能连接方案是选择是否在每一对路由器之间放置一条线路。每一对路由器之间有4种选择：高速、中速、低速或无线路。五个路由器之间共有 $C_{5}^{2} = 10$ 对，因此可能的拓扑数量为 $4^{10} = 1,048,576$。每个拓扑检查需要100毫秒，因此总时间为 $1,048,576 \times 100 \text{ms} = 104,857,600 \text{ms}$，即104,857.6秒，大约29.1小时。
+
+\section{1-2}
+
+\subsection{问题与翻译}
+
+What are two reasons for using layered protocols? What is one possible disadvantage of using layered protocols?
+
+使用分层协议的两个原因是什么？使用分层协议的一个可能缺点是什么？
+
+\subsection{解答与翻译}
+
+Two reasons for using layered protocols are:
+
+Simplification of network design, making development and debugging easier.\\
+Independence of layers allows for optimized development at each layer. A disadvantage is the extra overhead caused by adding headers at each layer, which may reduce efficiency.
+
+使用分层协议的原因一是简化了复杂的网络设计，使得开发和调试更加容易。
+
+第二个原因，它允许不同层次独立开发和优化。每一层都有明确的功能和接口，因此不同层可以独立开发和更新，而不需要修改其他层。这种模块化设计提供了灵活性，使得系统可以根据需要进行扩展或替换部分协议而不影响整体结构。
+
+缺点是额外的协议开销，可能降低效率。每一层的引入通常会带来额外的开销，例如数据封装、解封装以及层与层之间的转换。这些开销可能导致性能降低，尤其是在需要高效率的实时通信环境中。
+
+\section{1-3}
+
+\subsection{问题与翻译}
+
+What is the principal difference between connectionless communication and connection-oriented communication? Give one example of a protocol that uses \\
+
+(i) connectionless communication
+
+(ii) connection-oriented communication
+
+无连接通信和面向连接通信的主要区别是什么？举一个使用以下方式的协议的例子：
+
+(i) 无连接通信
+
+(ii) 面向连接通信
+
+
+\subsection{解答与翻译}
+
+In connectionless communication, data packets do not need to establish a connection before being sent. Each packet is sent independently, and packets may take different paths to reach the destination. A typical example is the UDP protocol, which is suitable for applications like video streaming.
+
+In connection-oriented communication, both parties must establish a connection before transmitting data to ensure that they can communicate. Data is transmitted in order, and the receiver acknowledges the received data to ensure its integrity. A typical example is the TCP protocol, which is suitable for file transfers and similar applications.
+
+The advantage of connectionless communication is that there is no need to confirm whether the data packet has arrived, and there is no guarantee that it will arrive in order. The advantage of connection-oriented communication is that it offers high reliability, ensuring that data will not be lost, duplicated, or arrive out of order. However, connection-oriented communication requires additional time and resources to establish, maintain, and terminate the connection, making it less efficient.
+
+在无连接通信中，数据包在发送之前不需要建立连接。
+每个数据包独立发送，数据包可能以不同路径到达目的地。
+例子就是典型的UDP协议，适用于视频流等应用。
+
+在面向连接的通信中，通信双方在数据传输前必须建立连接，确保双方都能通信。
+数据按顺序传输，并且接收方会对收到的数据进行确认，确保数据完整性。
+例子是典型的TCP协议，适用于文件传输等等。
+
+无连接通信的优点在于：无需确认数据包是否到达，也不保证按顺序到达。而面向连接通信的优点在于：可靠性高，保证数据不会丢失、重复或乱序。但面向连接通信需要额外的时间和资源来建立、维护和终止连接，效率较低。
+
+\section{1-4}
+
+\subsection{问题与翻译}
+
+In some networks, the data link layer handles transmission errors by requesting that damaged frames be retransmitted. If the probability of a frame's being damaged is p, what is the mean number of transmissions required to send a frame? Assume that acknowledgements are never lost.
+
+在某些网络中，数据链路层通过请求重传损坏的帧来处理传输错误。如果帧被损坏的概率是p，发送一帧所需的平均传输次数是多少？假设确认永远不会丢失。
+
+\subsection{解答与翻译}
+
+设正好是 \( k \) 次的概率 \( P_k \)，就是起初的 \( k-1 \) 次尝试都失败的概率。\( P_k = p(1 - p)^{k-1} \)，乘以第 \( k \) 次传输成功的概率。平均传输次数就是
+
+\[
+\sum_{k=1}^{\infty} k P_k = \sum_{k=1}^{\infty} k (1-p)^{k-1} = \frac{1}{1-p}
+\]
+
+\section{1-5}
+
+\subsection{问题与翻译}
+
+A system has an n-layer protocol hierarchy. Applications generate messages of length M bytes. At each of the layers, an h-byte header is added. What fraction of the network bandwidth is filled with headers?
+
+一个系统有n层协议层次结构。应用程序生成长度为M字节的消息。在每一层上，都会添加一个h字节的报头。网络带宽中有多少部分是被报头占用的？
+
+\subsection{解答与翻译}
+
+Each layer adds an \( h \)-byte header, and there are a total of \( n \) layers. The total length of each message is \( M + n \times h \). Therefore, the proportion of the total bandwidth occupied by the headers is \( \frac{n \times h}{M + n \times h} \)
+
+每层增加一个h字节的报头，总共n层。每个消息的总长度为 $M + n \times h$。因此，报头占总带宽的比例为 $\frac{n \times h}{M + n \times h}$。
+
+\section{1-6}
+
+\subsection{问题与翻译}
+
+What is the main difference between TCP and UDP?
+
+TCP 和 UDP 之间的主要区别是什么？
+
+\subsection{解答与翻译}
+
+TCP is a connection-oriented protocol that provides reliable data transmission and ensures the order of data. Before transmitting data, TCP must establish a connection through a three-way handshake to confirm the connection status of both communicating parties, ensuring the reliability of communication.
+
+UDP is a connectionless protocol, which means that data can be sent without establishing a connection. It sends data directly without guaranteeing the reliability of transmission. UDP only sends datagrams without confirming whether they have arrived, nor does it ensure that the data arrives in order or without duplication. Since there is no overhead for connection establishment, acknowledgment, or retransmission, UDP has faster transmission speed, making it suitable for real-time applications such as video calls and online gaming.
+
+TCP是面向连接的协议，提供可靠的数据传输和顺序保证，TCP 在传输数据之前必须先建立连接，通过三次握手（three-way handshake）来确认通信双方的连接状态，保证通信的可靠性。
+
+UDP是无连接的协议，发送数据时不需要先建立连接，数据直接发送，不保证数据传输的可靠性。UDP 只负责将数据报发送出去，不确认是否到达，也不确保数据按顺序或无重复地到达。由于没有连接建立、确认和重传的开销，传输速度更快，适合实时应用，如视频通话、在线游戏等。
+
+\section{1-7}
+
+\subsection{问题与翻译}
+
+When a file is transferred between two computers, two acknowledgement strategies are possible. In the first one, the file is chopped up into packets, which are individually acknowledged by the receiver, but the file transfer as a whole is not acknowledged. In the second one, the packets are not acknowledged individually, but the entire file is acknowledged when it arrives. Discuss these two approaches.
+
+当文件在两台计算机之间传输时，有两种确认策略是可能的。第一种情况下，文件被切割成多个数据包，接收方会单独确认每个数据包，但整个文件传输不会被确认。第二种情况下，数据包不单独确认，但整个文件在到达时会被确认。讨论这两种方式的优缺点。
+
+\subsection{解答与翻译}
+
+The first strategy's advantage is that each packet is acknowledged in real time, but this increases overhead. The second strategy reduces overhead by sending one acknowledgment for the entire file, but there is a higher risk of data loss if no intermediate confirmations are made.
+
+第一种策略的优点是实时确认每个数据包的接收情况，缺点是每个数据包的确认会增加传输开销。第二种策略的优点是减少了确认带来的开销，但缺点是整个文件传输过程中可能没有任何确认，容易丢失数据。
+
+\section{1-8}
+
+\subsection{问题与翻译}
+
+An image is 1024 X 768 pixels with 3 bytes/pixel. Assume the image is uncompressed. How long does it take to transmit it over a 56-kbps modem channel?
+
+\begin{itemize}
+\item Over a 1-Mbps cable modem?
+\item Over a 10-Mbps Ethernet?
+\item Over 100-Mbps Ethernet?
+\item Over gigabit Ethernet?
+\end{itemize}
+
+一个图像大小为1024 X 768像素，每个像素占用3字节。假设图像未压缩。通过56-kbps调制解调器以下不同的通道传输图像需要多长时间：
+
+\begin{itemize}
+\item 1-Mbps有线调制解调器
+\item 10-Mbps以太网
+\item 100-Mbps以太网
+\item 千兆以太网
+\end{itemize}
+
+\subsection{解答与翻译}
+
+
+To calculate how long it takes to transmit an uncompressed image over different channels, we first need to compute the image size in bits and then divide it by the transmission rate.
+
+The image has a resolution of 1024 x 768 pixels.  
+Each pixel is 3 bytes (24 bits).  
+
+Thus, the total image size \( S \) in bits is:
+
+\[
+S = 1024 \times 768 \times 3 \times 8 \text{ bits} = 18874368 \text{ bits}
+\]
+
+The transmission time \( T \) for a given channel can be calculated as:
+
+\[
+T = \frac{\text{Image size in bits}}{\text{Transmission rate in bits per second}}
+\]
+
+\subsubsection*{1. Over a 56-kbps modem channel:}
+
+Transmission rate: 56 kbps = \( 56 \times 10^3 \) bits per second.
+
+\[
+T = \frac{18874368}{56 \times 10^3} \approx 337.05 \text{ seconds}
+\]
+
+\subsubsection*{2. Over a 1-Mbps cable modem:}
+
+Transmission rate: 1 Mbps = \( 1 \times 10^6 \) bits per second.
+
+\[
+T = \frac{18874368}{1 \times 10^6} \approx 18.87 \text{ seconds}
+\]
+
+\subsubsection*{3. Over a 10-Mbps Ethernet:}
+
+Transmission rate: 10 Mbps = \( 10 \times 10^6 \) bits per second.
+
+\[
+T = \frac{18874368}{10 \times 10^6} \approx 1.89 \text{ seconds}
+\]
+
+\subsubsection*{4. Over a 100-Mbps Ethernet:}
+
+Transmission rate: 100 Mbps = \( 100 \times 10^6 \) bits per second.
+
+\[
+T = \frac{18874368}{100 \times 10^6} \approx 0.19 \text{ seconds}
+\]
+
+\subsubsection*{5. Over gigabit Ethernet:}
+
+Transmission rate: 1 Gbps = \( 1 \times 10^9 \) bits per second.
+
+\[
+T = \frac{18874368}{1 \times 10^9} \approx 0.019 \text{ seconds}
+\]
+
+
+要计算将未压缩的图像通过不同通道传输所需的时间，我们首先需要计算图像的大小（以位为单位），然后将其除以传输速率。
+
+图像的总大小 \( S \) 为：
+
+\[
+S = 1024 \times 768 \times 3 \times 8 \text{ bits} = 18874368 \text{ bits}
+\]
+
+对于给定的通道:
+
+\[
+T = \frac{\text{图像大小（以位为单位）}}{\text{传输速率（以位/秒为单位）}}
+\]
+
+\subsubsection*{1. 通过 56-kbps 调制解调器通道：}
+
+传输速率: 56 kbps = \( 56 \times 10^3 \) bits per second.
+
+\[
+T = \frac{18874368}{56 \times 10^3} \approx 337.05 \text{ 秒}
+\]
+
+\subsubsection*{2. 通过 1-Mbps 电缆调制解调器：}
+
+传输速率: 1 Mbps = \( 1 \times 10^6 \) bits per second.
+
+\[
+T = \frac{18874368}{1 \times 10^6} \approx 18.87 \text{ 秒}
+\]
+
+\subsubsection*{3. 通过 10-Mbps 以太网：}
+
+传输速率: 10 Mbps = \( 10 \times 10^6 \) bits per second.
+
+\[
+T = \frac{18874368}{10 \times 10^6} \approx 1.89 \text{ 秒}
+\]
+
+\subsubsection*{4. 通过 100-Mbps 以太网：}
+
+传输速率: 100 Mbps = \( 100 \times 10^6 \) bits per second.
+
+\[
+T = \frac{18874368}{100 \times 10^6} \approx 0.19 \text{ 秒}
+\]
+
+\subsubsection*{5. 通过千兆以太网：}
+
+传输速率: 1 Gbps = \( 1 \times 10^9 \) bits per second.
+
+\[
+T = \frac{18874368}{1 \times 10^9} \approx 0.019 \text{ 秒}
+\]
+
+\section{1-9}
+
+\subsection{问题与翻译}
+
+Suppose the algorithms used to implement the operations at layer k is changed. How does this impact operations at layers k − 1 and k + 1?
+
+假设用于实现第k层操作的算法发生了变化。这对第k-1层和第k+1层的操作有何影响？
+
+\subsection{解答与翻译}
+
+Changing the algorithm of layer \( k \) may affect the services provided by layer \( k \), but it should not affect layer \( k-1 \), as layer \( k-1 \) does not need to know the implementation details of layer \( k \). However, layer \( k+1 \), which relies on the services provided by layer \( k \), may need to be adjusted to accommodate the new service implementation.
+
+改变第k层的算法可能会影响第k层的服务，但不会影响第k-1层，因为每一层有其负责的部分，第k-1层的实现与第k层的实现过程无关。
+但k+1层依赖于第k层提供的服务，可能需要调整。
+
+\section{1-10}
+
+\subsection{问题与翻译}
+
+Suppose there is a change in the service (set of operations) provided by layer k. How does this impact services at layers k-1 and k+1?
+
+假设第k层提供的服务（操作集）发生了变化。这对第k-1层和第k+1层的服务有何影响？
+
+\subsection{解答与翻译}
+
+If the service at layer \( k \) changes, layer \( k-1 \) may remain unaffected since it does not depend on the services of the upper layer. However, layer \( k+1 \), which relies on the services of layer \( k \), may need to be modified to accommodate the changes in the service.
+
+若第k层的服务发生变化，第k-1层可能不受影响，因为第k-1层不依赖于上层服务。但k+1层依赖于k层的服务。
+
+\newpage{}
+
+\section{附录}
+
+\end{document}
