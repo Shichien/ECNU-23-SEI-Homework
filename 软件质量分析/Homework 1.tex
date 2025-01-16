@@ -1,0 +1,545 @@
+% \date{May 14, 2024}
+% \author{Deralive}
+% \title{华东师范大学软件学院实验报告模板}
+% 注意事项：编译两次，以确保目录、页码完整显示
+
+\def\allfiles{}
+
+%————————————多文件编译————————————%
+% \ifx\allfiles\undefined
+% 	    \begin{document}
+% \else
+% \fi
+
+% Content
+
+% \ifx\allfiles\undefined
+% 	    \end{document}
+% 	\else
+% 	\fi
+%—————————————————————————————————%
+
+\documentclass[14pt,a4paper,UTF8,twoside]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry} 
+\usepackage{ctex}
+\usepackage{booktabs} % 表格库
+\usepackage{titlesec} % 标题库
+\usepackage{fancyhdr} % 页眉页脚库
+\usepackage{lastpage} % 页码数库
+\usepackage{listings} % 代码块包
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{fontspec} % 允许设置字体
+\usepackage{unicode-math} % 允许数学公式使用特定字体
+\usepackage{mwe}
+\usepackage{zhlipsum} % 中文乱数文本
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{float} % 浮动体环境
+\usepackage{subcaption} % 子图包
+\usepackage{biblatex}
+\addbibresource{references.bib} % 指定你的.bib文件名称
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\date{} % 留空，以让编译时去除日期
+
+%———————————————注意事项—————————————————%
+
+% 1、如果编译显示失败，但没有错误信息，就是 filename.pdf 正在被占用
+% 2、在文件夹中的终端使用 Windows > xelatex filename.tex 也可编译
+
+%—————————————华东师范大学———————————————%
+
+% 论文制作时须加页眉，页眉从中文摘要开始至论文末
+% 偶数页码内容为：华东师范大学硕士学位论文，奇数页码内容为学位论文题目
+
+%————————定义 \section 的标题样式————————%
+
+% 注意：\chapter 等命令，内部使用的是 \thispagestyle{plain} 的排版格式
+% 若需要自己加上页眉，实际是在用 \thispagestyle{fancy} 的排版格式
+% 加上下面这一段指令，就能够让 \section 也使用 fancy 的排版格式
+% 本质就是让目录、第一页也能够显示页眉、页脚
+
+\fancypagestyle{plain}{
+  \pagestyle{fancy}
+}
+
+\title{华东师范大学软件学院课程作业} % 模板
+\titleformat{\section}
+    {\normalfont\bfseries\Large} % 字体大小、字体系列（\bfseries 为加粗）
+    {\thesection}{1em}{}
+
+% 设置章节的中文格式
+\renewcommand\thesection{\chinese{section} \hspace{0pt}}
+\renewcommand\thesubsection{\arabic{subsection} \hspace{0pt}}
+% \renewcommand\thesubsubsection{\alph{subsubsection} \hspace{0pt}} % 字母编号
+% \hspace{0pt} 是为了确保在章节编号和章节题目之间不要有空格，使得排版更为美观
+    
+%—————————————页面基础设置———————————————%
+
+\geometry{left=10mm, right=10mm, top=20mm, bottom=20mm}
+
+%————————————设置页眉、页脚——————————————%
+
+\pagestyle{fancy} % 设置 plain style 的属性
+
+% 设置页眉
+
+\fancyhead[RE]{\leftmark} % Right Even 偶数页右侧显示章名 \leftmark 最高级别章名
+\fancyhead[LO]{\rightmark} % Left Odd 奇数页左侧显示节名 \rightmark 第二级别节名
+\fancyhead[C]{华东师范大学软件学院课程作业} % Center 居中显示
+\fancyhead[LE,RO]{~\thepage~} % 在偶数页的左侧，奇数页的右侧显示页码
+\renewcommand{\headrulewidth}{1.2pt} % 页眉与正文之间的水平线粗细
+
+% 设置页脚：在每页的右下脚以斜体显示书名
+
+\fancyfoot[RO,RE]{\it Lab Report By \LaTeX} % 使用意大利斜体显示
+\renewcommand{\footrulewidth}{0.5pt} % 页脚水平线宽度
+
+% 设置页码：在底部居中显示页码
+
+\pagestyle{fancy}
+\fancyfoot[C]{\kaishu 第 \thepage 页 \ 共 \pageref{LastPage} 页} % LastPage 需要二次编译以获取总页数
+
+%——————————————代码块设置———————————————%
+
+\lstset {
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+    basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=bl,                   % sets the caption-position to bottom
+    commentstyle=\color{mygreen},    % comment style
+    deletekeywords={...},            % if you want to delete keywords from the given language
+    escapeinside={\%*}{*},           % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    frame=single,                    % adds a frame around the code
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    % language=Python,               % the language of the code
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    stringstyle=\color{orange},      % string literal style
+    tabsize=2,                       % sets default tabsize to 2 spaces
+    % title=Python Code              % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% 注释掉的部分用于后续插入代码，参数可调整，格式如下：
+
+% 1、直接插入
+% \begin{lstlisting}[language = ? , title = { ? } ]
+%       Your code here.
+% \end{lstlisting}
+
+% 2、文件插入
+% \lstinputlisting[language = C , title = ?.c] {filename.c}
+
+%———————————————字体设置————————————————%
+
+% \setCJKmainfont{SimSun} % 设置正文罗马族的 CJK 字体
+% \renewcommand{\normalsize}{\fontsize{12pt}{15pt}\selectfont} % 设置正文字号
+\linespread{1.2}
+
+%——————————————————————————————————————%
+
+%——————————————导言区结束，进入正文部分———————————————%
+
+%——————————————————————————————————————%
+
+\begin{document}
+
+\maketitle
+
+\begin{center} % \extracolsep{\fill} 拉伸到页面最大宽度前，保证居中显示
+
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l  l  l }
+    \hline
+    课程名称：软件质量分析 &  年级：2023级本科  &  姓名：张梓卫 \\
+    作业主题：ISO 9126 翻译 & 学号：10235101526 & 实验日期： \\
+    指导老师： & 组号： \\
+    \hline
+  \end{tabular*}
+
+\end{center}
+
+\tableofcontents % 目录也需要二次编译
+
+\textbf{10.4 ANALYSIS OF DERIVED MEASURES}
+
+\textbf{10.4 衍生测量分析}
+
+\textbf{10.4.1 Analysis of the Derived Measures in ISO 9126 - 4: Quality in Use}
+
+\textbf{10.4.1 ISO 9126 - 4 中衍生测量的分析：“使用质量”}
+
+The ISO 9126-4 technical report on the measures proposed for the ISO \textbf{Quality in Use} model is used to illustrate some of the metrology-related issues that were outstanding in the ISO 9126 series in the late 2000s.
+Many of the measurement issues raised with respect to ISO Part 4 would also apply to Parts 2 and 3.
+
+ISO 9126-4 技术报告提出的度量，可用于阐释 ISO 9126 系列在 2000 年代后期尚未解决的一些与度量相关问题。
+ISO 第 4 部分中提出的许多问题同样应用于第 2 部分和第 3 部分。
+
+In ISO 9126-4, 15 derived measures are proposed for the 4 quality characteristics of the ISO Quality in Use model — see Table 10.1.
+
+在 ISO 9126-4 中，15 个派生度量被在 ISO “使用质量”模型的 4 个质量特征提出  —— 见表 10.1。
+
+The objective of the analysis is to identify the measurement concepts that were not tackled in the ISO 9126 series of documents,
+that is, their gaps in their measurement designs.
+
+本分析的目标是理解并鉴别 ISO 9126 系列文档中未解决的度量概念，即度量设计中的欠缺与空白。
+
+Table 10.1：Derived Measures in ISO 9124-4: Quality in Use
+
+\begin{table} [H]
+  \centering
+  % \caption{Derived Measures in ISO 9124-4: Quality in Use}
+  \begin{tabular}{|l|l|}
+  \hline
+  \textbf{Quality Characteristic} & \textbf{Derived Measures}            \\ \hline
+  Effectiveness                   & \begin{tabular}[c]{@{}l@{}}--- task effectiveness \\ --- task completion \\ --- error frequency\end{tabular} \\ \hline
+  Productivity                    & \begin{tabular}[c]{@{}l@{}}--- task time \\ --- task efficiency \\ --- economic productivity \\ --- productive proportion \\ --- relative user efficiency\end{tabular} \\ \hline
+  Safety                          & \begin{tabular}[c]{@{}l@{}}--- user health and safety \\ --- safety of people affected by use of the system \\ --- economic damage \\ --- software damage\end{tabular} \\ \hline
+  Satisfaction                    & \begin{tabular}[c]{@{}l@{}}--- satisfaction scale \\ --- satisfaction questionnaire \\ --- discretionary usage\end{tabular} \\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{itemize}
+  \item Each of these gaps in the design of the derived measures represents an opportunity to improve the measures in the upcoming ISO update, which is the ISO 25000 series.
+  \item This analysis provides an illustration of the improvements that are needed to many of the software measures proposed to the industry.
+\end{itemize}
+
+表10.1 质量模型 ISO Quality in Use 中的派生度量
+
+\begin{table} [H]
+  \centering
+  \caption{ISO 9124-4 中的派生度量：使用中的质量}
+  \begin{tabular}{|l|l|}
+  \hline
+  \textbf{质量特性} & \textbf{派生度量}            \\ \hline
+  有效性                   & \begin{tabular}[c]{@{}l@{}}--- 任务有效性 \\ --- 任务完成度 \\ --- 错误频率\end{tabular} \\ \hline
+  生产率                    & \begin{tabular}[c]{@{}l@{}}--- 任务时间 \\ --- 任务效率 \\ --- 经济生产率 \\ --- 生产比例 \\ --- 相对用户效率\end{tabular} \\ \hline
+  安全性                          & \begin{tabular}[c]{@{}l@{}}--- 用户健康与安全 \\ --- 系统使用过程中受影响人员的安全 \\ --- 经济损失 \\ --- 软件损坏\end{tabular} \\ \hline
+  满意度                    & \begin{tabular}[c]{@{}l@{}}--- 满意度量表 \\ --- 满意度问卷 \\ --- 自主使用\end{tabular} \\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{itemize}
+  \item 每个在派生度量设计中的空白都代表着在即将发布的 ISO 更新（ISO 25000 系列）中改进度量的机会。
+  \item 本次分析阐释了许多软件度量在工业界提出的改进需求。
+\end{itemize}
+
+\textbf{10.4.2 Analysis of the Measurement of Effectiveness in ISO 9126}
+
+\textbf{10.4.2 ISO 9126 中效率测量的分析}
+
+In ISO 9126 - 4 , it is claimed that the proposed three measures for the Effectiveness
+characteristic — see Table 10.1 — assess whether or not the task carried out by 
+users achieved the specifi c goals with accuracy and completeness in a specifi c 
+context of use.
+
+This sub - section identifi es a number of issues with: 
+ 
+\begin{itemize}
+  \item 1. the base measures proposed, 
+  \item 2. the derived measures, 
+  \item 3. the measurement units, 
+  \item 4. the measurement units of the derived quantities, and 
+  \item 5. the value of a quantity for Effectiveness.
+\end{itemize}
+
+在 ISO 9126-4 中声称，有效性特征提出的三个度量标准为 — （见表 10.1） — 评估用户执行的任务是否在特定的使用场景下，以准确性和完整性达到了特定目标。
+
+本小节指出了几个问题：
+
+\begin{itemize}
+  \item 提出的基础度量，
+  \item 派生度量，
+  \item 度量单位，
+  \item 派生量的度量单位，以及
+  \item 有效性的数量值。
+\end{itemize}
+
+\textbf{10.4.2.1 Identifi cation of the Base Measure of Effectiveness.} The 3 Effectiveness - derived measures (task effectiveness, task completion, and error 
+frequency) come from a computation of four base measures, which are them￾selves collected/measured directly, namely:
+
+\begin{itemize}
+ \item task time, 
+ \item number of tasks, 
+ \item number of errors made by the user, and 
+ \item proportional value of each missing or incorrect component.
+\end{itemize}
+
+\textbf{10.4.2.1 有效性基础度量的识别。} 有效性的 3 个派生度量（任务有效性、任务完成度和错误频率）来自对四个基础度量的计算，这些度量是直接收集/测量的，分别是：
+
+\begin{itemize}
+\item 任务时间，
+\item 任务数量，
+\item 用户犯错次数，以及
+\item 每个缺失或错误组件的比例值。
+\end{itemize}
+
+The first three base measures above refer to terms in common use (i.e. task time, 
+number of tasks, and number of errors made by the user), but this leaves much 
+to interpretation on what constitutes, for example, a task.
+
+Currently, ISO 9124 does not provide a detailed measurement - related definition for any of them:
+
+\begin{itemize}
+\item In summary, it does not provide assurance that the measurement results 
+are repeatable and reproducible across measurers or across groups measur￾ing the same software, or across organizations either, where a task might 
+be interpreted differently and with different levels of granularity. 
+\item This leeway in the interpretation of these base measures makes a rather 
+weak basis for both internal and external benchmarking.
+\end{itemize}
+
+上述前三个基础度量是常用术语（即任务时间、任务数量和用户犯错次数），但这给“任务”的定义留下了许多解释空间。
+
+目前，ISO 9124 并未为这些度量提供详细的与度量相关的定义：
+
+\begin{itemize}
+  \item 总的来说，它未能保证测量结果在不同测量者或组织中对同一软件进行测量时具有可重复性和可再现性，不同组织对任务的理解可能有所不同，粒度层次也可能不同。
+  \item 这种对这些基础度量的解释自由度，使其在内部和外部基准测试中的基础较为薄弱。
+\end{itemize}
+  
+The third base measure, number of errors made by the user, is defined in 
+Appendix F of ISO TR 9126 - 4 as an “ instance where test participants did not 
+complete the task successfully, or had to attempt portions of the task more than 
+once. ”
+
+This definition diverges signifi cantly from the one in the IEEE Standard 
+Glossary of Software Engineering Terminology, where the term “ error ” has been 
+defined as “ the difference between a computed, observed, or measured value or 
+condition and the true, specifi ed, or theoretically correct value or condition. For 
+example: a difference of 30 meters between a computed result and the correct 
+result.
+
+第三个基础度量“用户犯错次数”在 ISO TR 9126-4 的附录 F 中被定义为“测试参与者未能成功完成任务，或必须多次尝试部分任务的实例。”
+
+该定义与 IEEE 软件工程术语标准词汇表中的定义有显著不同，后者将“错误”定义为“计算、观察或测量值或条件与真实、指定或理论正确值或条件之间的差异”。
+
+The fourth base measure, referred to as the “ proportional value of each 
+missing or incorrect component ” in the task output is based, in turn, on another 
+definition, whereas each “ potential missing or incorrect component ” is given a 
+weighted value A i based on the extent to which it detracts from the value of the 
+output to the business or user.
+
+This embedded definition itself contains a number of subjective assessments 
+for which no repeatable procedure is provided:
+
+
+第四个基础度量，即任务输出中“每个缺失或错误组件的比例值”，基于另一种定义，即每个“潜在缺失或错误组件”根据其削弱输出对业务或用户价值的程度，赋予一个加权值。
+
+该嵌入定义本身包含了许多主观评估，且没有提供可重复的操作程序：
+
+\begin{itemize}
+ \item the value of the output to the business or user, 
+ \item the extent to which it detracts from that value, 
+ \item the components of a task, and 
+ \item potential missing or incorrect components.
+\end{itemize}
+
+\begin{itemize}
+\item 输出对业务或用户的价值，
+\item 它对该价值的削弱程度，
+\item 任务的组成部分，以及
+\item 潜在的缺失或错误组件。
+\end{itemize}
+
+\textbf{10.4.2.2 The Derived Measures of Effectiveness.} The proposed three 
+derived measures for the Effectiveness characteristic, which are defined as 
+a prescribed combination of the base measures mentioned above, inherit the 
+weaknesses of the base measures of which they are composed. In summary, there 
+is no assurance that the measurement results of the derived measures are repeat￾able and reproducible across measurers, across groups measuring the same soft￾ware, or across organizations either, where a task might be interpreted differently 
+and with different levels of granularity.
+
+\textbf{10.4.2.2 有效性的派生度量。} 对有效性特征提出的三个派生度量，由上述基础度量的组合定义，继承了组成它们的基础度量的弱点。
+总的来说，这些派生度量的测量结果在不同测量者、同一测量软件的不同群体或组织之间没有可重复性、复现性的保证，其中任务可能会以不同的粒度层次进行解释。
+
+\textbf{10.4.2.3 The Measurement Units of the Base Measures.} Of the four base measures, a single one, i.e. task time, has:
+
+\textbf{10.4.2.3 基础度量的度量单位。} 在四个基础度量中，只有一个度量，即任务时间，具有：
+
+\begin{itemize}
+ \item an internationally recognized standard measurement unit: the second, or a 
+multiple of this unit; 
+ \item a universally recognized corresponding symbol: “ s ” for the second as a 
+measure of time.
+\end{itemize}
+
+\begin{itemize}
+\item 一个国际公认的标准度量单位：秒或其倍数；
+\item 一个普遍公认的符号：“s”表示时间的度量单位秒。
+\end{itemize}
+
+The next two base measures (tasks and errors) do not refer to any international 
+standard of measurement and must be locally defined. This means that:
+
+接下来的两个基础度量（任务和错误）没有任何国际标准度量，必须在本地定义。这意味着：
+
+\begin{itemize}
+\item They are not reliably comparable across organizations. 
+\item They are also not reliably comparable within a single organization when 
+measured by different people, unless local measurement protocols (i.e. 
+measurement procedure) have been clearly documented and rigorously 
+implemented.
+\end{itemize}
+
+\begin{itemize}
+\item 它们在不同组织间无法进行可靠的比较。
+\item 它们在同一组织内也无法进行可靠的比较，除非清楚地记录并严格执行了本地的测量协议（即测量程序）。
+\end{itemize}
+
+The fourth base measure (proportional value of each missing or incorrect com￾ponent) is puzzling:
+
+第四个基础度量（每个缺失或错误组件的比例值）令人困惑：
+
+\begin{itemize}
+ \item it is based on a given weighted value (number), and 
+ \item it has no measurement unit.
+\end{itemize}
+
+\begin{itemize}
+\item 它基于一个给定的加权值（数字），
+\item 它没有度量单位。
+\end{itemize}
+
+\textbf{10.4.2.4 Measurement Units of the Derived Measures.} \textit{Task effective-ness}: In ISO 9126 - 4, this derived measure leads to a derived unit that depends 
+on a given weight:
+
+\[
+Task\ effectiveness\ a\ given\ weight = 1 - (a\ given\ weight)
+\]
+
+\textbf{10.4.2.4 派生度量的度量单位。} \textit{任务有效性}：在 ISO 9126-4 中，该派生度量的计算单位取决于给定的权重：
+
+\begin{center}
+任务有效性 = 1 −（给定的权重）
+\end{center}
+
+Therefore, its derived unit of measurement is unclear and undefined.
+
+因此，其派生度量单位不清楚，也未定义。
+
+\textit{Task completion}: The derived measure is computed by dividing one base 
+measure by the other (task/task) with the same unit of measurement. The mea￾surement results is a percentage.
+
+\textit{Error frequency}: The definition of the computation of this derived measure 
+provides two distinct alternatives for the elements of this computation. This can 
+lead to two distinct interpretations:
+
+\textit{任务完成度}：该派生度量通过将一个基础度量除以另一个基础度量（任务/任务）来计算，其度量结果是一个百分比。
+
+\textit{错误频率}：该派生度量的计算定义提供了两种不同的计算要素替代方案，这可能导致两种不同的解释：
+
+\begin{itemize}
+ \item errors/task, or 
+ \item errors/second.
+\end{itemize}
+
+\begin{itemize}
+  \item 错误/任务，或
+  \item 错误/秒。
+\end{itemize}
+
+Of course,
+当然，
+
+\begin{itemize}
+ \item this, in turn, leads to two distinct derived measures as a result of implementing two different measurement functions (formulae) for this same derived 
+measure; 
+ \item and leaves open the possibility of misinterpretation and misuse of measurement results when combined with other units. For example: measures 
+in centimeters and measures in inches cannot be directly added or 
+multiplied.
+\end{itemize}
+
+\begin{itemize}
+\item 这将导致两种不同的派生度量，因为对同一派生度量应用了两种不同的测量公式；
+\item 并且在与其他单位组合时，可能会导致测量结果的误解和误用。例如：厘米和英寸的度量不能直接相加或相乘。
+\end{itemize}
+
+\begin{lstlisting}
+In software measurement, who cares about this mixing of units? 
+  Should you care as a software manager? 
+  Should you care as a software engineer?
+\end{lstlisting}
+
+\begin{lstlisting}
+在软件评估里，谁在意这些部分的混合呢？
+  作为一个软件管理工程师，你应该在意吗？
+  作为一个软件工程师，你应该在意吗？
+\end{lstlisting}
+
+\textbf{10.4.2.5 Value of a Quantity for Effectiveness.} The five types of metrology values of a quantity are 2:
+
+\begin{itemize}
+ \item Numerical quantity value 
+ \item Quantity - value scale 
+ \item Ordinal quantity - value scale 
+ \item Conventional reference scale 
+ \item Ordinal value
+\end{itemize}
+
+\textbf{10.4.2.5 有效性数量的值。} 度量值的五种类型是：
+
+\begin{itemize}
+\item 数值量值
+\item 量值尺度
+\item 序数量值尺度
+\item 约定参考尺度
+\item 序数值
+\end{itemize}
+
+In the measurement of Effectiveness with ISO 9126 - 4, for each base measure
+numerical values are obtained on the basis of the defined data collection 
+procedure:
+
+在 ISO 9126-4 中，针对每个基础度量，依据定义的数据收集程序获得数值：
+
+For each derived measure , numerical values are obtained by applying their 
+respective measurement function. For instance, the derived measures task effectiveness and task completion are expressed as percentages, and are interpreted 
+as the effectiveness and completion of a specifi c task respectively.
+
+针对每个派生度量，通过应用其各自的测量函数获得数值。例如，任务有效性和任务完成度的派生度量以百分比表示，分别解释为特定任务的有效性和完成度。
+
+\begin{itemize}
+\item For task effectiveness in particular, it would be diffi cult to fi gure out both 
+a true value and a conventional true value. 
+\item For task completion and error frequency, the true values would depend on 
+locally defined and rigorously applied measurement procedures, but 
+without reference to universally recognized conventional true values (as 
+they are locally defined).
+\end{itemize}
+
+\begin{itemize}
+\item 对于任务有效性，难以确定一个真实值和约定真实值。
+\item 对于任务完成度和错误频率，真实值将取决于本地定义并严格执行的测量程序，但不会参照国际公认的约定真实值（因为它们是本地定义的）。
+\end{itemize}
+
+Finally, in terms of the metrological values:
+
+最后，关于度量值：
+
+\begin{itemize}
+  \item 只有任务时间引用了一个约定的参考尺度，即国际标准（基准）时间单位秒。
+  \item 在这些有效性的派生度量中，其他基础度量均未引用约定的参考尺度，或本地定义的尺度。
+\end{itemize}
+
+See the Advanced Readings section for an additional example.
+
+请参阅“高级阅读”部分，获取更多示例。
+
+\end{document}

@@ -1,0 +1,7 @@
+Line 1: This is a test line with (parentheses).
+Line 2: Another line with (unmatched parenthesis.
+Line 3: A line with multiple (parentheses) and another (one).
+Line 4: A line with an extra closing parenthesis).
+Line 5: No parentheses here.
+Line 6: Nested (parentheses (inside) another).
+Line 7: Permisson Denied (

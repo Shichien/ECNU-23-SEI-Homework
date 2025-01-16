@@ -1,0 +1,463 @@
+% \date{May 14, 2024}
+% \author{Deralive}
+% \title{华东师范大学软件学院实验报告模板}
+% 注意事项：编译两次，以确保目录、页码完整显示
+
+\def\allfiles{}
+
+%————————————多文件编译————————————%
+% \ifx\allfiles\undefined
+% 	    \begin{document}
+% \else
+% \fi
+
+% Content
+
+% \ifx\allfiles\undefined
+% 	    \end{document}
+% 	\else
+% 	\fi
+%—————————————————————————————————%
+
+\documentclass[14pt,a4paper,UTF8,twoside]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry} 
+\usepackage{ctex}
+\usepackage{multicol}
+\usepackage{booktabs} % 表格库
+\usepackage{titlesec} % 标题库
+\usepackage{fancyhdr} % 页眉页脚库
+\usepackage{lastpage} % 页码数库
+\usepackage{listings} % 代码块包
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{fontspec} % 允许设置字体
+\usepackage{unicode-math} % 允许数学公式使用特定字体
+\usepackage{mwe}
+\usepackage{zhlipsum} % 中文乱数文本
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{float} % 浮动体环境
+\usepackage{subcaption} % 子图包
+\usepackage[sorting=none]{biblatex}
+\usepackage{array}
+\usepackage{multirow}
+\addbibresource{references.bib} % 指定你的.bib文件名称
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\date{} % 留空，以让编译时去除日期
+
+%———————————————注意事项—————————————————%
+
+% 1、如果编译显示失败，但没有错误信息，就是 filename.pdf 正在被占用
+% 2、在文件夹中的终端使用 Windows > xelatex filename.tex 也可编译
+
+%—————————————华东师范大学———————————————%
+
+% 论文制作时须加页眉，页眉从中文摘要开始至论文末
+% 偶数页码内容为：华东师范大学硕士学位论文，奇数页码内容为学位论文题目
+
+%————————定义 \section 的标题样式————————%
+
+% 注意：\chapter 等命令，内部使用的是 \thispagestyle{plain} 的排版格式
+% 若需要自己加上页眉，实际是在用 \thispagestyle{fancy} 的排版格式
+% 加上下面这一段指令，就能够让 \section 也使用 fancy 的排版格式
+% 本质就是让目录、第一页也能够显示页眉、页脚
+
+\fancypagestyle{plain}{
+  \pagestyle{fancy}
+}
+
+\title{华东师范大学软件学院课程作业} % 模板
+\titleformat{\section}
+    {\normalfont\bfseries\Large} % 字体大小、字体系列（\bfseries 为加粗）
+    {\thesection}{1em}{}
+
+% 设置章节的中文格式
+\renewcommand\thesection{\chinese{section} \hspace{0pt}}
+\renewcommand\thesubsection{\arabic{subsection} \hspace{0pt}}
+% \renewcommand\thesubsubsection{\alph{subsubsection} \hspace{0pt}} % 字母编号
+% \hspace{0pt} 是为了确保在章节编号和章节题目之间不要有空格，使得排版更为美观
+    
+%—————————————页面基础设置———————————————%
+
+\geometry{left=10mm, right=10mm, top=20mm, bottom=20mm}
+
+%————————————设置页眉、页脚——————————————%
+
+\pagestyle{fancy} % 设置 plain style 的属性
+
+% 设置页眉
+
+\fancyhead[RE]{\leftmark} % Right Even 偶数页右侧显示章名 \leftmark 最高级别章名
+\fancyhead[LO]{\rightmark} % Left Odd 奇数页左侧显示节名 \rightmark 第二级别节名
+\fancyhead[C]{华东师范大学软件学院课程作业} % Center 居中显示
+\fancyhead[LE,RO]{~\thepage~} % 在偶数页的左侧，奇数页的右侧显示页码
+\renewcommand{\headrulewidth}{1.2pt} % 页眉与正文之间的水平线粗细
+
+% 设置页脚：在每页的右下脚以斜体显示书名
+
+\fancyfoot[RO,RE]{\it Lab Report By \LaTeX} % 使用意大利斜体显示
+\renewcommand{\footrulewidth}{0.5pt} % 页脚水平线宽度
+
+% 设置页码：在底部居中显示页码
+
+\pagestyle{fancy}
+\fancyfoot[C]{\kaishu 第 \thepage 页 \ 共 \pageref{LastPage} 页} % LastPage 需要二次编译以获取总页数
+
+%——————————————代码块设置———————————————%
+
+\lstset {
+    backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+    basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+    breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+    breaklines=true,                 % sets automatic line breaking
+    captionpos=bl,                   % sets the caption-position to bottom
+    commentstyle=\color{mygreen},    % comment style
+    deletekeywords={...},            % if you want to delete keywords from the given language
+    escapeinside={\%*}{*},           % if you want to add LaTeX within your code
+    extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+    frame=single,                    % adds a frame around the code
+    keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+    keywordstyle=\color{blue},       % keyword style
+    % language=Python,               % the language of the code
+    morekeywords={*,...},            % if you want to add more keywords to the set
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+    rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+    showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+    showstringspaces=false,          % underline spaces within strings only
+    showtabs=false,                  % show tabs within strings adding particular underscores
+    stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+    stringstyle=\color{orange},      % string literal style
+    tabsize=2,                       % sets default tabsize to 2 spaces
+    % title=Python Code              % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% 注释掉的部分用于后续插入代码，参数可调整，格式如下：
+
+% 1、直接插入
+% \begin{lstlisting}[language = ? , title = { ? } ]
+%       Your code here.
+% \end{lstlisting}
+
+% 2、文件插入
+% \lstinputlisting[language = C , title = ?.c] {filename.c}
+
+%———————————————字体设置————————————————%
+
+% \setCJKmainfont{SimSun} % 设置正文罗马族的 CJK 字体
+% \renewcommand{\normalsize}{\fontsize{12pt}{15pt}\selectfont} % 设置正文字号
+\linespread{1.2}
+
+%——————————————————————————————————————%
+
+%———————————————超链接设置——————————————%
+
+\hypersetup{
+    pdfstartview=FitH, % 设置PDF文档打开时的初始视图为页面宽度适应窗口宽度（即页面水平适应）
+    CJKbookmarks=true, % 用对CJK（中文、日文、韩文）字符的书签支持，确保这些字符在书签中正确显示
+    bookmarksnumbered=true, % 书签带有章节编号。这对有章节编号的文档很有用
+    bookmarksopen=true, % 文档打开时，书签树是展开的，方便查看所有书签
+    colorlinks, % 启用彩色链接。这样，链接在PDF中会显示为彩色，而不是默认的方框
+    pdfborder=001, % 设置PDF文档中链接的边框样式。001 表示链接周围没有边框，仅在单击时显示一个矩形
+    linkcolor=blue, % 设置文档内部链接（如目录中的章节链接）的颜色为蓝色
+    anchorcolor=blue, % 设置锚点链接（即目标在同一文档内的链接）的颜色为蓝色
+    citecolor=blue, % 设置引用（如文献引用）的颜色为蓝色
+}
+
+%——————————————导言区结束，进入正文部分———————————————%
+
+%——————————————————————————————————————%
+
+\begin{document}
+
+\maketitle
+
+\begin{center} % \extracolsep{\fill} 拉伸到页面最大宽度前，保证居中显示
+
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l  l  l }
+    \hline
+    课程名称：软件质量分析 &  年级：2023级本科  &  姓名：张梓卫 \\
+    作业主题：总结软件可靠性定义 & 学号：10235101526 & 作业日期：2024/10/16 \\
+    指导老师：陈仪香 & 组号： \\
+    \hline
+  \end{tabular*}
+
+\end{center}
+
+\tableofcontents % 目录也需要二次编译
+
+\section{C919的可信属性模型}
+
+\begin{multicols}{2}
+  
+  \subsection{可靠性}
+  
+  \subsubsection{结构完整性}
+  
+  \begin{itemize}
+      \item 机身结构设计
+      \item 高强度材料应用
+      \item 抗疲劳性能
+  \end{itemize}
+  
+  \subsubsection{飞行控制可靠性}
+  
+  \begin{itemize}
+      \item 冗余飞行控制系统
+      \item 自动驾驶仪可靠性
+      \item 软件验证与验证（V\&V）
+  \end{itemize}
+  
+  \subsubsection{发动机可靠性}
+  
+  \begin{itemize}
+      \item 发动机性能稳定性
+      \item 故障保护机制
+      \item 实时监控与诊断
+      \item 自动化应急处理
+      \item 乘客和机组安全措施
+  \end{itemize}
+
+  \subsubsection{系统可靠性}
+  
+  \begin{itemize}
+      \item 各系统稳定运行
+      \item 故障率低
+      \item 关键组件高可靠性
+      \item 供应链质量管理
+  \end{itemize}
+  
+  \subsection{可维护性}
+  
+  \subsubsection{维护便捷性}
+  
+  \begin{itemize}
+      \item 模块化设计
+      \item 易于更换的部件
+      \item 全球备件网络
+      \item 快速供应链响应
+  \end{itemize}
+  
+  \subsubsection{诊断与技术支持}
+  
+  \begin{itemize}
+      \item 内置健康监测
+      \item 预防性维护
+      \item 详细维护手册
+      \item 培训与支持服务
+  \end{itemize}
+  
+  \subsection{安全保障}
+  
+  \subsubsection{网络安全}
+  
+  \begin{itemize}
+      \item 防范网络攻击
+      \item 通信加密
+      \item 数据加密存储
+      \item 访问权限控制
+  \end{itemize}
+  
+  \subsubsection{物理安全}
+  
+  \begin{itemize}
+      \item 未授权进入防护
+      \item 安全的舱门设计
+  \end{itemize}
+  
+  \subsection{性能}
+  
+  \subsubsection{燃油效率}
+  
+  \begin{itemize}
+      \item 空气动力学优化
+      \item 高效发动机技术
+      \item 低排放技术
+      \item 降噪设计
+  \end{itemize}
+  
+  \subsubsection{航程和载荷}
+  
+  \begin{itemize}
+      \item 满足设计航程
+      \item 优化载客量
+  \end{itemize}
+  
+  \subsubsection{环境性能}
+  
+  \subsection{人机工程}
+  
+  \subsubsection{驾驶舱设计}
+  
+  \begin{itemize}
+      \item 人体工程学布局
+      \item 直观的界面
+      \item 自动化辅助
+      \item 降低飞行员疲劳
+  \end{itemize}
+  
+  \subsubsection{乘客舒适性}
+  
+  \begin{itemize}
+      \item 优化客舱环境
+      \item 座椅和空间配置
+  \end{itemize}
+  
+  \subsection{可支持性}
+  
+  \subsubsection{培训计划}
+  
+  \begin{itemize}
+      \item 飞行员培训
+      \item 维护人员培训
+      \item 24/7 支持服务
+      \item 全球服务网络
+  \end{itemize}
+  
+  \subsubsection{客户服务}
+  
+  \begin{itemize}
+      \item 售后支持
+      \item 客户反馈机制
+  \end{itemize}
+
+  \subsection{运营效率}
+  
+  \subsubsection{成本效益}
+  
+  \begin{itemize}
+      \item 降低运营成本
+      \item 燃油经济性
+      \item 快速登机卸货
+      \item 地面服务优化
+  \end{itemize}
+  
+  \subsubsection{基础设施兼容}
+  
+  \begin{itemize}
+      \item 适应现有机场设施
+      \item 兼容地面设备
+  \end{itemize}
+  
+  \subsection{创新性}
+  
+  \subsubsection{先进技术}
+  
+  \begin{itemize}
+      \item 新材料应用
+      \item 先进制造工艺
+      \item 产品升级计划
+      \item 技术研发投入
+  \end{itemize}
+  
+  \subsubsection{数字化}
+  
+  \begin{itemize}
+      \item 数字孪生技术
+      \item 智能数据分析
+  \end{itemize}
+  
+\end{multicols}
+
+\section{安全属性的定义}
+
+软件产品质量属性中的安全性是指在软件生命周期内\cite{space1977national}，应用安全性工程技术，
+防范和应对各种恶意攻击、非法使用以及内部泄漏，从而确保
+软件在系统上下文中执行不会导致系统发生不可接受的风险\cite{leveson1986software}，防止对程序及数据的非授权的故意或意外访问，
+确保降低错误已控制在可接受风险水平内的与软件能力有关的软件属性。其包含三个子属性：信息保护性、数据完整性、可恢复性。\cite{沈国华2016软件可信评估研究综述, 王怀民2014基于网络的可信软件大规模协同开发与演化, 刘彦钊2012一种基于属性划分的软件可信性度量模型研究}
+
+\section{安全属性的三个子属性及涵义}
+
+\subsection{数据保密性\cite{chowdhury2008security}}
+
+\textbf{涵义}：通过加密、访问控制等技术手段，确保只有被授权的用户才能访问或修改特定数据。
+
+\subsection{代码安全性}
+
+\textbf{涵义}：以代码审查、签名验证和防篡改等技术，确保代码的完整性和可靠性，防止恶意代码注入。
+
+\subsection{控制保密性}
+
+\textbf{涵义}：从控制命令加密、身份验证等手段中，防止系统控制权限被未授权用户获取或篡改，确保操作安全。
+
+\section{基于全生命周期的度量元设计}
+
+\subsection{数据保密性}
+
+\begin{itemize}
+    \item \textbf{需求分析阶段}：定义需要保护的敏感数据类型和访问策略的完善程度。
+    \item \textbf{设计阶段}：加密算法的强度及数据加密传输的覆盖率。
+    \item \textbf{实现阶段}：数据加密机制的实现情况及身份验证机制的实施效果。
+    \item \textbf{测试阶段}：通过渗透测试和漏洞扫描验证数据保密性的有效性。
+\end{itemize}
+
+\subsection{代码安全性}
+
+\begin{itemize}
+    \item \textbf{需求分析阶段}：代码安全需求的识别和完整性。\cite{chowdhury2008security}
+    \item \textbf{设计阶段}：防篡改设计方案的健全性，代码签名和验证机制的设计。
+    \item \textbf{实现阶段}：代码静态分析工具的应用及漏洞修复率。
+    \item \textbf{测试阶段}：动态分析及模糊测试的通过率，是否存在潜在的代码漏洞。
+\end{itemize}
+
+\subsection{控制保密性}
+
+\begin{itemize}
+    \item \textbf{需求分析阶段}：控制命令安全需求的定义及控制访问策略的制定。
+    \item \textbf{设计阶段}：控制命令加密机制的强度及访问控制机制的设计。
+    \item \textbf{实现阶段}：控制命令加密及访问控制机制的实施情况。
+    \item \textbf{测试阶段}：通过安全审计和模拟攻击验证控制保密性。
+\end{itemize}
+
+\section{基于出厂报告的度量元设计}
+
+\subsection{数据保密性}
+
+\begin{itemize}
+    \item \textbf{A级}：敏感数据的加密和访问控制机制非常完善，所有数据均通过高级加密标准加密，且通过了严格的安全测试。
+    \item \textbf{B级}：大部分敏感数据均已加密，只有少数非关键数据未完全加密，安全测试基本通过。
+    \item \textbf{C级}：只有部分敏感数据进行了加密处理，存在部分漏洞，安全测试结果显示数据有泄露风险。
+    \item \textbf{D级}：数据加密及访问控制机制不完善，敏感数据容易被未授权访问，安全风险较高。
+\end{itemize}
+
+\subsection{代码安全性}
+
+\begin{itemize}
+    \item \textbf{A级}：代码经过全面的静态分析、动态分析及安全审计，所有已知漏洞均已修复，代码签名验证机制完整。
+    \item \textbf{B级}：代码经过部分静态分析和审计，主要漏洞已修复，但存在少量未修复的低风险漏洞。
+    \item \textbf{C级}：代码只经过简单的安全审计，未能修复所有发现的安全漏洞，存在中等安全风险。
+    \item \textbf{D级}：代码未经过系统性的安全审计，存在大量已知和潜在的安全漏洞，安全风险极高。
+\end{itemize}
+
+\subsection{控制保密性}
+
+\begin{itemize}
+    \item \textbf{A级}：控制命令经过严格的加密和访问控制，具备全面的审计和恢复机制，且通过了高强度的安全测试。
+    \item \textbf{B级}：控制命令大部分经过加密处理，访问控制机制较为完善，但未覆盖所有控制指令。
+    \item \textbf{C级}：控制命令只有少部分进行了加密，访问控制机制存在漏洞，未能防止未授权访问。
+    \item \textbf{D级}：控制命令未经过加密处理，访问控制机制薄弱，系统面临较高的被篡改或攻击风险。
+\end{itemize}
+
+\section{参考资料}
+
+\begin{itemize}
+  \item 软件产品质量模型8个属性：\href{https://www.jianshu.com/p/89cff6038bea}{\underline{https://www.jianshu.com/p/89cff6038bea}}
+  \item 11种方法判断软件的安全可靠性​：\href{https://blog.csdn.net/qq_44005305/article/details/139471105}{\underline{https://blog.csdn.net/qq\_44005305/article/details/139471105}}
+  \item 提升数据保密性的策略：\href{https://wenku.baidu.com/view/29dd73485322aaea998fcc22bcd126fff6055d50.html}{\underline{https://wenku.baidu.com/view/29dd73485322aaea998fcc22bcd126fff6055d50.html}}
+\end{itemize}
+
+\section*{参考文献}
+
+\printbibliography
+
+\end{document}
