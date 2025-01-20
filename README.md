@@ -1,6 +1,6 @@
 # ECNU-23-SEI-Homework
-<p style="text-align: center;">记录我在华东师范大学软件工程学院攻读时的成长作业过程</p>
-<p style="text-align: center;">使用 `.` 键可以进入 VSCode Web 端阅览文件.</p>
+<p align="center">记录我在华东师范大学软件工程学院攻读时的成长作业过程</p>
+<p align="center">使用 `.` 键可以进入 VSCode Web 端阅览文件.</p>
 
 ## 20世纪中国爱情文学
 - 和忧忧一起偶尔听的课，老师很有趣，说如果在我们班级里谈到了恋爱，你们两个人都来找我，我给你们打一百分哦！
