@@ -1,0 +1,153 @@
+\documentclass[a4paper,12pt,UTF8,twoside]{article}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\usepackage{ctex}
+\usepackage{multicol}
+\usepackage{booktabs} % 表格库
+\usepackage{titlesec} % 标题库
+\usepackage{fancyhdr} % 页眉页脚库
+\usepackage{lastpage} % 页码数库
+\usepackage{listings} % 代码块包
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{fontspec} % 允许设置字体
+\setmainfont{SimSun} % 使用宋体
+\usepackage{unicode-math} % 允许数学公式使用特定字体
+\usepackage{mwe}
+\usepackage{zhlipsum} % 中文乱数文本
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{float} % 浮动体环境
+\usepackage{subcaption} % 子图包
+\usepackage[sorting=none]{biblatex}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{setspace}
+\setlength{\parindent}{2em} % 设置段落缩进
+\onehalfspacing % 行间距1.5倍
+
+\date{} % 留空，以让编译时去除日期
+
+\fancypagestyle{plain}{
+  \pagestyle{}
+}
+
+\title{华东师范大学课程作业} % 模板
+\titleformat{\section}
+    {\normalfont\bfseries\Large} % 字体大小、字体系列（\bfseries 为加粗）
+    {\thesection}{1em}{}
+
+% 设置章节的中文格式
+\renewcommand\thesection{\chinese{section} \hspace{0pt}}
+\renewcommand\thesubsection{\arabic{subsection} \hspace{0pt}}
+% \renewcommand\thesubsubsection{\alph{subsubsection} \hspace{0pt}} % 字母编号
+% \hspace{0pt} 是为了确保在章节编号和章节题目之间不要有空格，使得排版更为美观
+    
+%————————————设置页眉、页脚——————————————%
+
+\pagestyle{fancy} % 设置 plain style 的属性
+\fancyhf{} % 清空页眉页脚
+
+% 设置页眉
+
+% \fancyhead[RE]{\leftmark} % Right Even 偶数页右侧显示章名 \leftmark 最高级别章名
+% \fancyhead[LO]{\rightmark} % Left Odd 奇数页左侧显示节名 \rightmark 第二级别节名
+\fancyhead[C]{华东师范大学课程作业} % Center 居中显示
+% \fancyhead[LE,RO]{~\thepage~} % 在偶数页的左侧，奇数页的右侧显示页码
+\renewcommand{\headrulewidth}{1.2pt} % 页眉与正文之间的水平线粗细
+
+% 设置页脚：在每页的右下脚以斜体显示书名
+
+% \fancyfoot[RO,RE]{\it Lab Report By \LaTeX} % 使用意大利斜体显示
+\renewcommand{\footrulewidth}{0.5pt} % 页脚水平线宽度
+
+% 设置页码：在底部居中显示页码
+
+\pagestyle{fancy}
+\fancyfoot[C]{\kaishu 第 \thepage 页 \ 共 \pageref{LastPage} 页} % LastPage 需要二次编译以获取总页数
+
+\begin{document}
+
+\begin{center} % \extracolsep{\fill} 拉伸到页面最大宽度前，保证居中显示
+
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} l  l  l }
+    \hline
+    课程名称：军事理论 &  作业日期：2024/11/07 & 指导老师：刘晓明 \\
+    姓名：张梓卫  & 学号：10235101526 & 专业：软件工程 \\ 
+    \hline
+  \end{tabular*}
+
+\end{center}
+
+\section*{摘要}
+2019年香港暴乱事件中，西方国家的一些非政府组织以资金支持、舆论操控、培训指导等方式干预事件发展，对中国国家安全构成了严重威胁。
+本文分析了西方干预在香港暴乱事件中的危害，基此来探究有效遏制外部势力干预国家内政的方式，坚定维护我国的国家安全。
+
+\section{NGO 的干预方式}
+
+中国社科院美国问题专家吕祥3日对《环球时报》记者说，NGO插手香港事务比较明显的做法是提供资金与策略、培养骨干、给“乱港分子”留后路。
+
+\subsection{资金、物资援助}
+中央政法委公众号“长安剑”曾刊文指出：充足的资金保障，是暴乱活动能够长时间持续的重要原因。
+以美国国家民主基金会、美国国际民主研究院为首的美国 NGO，长期资助香港本地政团、民调机构以及所谓人权组织，
+直接或间接地支持暴乱分子，为激进团体的行动提供了经济后盾。
+
+香港社区服务协会（HKCSS）也在被指使下，不仅公开发表纵暴言论，还为暴徒们提供庇护所和食物，
+增加了乱港分子违法活动的破坏性。
+
+\subsection{舆论操控与国际施压}
+如“人权观察”与“自由之家”等 NGO 通过其媒体和社交平台上国际舆论场中的影响力，发布片面或失实信息，
+自香港发送修例风波以来，自由之家屡屡指手画脚。
+塑造暴乱为“争取民主和人权”的运动，扭曲真实事件面貌。
+甚至推动了一些国家出台针对中国的制裁措施。这样的舆论压力不仅为暴乱者提供了心理支持，还使得更多人受到误导，参与到暴力活动中，进一步威胁香港社会的安定。
+
+法国《新团结》报主编克里斯蒂娜·比埃分析香港局势幕后因素说，
+当前香港所发生的暴力事件具有外部势力支持下的“颜色革命”倾向，
+部分美国政客甚至与香港反对派代表会面。当然英国在其中扮演的角色也不容忽视，
+不难看出，很多股势力企图遏制中国的发展，使历史时钟“逆转”！
+
+\subsection{暴乱培训和高层密会}
+“在众多的 NGO 组织中，发挥核心作用的是美国某民主基金会”。
+一些 NGOs 不仅提供资金支持，还组织暴力技能的培训，
+为示威者提供多种涉及暴力的手段和技巧。
+
+除此之外，2019年8月7日，“港独”组织头目黄之锋在众港媒追问下，终于公开承认昨日与美国驻港澳总领事馆政治组主管Julie Eadeh进行了会面。
+7月8日，美国副总统、国务卿高调会见了香港商人黎智英，次日美国国家安全顾问博尔顿也会见了他。高层密会中，均有请求美国政府发表言论支持和鼓励香港暴动的语句，
+
+\section{遏制外部势力的对策}
+
+\subsection{加强法律和选举制度建设}
+完善并实施《香港国安法》，依法防范、制止和惩治外国和境外势力利用香港进行分裂颠覆、渗透破坏等活动。
+当然，香港暴乱时浮出水面的港独汉奸，也让修改完善香港选举制度也显得尤为重要。应该构建起符合“爱国者治港”原则又符合香港实际情况的选举制度，
+确保“一国两制”实践行稳致远。
+
+\subsection{对等制裁涉港问题表现恶劣的机构和个人}
+2020年8月10日，如上文提到的内容，中方对人权观察执行主席罗斯、自由之家总裁阿布拉莫维茨等人实施制裁。
+包括特朗普政府中的蓬佩奥、纳瓦罗、阿扎、克拉奇、克拉夫特等政客及其家属被禁止入境中国内地和香港、澳门，
+他们及其关联企业、机构也被限制与中国打交道、做生意。今后应该严格依据《反外国制裁法》等文件严格执行，
+并且外交部应严正阐明并公开乱港事实清单，让乱港未遂者们引以为戒。
+
+\subsection{开展积极涉港外交工作}
+在联合国人权理事会、联合国大会第三委员会等国际舞台针对涉港议题施压，
+重申中国实行“一国两制”，强调香港事务是国家内政、国家主权不可侵犯。
+同时，应该在中美、中欧、中英等双边场合开展涉港外交斗争，反对出于政治动机、基于虚假信息的无理指责。
+
+\section*{参考资料}
+
+\begin{itemize}
+  \item 起底被中国制裁的5个美国NGO，到底都有哪些黑历史：\\
+  \href{https://news.ifeng.com/c/7s7gqwloo8e}{\underline{https://news.ifeng.com/c/7s7gqwloo8e}}
+  \item 被中国点名制裁！美国祸港NGO大起底：\\
+  \href{http://world.people.com.cn/n1/2019/1204/c1002-31489037.html}{\underline{http://world.people.com.cn/n1/2019/1204/c1002-31489037.html}}
+  \item 外国专家谈香港暴力示威：背后有外部势力组织策划：\\
+  \href{http://news.china.com.cn/2019-08/16/content_75107832.htm}{\underline{http://news.china.com.cn/2019-08/16/content\_75107832.htm}}
+  \item 【中国那些事儿】香港暴乱，西方媒体的盆景：\\
+  \href{world.chinadaily.com.cn/a/201909/04/WS5d6f63d5a31099ab995ddf3c.html}{\underline{https://world.chinadaily.com.cn/a/201909/04/WS5d6f63d5a31099ab995ddf3c.html}}
+  \item 十八大以来中央防范和遏制外部势力干预香港事务：政策论述与实践行动，张建（上海国际问题研究院 \ \ 台港澳研究所）
+\end{itemize}
+\end{document}
