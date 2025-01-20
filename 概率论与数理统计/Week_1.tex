@@ -1,0 +1,209 @@
+\documentclass[twoside]{article}
+\input{Template Head.tex}
+% ————————————————————————————————————————————————————————————————————————
+\begin{document}
+
+\maketitle
+\vspace{-3.5em}
+\garis{Kite}{Kite}
+
+\tableofcontents
+
+\section{第一章习题1、3、4}
+
+\subsection{习题 1}
+
+1. 写出下列随机试验的样本空间 \( S \):
+
+(1) 记录一个班一次数学考试的平均分数 (设以百分制记分)。  
+
+\begin{ans}{1}{1}
+
+样本空间 \( S \) 是从 0 到 100 的所有可能分数组成的集合。
+\[
+S = [0, 100]
+\]
+\end{ans}
+
+(2) 生产产品直到有 10 件正品为止，记录生产产品的总件数。  
+
+\begin{ans}{2}{2}
+    
+样本空间 \( S \) 是所有可能的生产件数，因为必须生产 10 件正品，所以最少生产 10 件，最多可以无限生产。
+\[
+S = \{10, 11, 12, \dots, n, n = +\infty \}
+\]
+
+\end{ans}
+
+(3) 对某工厂生产的产品进行检查，合格的记上“正品”，不合格的记上“次品”，如连续查出了 2 件次品就停止检查，若检查了 4 件产品就停止检查，记录检查的结果。  
+样本空间 \( S \) 是所有可能的检查结果。假设“正品”记为 \( P \)，“次品”记为 \( F \)，
+
+\begin{ans}{3}{3}
+
+    样本空间可以包含如下元素：
+\[
+S = \{PPPP, PPPF, PPFP, PFPP, FPFP, FPPF, PFPF, PPFF, PFF, FPF, FF \}
+\]
+
+\end{ans}
+
+(4) 在单位圆内任意取一点，记录它的坐标。
+
+\begin{ans}{4}{4}
+
+样本空间 \( S \) 是单位圆内的所有点的坐标，坐标形式为 \( (x, y) \)，其中满足：
+\[
+x^2 + y^2 \leq 1
+\]
+即：
+\[
+S = \{(x, y) | x^2 + y^2 \leq 1 \}
+\]
+
+\end{ans}
+
+\subsection{习题3}
+
+1. 已知 \( A, B, C \) 是三事件，且 \( P(A) = P(B) = P(C) = \frac{1}{4} \)，\( P(AB) = P(BC) = 0 \)，\( P(AC) = \frac{1}{8} \)，求 \( A, B, C \) 至少有一个发生的概率。
+
+求A、B、C至少有一个发生的概率，即计算三个事件的并集概率：
+
+\begin{ans}{5}{5}
+
+\[
+P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C)
+\]
+
+其中，由于$ ABC \subset AB$，故 $ P(ABC) <= P(AB) = 0 $, 由于 $ P(ABC) >= 0 $, 故 $ P(ABC) = 0$。
+
+则所求 $ P(ABC) = \frac{5}{8 }$.
+
+\end{ans}
+
+2. 已知 \( P(A) = \frac{1}{2}, P(B) = \frac{1}{3}, P(C) = \frac{1}{5}, P(AB) = \frac{1}{10}, P(AC) = \frac{1}{15}, P(BC) = \frac{1}{20}, P(ABC) = \frac{1}{30} \)，求 \( A \cup B, A \cup B \cup C, \overline{A} \overline{B} C, \overline{A} B \cup C \) 的概率。
+
+\begin{ans}{6}{6}
+
+解答：
+
+\[
+P(A \cup B) = P(A) + P(B) - P(AB) = \frac{1}{2} + \frac{1}{3} - \frac{1}{10} = \frac{11}{15}
+\]
+
+\[
+P(\overline{A} \cap \overline{B}) = P(A \cup B) = 1 - P(A \cup B) = \frac{4}{15}
+\]
+
+\[
+P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(A \cap B) - P(A \cap C) - P(B \cap C) + P(A \cap B \cap C)
+\]
+\[
+= \frac{1}{2} + \frac{1}{3} + \frac{1}{5} - \frac{1}{10} - \frac{1}{15} - \frac{1}{20} + \frac{1}{30}
+\]
+\[
+= \frac{51}{60} = \frac{17}{20}
+\]
+
+
+\[
+P(\overline{A} \cap \overline{B} \cap \overline{C}) = P(A \cup B \cup C) = 1 - P(A \cup B \cup C) = \frac{3}{20}
+\]
+
+\[
+P(\overline{A} \cap \overline{B} \cap C) = P(\overline{A} \cap \overline{B} \cap (\overline{S} - C)) = P(\overline{A} \cap \overline{B}) - P(\overline{A} \cap \overline{B} \cap C)
+= \frac{4}{15} - \frac{3}{20} = \frac{16}{60} - \frac{9}{60} = \frac{7}{60}
+\]
+
+\[
+p = P(\overline{A} \cap \overline{B} \cap C)
+\]
+
+\[
+p = P(\overline{A} \cap \overline{B}) + P(C) - P(\overline{A} \cap \overline{B} \cap C)
+\]
+
+\[
+p = \frac{4}{15} + \frac{1}{5} - \frac{7}{60} = \frac{7}{20}
+\]
+
+\end{ans}
+
+(3) 已知 $P(A) = \frac{1}{2}$，(i) 若 $A, B$ 互不相容，求 $P(AB^c)$，(ii) 若 $P(AB) = \frac{1}{8}$，求 $P(AB^c)$。
+
+\begin{ans}{7}{7}
+不妨设 $ \Omega $ 为全集.
+
+(i) $ P(AB) = P(A(\Omega - B)) = P(A - AB) = P(A) - P(AB) = \frac{1}{2} $
+
+(ii)$ P(AB) = P(A(\Omega - B)) = P(A - AB) = P(A) - P(AB) = \frac{1}{2} - \frac{1}{8} = \frac{3}{8} $
+
+\end{ans}
+
+\subsection{习题4}
+
+(1) 证明 $\overline{AB} = \overline{A}B$ 等价于 $A = B$：
+\begin{ans}{8}{8}
+    因为 $\overline{AB}$ 表示 $A$ 和 $B$ 都不发生的事件，且 $\overline{A}B$ 表示 $A$ 不发生但 $B$ 发生的事件。
+    
+    \[
+    \overline{AB} = \overline{A}B \implies A = B
+    \]
+    
+    根据集合的性质，这说明 $A$ 与 $B$ 是相同的事件。
+\end{ans}
+
+(2) 验证事件 $A$ 和事件 $B$ 恰有一个发生的概率：
+
+\begin{ans}{9}{9}
+    
+    设事件 $A$ 或事件 $B$ 发生但不同时发生的概率为：
+    
+    \[
+    P(A \cup B) - P(A \cap B) = P(A) + P(B) - 2P(AB)
+    \]
+    
+    根据集合间的基本概率公式，可以得出：
+    
+    \[
+    P(A \text{ 恰有一个发生}) = P(A) + P(B) - 2P(AB).
+    \]
+    
+    证毕。
+\end{ans}
+
+\section{附加题}
+
+\begin{itemize}
+    \item 补充习题 1: 设 $A, B, C$ 为三个事件。已知 $P(A) = a, P(B) = 2a, P(C) = 3a, P(AB) = P(AC) = P(BC) = b$。证明：$a \leq \frac{1}{4}, b \leq \frac{1}{4}$。
+    
+    \item 补充习题 2: 证明 $\lvert P(AB) - P(A)P(B) \rvert \leq \frac{1}{4}$。
+\end{itemize}
+
+\subsection{附加题1}
+
+\begin{proof}
+    
+    因为 $AB \subseteq A$，则 $P(AB) \leq P(A)$，即 $b \leq a$。
+
+    由于 $1 \geq P(B \cup C) = P(B) + P(C) - P(BC) = 5a - b \geq 4a$，则 $a \leq \frac{1}{4}$。
+    
+    由 $b \leq a$ 且 $a \leq \frac{1}{4}$，得 $b \leq \frac{1}{4}$。
+
+\end{proof}
+
+\subsection{附加题2}
+
+\begin{proof}
+
+\noindent
+设 $P(A) \geq P(B)$，则
+
+\[
+P(AB) - P(A)P(B) \leq P(B) - P(B)P(B) = P(B)[1 - P(B)] \leq (\frac{[P(B) + 1 - P(B)]}{2})^2 = \frac{1}{4}.
+\]
+
+\end{proof}
+\newpage{}
+
+\end{document}

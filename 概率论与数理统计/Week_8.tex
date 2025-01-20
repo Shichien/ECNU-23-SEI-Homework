@@ -1,0 +1,360 @@
+\documentclass[twoside]{article}
+\input{Template Head.tex}
+% ————————————————————————————————————————————————————————————————————————
+\begin{document}
+
+\maketitle
+\vspace{-3.5em}
+\garis{Kite}{Kite}
+
+\tableofcontents
+
+\section{第三章习题 4}
+
+设 \( X, Y \) 都是非负的连续型随机变量，它们相互独立。
+\begin{enumerate}
+    \item 证明 \( P(X < Y) = \int_0^{\infty} F_X(x) f_Y(x) \, dx \)，其中 \( F_X(x) \) 是 \( X \) 的分布函数，\( f_Y(y) \) 是 \( Y \) 的概率密度。
+    \item 设 \( X, Y \) 相互独立，其概率密度分别为
+    \[
+    f_X(x) = 
+    \begin{cases} 
+        \lambda_1 e^{-\lambda_1 x}, & x > 0, \\
+        0, & \text{其他},
+    \end{cases}
+    \quad
+    f_Y(y) = 
+    \begin{cases} 
+        \lambda_2 e^{-\lambda_2 y}, & y > 0, \\
+        0, & \text{其他}.
+    \end{cases}
+    \]
+    求 \( P(X < Y) \)。
+\end{enumerate}
+
+\begin{ans}{4}{4}
+    (1) 因为 \( X \) 和 \( Y \) 是相互独立的非负连续型随机变量，且 \( F_X(x) \) 是 \( X \) 的分布函数，\( f_Y(y) \) 是 \( Y \) 的概率密度函数，因此：
+    \[
+    P(X < Y) = \iint_{x < y} f_X(x) f_Y(y) \, dx \, dy
+    \]
+    
+    通过改变积分顺序，我们得到：
+    \[
+    P(X < Y) = \int_0^{\infty} \int_0^y f_X(x) \, dx \, f_Y(y) \, dy = \int_0^{\infty} F_X(x) f_Y(x) \, dx
+    \]
+    
+    (2) 已知 \( f_X(x) = \lambda_1 e^{-\lambda_1 x} \) 和 \( f_Y(y) = \lambda_2 e^{-\lambda_2 y} \)，根据 (1) 的结果，有：
+    \[
+    P(X < Y) = \int_0^{\infty} F_X(x) f_Y(y) \, dx
+    \]
+    
+    将 \( F_X(x) = 1 - e^{-\lambda_1 x} \) 和 \( f_Y(y) = \lambda_2 e^{-\lambda_2 y} \) 代入，得到：
+    \[
+    P(X < Y) = \int_0^{\infty} (1 - e^{-\lambda_1 x}) \lambda_2 e^{-\lambda_2 x} \, dx
+    \]
+    
+    经过积分计算，结果为：
+    \[
+    P(X < Y) = \frac{\lambda_1}{\lambda_1 + \lambda_2}
+    \]
+\end{ans}
+
+\section{第三章习题 6}
+将一枚硬币掷 3 次，以 \( X \) 表示前 2 次中出现正面（H）的次数，以 \( Y \) 表示 3 次中出现正面的次数。求 \( X, Y \) 的联合分布律以及 \( (X, Y) \) 的边缘分布律。
+
+\begin{ans}{6}{6}
+    样本空间如下，共有 8 种情况：
+    \[
+    \{ \text{HHH, HHT, HTH, THH, HTT, THT, TTH, TTT} \}
+    \]
+    
+    构建联合概率表如下：
+    
+    \[
+    \begin{array}{|c|c|c|c|c|c|}
+    \hline
+    X \backslash Y & 0 & 1 & 2 & 3 & \text{边缘分布 } P(Y = j) \\
+    \hline
+    0 & \frac{1}{8} & 0 & \frac{1}{8} & 0 & \frac{1}{4} \\
+    1 & 0 & \frac{1}{8} & \frac{2}{8} & 0 & \frac{3}{8} \\
+    2 & 0 & 0 & \frac{1}{8} & \frac{1}{8} & \frac{1}{4} \\
+    \hline
+    \text{边缘分布 } P(X = i) & \frac{1}{4} & \frac{3}{8} & \frac{1}{4} & 0 & 1 \\
+    \hline
+    \end{array}
+    \]
+\end{ans}
+
+\section{第三章习题 7}
+
+设二维随机变量 \( (X, Y) \) 的概率密度为
+\[
+f(x, y) = 
+\begin{cases} 
+4.8y(2 - x), & 0 \leq x \leq 1, 0 \leq y \leq x, \\
+0, & \text{其他}.
+\end{cases}
+\]
+求边缘概率密度。
+
+\begin{ans}{7}{7}
+    由于 \( (X, Y) \) 的概率密度 \( f(x, y) \) 在区域 \( G = \{ (x, y) | 0 \leq x \leq 1, 0 \leq y \leq x \} \) 外取零，因此我们可以计算边缘密度 \( f_X(x) \) 和 \( f_Y(y) \)。
+
+    \[
+    f_X(x) = \int_{-\infty}^{\infty} f(x, y) \, dy = \int_0^x 4.8y(2 - x) \, dy
+    \]
+    \[
+    = 4.8 \int_0^x y(2 - x) \, dy = 2.4 (2 - x) x^2, \quad 0 \leq x \leq 1.
+    \]
+    
+    同理，
+    \[
+    f_Y(y) = \int_{-\infty}^{\infty} f(x, y) \, dx = \int_y^1 4.8y(2 - x) \, dx
+    \]
+    \[
+    = 4.8y \int_y^1 (2 - x) \, dx = 2.4y(3 - 4y + y^2), \quad 0 \leq y \leq 1.
+    \]
+    
+    因此，边缘密度函数为
+    \[
+    f_X(x) = 
+    \begin{cases} 
+    2.4 (2 - x) x^2, & 0 \leq x \leq 1, \\
+    0, & \text{其他}.
+    \end{cases}
+    \]
+    和
+    \[
+    f_Y(y) = 
+    \begin{cases} 
+    2.4y(3 - 4y + y^2), & 0 \leq y \leq 1, \\
+    0, & \text{其他}.
+    \end{cases}
+    \]
+    
+\end{ans}
+
+\section{第三章习题 9}
+
+设二维随机变量 \( (X, Y) \) 的概率密度为
+\[
+f(x, y) = 
+\begin{cases} 
+cx^2 y, & x^2 \leq y \leq 1, \\
+0, & \text{其他}.
+\end{cases}
+\]
+
+\begin{enumerate}
+    \item 确定常数 \( c \)。
+    \item 求边缘概率密度。
+\end{enumerate}
+
+\begin{ans}{9}{9}
+    (1) 确定常数 \( c \)
+
+    \[
+    1 = \iint f(x, y) \, dx \, dy = \int_0^1 \int_{x^2}^1 cx^2 y \, dy \, dx
+    \]
+    
+    计算内层积分：
+    \[
+    = \int_0^1 c x^2 \int_{x^2}^1 y \, dy \, dx = \int_0^1 c x^2 \left[ \frac{y^2}{2} \right]_{x^2}^1 \, dx
+    \]
+    \[
+    = \int_0^1 c x^2 \left( \frac{1}{2} - \frac{x^4}{2} \right) \, dx = c \int_0^1 \frac{x^2}{2} (1 - x^4) \, dx
+    \]
+    \[
+    = c \int_0^1 \frac{x^2}{2} - \frac{x^6}{2} \, dx = c \left[ \frac{x^3}{6} - \frac{x^7}{14} \right]_0^1 = c \left( \frac{1}{6} - \frac{1}{14} \right)
+    \]
+    \[
+    = c \cdot \frac{4}{21} = 1 \Rightarrow c = \frac{21}{4}
+    \]
+    
+    (2) 求边缘概率密度
+    
+    \[
+    f_X(x) = \int_{-\infty}^{\infty} f(x, y) \, dy = \int_{x^2}^1 \frac{21}{4} x^2 y \, dy
+    \]
+    \[
+    = \frac{21}{4} x^2 \int_{x^2}^1 y \, dy = \frac{21}{4} x^2 \left[ \frac{y^2}{2} \right]_{x^2}^1
+    \]
+    \[
+    = \frac{21}{4} x^2 \cdot \frac{1 - x^4}{2} = \frac{21}{8} x^2 (1 - x^4), \quad -1 \leq x \leq 1.
+    \]
+    
+    同理，
+    \[
+    f_Y(y) = \int_{-\infty}^{\infty} f(x, y) \, dx = \int_{-\sqrt{y}}^{\sqrt{y}} \frac{21}{4} x^2 y \, dx
+    \]
+    \[
+    = \frac{21}{4} y \int_{-\sqrt{y}}^{\sqrt{y}} x^2 \, dx = \frac{21}{4} y \cdot \frac{2y^{3/2}}{3} = \frac{7}{4} y^{5/2}, \quad 0 \leq y \leq 1.
+    \]
+    
+    因此，边缘密度函数为
+    \[
+    f_X(x) = 
+    \begin{cases} 
+    \frac{21}{8} x^2 (1 - x^4), & -1 \leq x \leq 1, \\
+    0, & \text{其他}.
+    \end{cases}
+    \]
+    和
+    \[
+    f_Y(y) = 
+    \begin{cases} 
+    \frac{7}{4} y^{5/2}, & 0 \leq y \leq 1, \\
+    0, & \text{其他}.
+    \end{cases}
+    \]
+\end{ans}
+
+\section{第三章习题 17}
+
+(1) 设随机变量 \( (X, Y) \) 具有分布函数
+\[
+F(x, y) = 
+\begin{cases} 
+(1 - e^{-ax})y, & x \geq 0, 0 \leq y \leq 1, a > 0, \\
+1 - e^{-ax}, & x \geq 0, y > 1, \\
+0, & \text{其他}.
+\end{cases}
+\]
+证明 \( X, Y \) 相互独立。
+
+(2) 设随机变量 \( (X, Y) \) 具有分布律
+\[
+P(X = x, Y = y) = p^2 (1 - p)^{x + y - 2}, \quad 0 < p < 1, x, y \text{均为正整数},
+\]
+问 \( X, Y \) 是否相互独立？
+
+
+\begin{ans}{17}{17}
+    (1) \( F_X(x) = F(x, \infty) \) 和 \( F_Y(y) = F(\infty, y) \) 为
+    \[
+    F_X(x) = 
+    \begin{cases}
+    1 - e^{-ax}, & x \geq 0, \\
+    0, & \text{其他}.
+    \end{cases}
+    \]
+    \[
+    F_Y(y) = 
+    \begin{cases}
+    y, & 0 \leq y \leq 1, \\
+    1, & y > 1, \\
+    0, & \text{其他}.
+    \end{cases}
+    \]
+    
+    因为对于所有 \( x, y \)，都有 \( F(x, y) = F_X(x) F_Y(y) \)，故 \( X, Y \) 相互独立。
+    
+    (2) \( P(X = x) \) 的计算如下：
+    \[
+    P(X = x) = \sum_{j=1}^{\infty} P(X = x, Y = j) = p^2 (1 - p)^{x - 1} \sum_{j=1}^{\infty} (1 - p)^{j - 1}
+    \]
+    \[
+    = p^2 (1 - p)^{x - 1} \cdot \frac{1}{1 - (1 - p)} = p(1 - p)^{x - 1}, \quad x = 1, 2, \dots, \text{其中 } 0 < p < 1.
+    \]
+    
+    同理，
+    \[
+    P(Y = y) = p(1 - p)^{y - 1}, \quad y = 1, 2, \dots, \text{其中 } 0 < p < 1.
+    \]
+    
+    因为对于所有正整数 \( x, y \) 都有
+    \[
+    P(X = x, Y = y) = P(X = x) P(Y = y),
+    \]
+    故 \( X, Y \) 相互独立。
+
+\end{ans}
+
+\section{第三章习题 18}
+
+设 \( X \) 和 \( Y \) 是两个相互独立的随机变量，\( X \) 在区间 \( (0, 1) \) 上服从均匀分布，\( Y \) 的概率密度为
+\[
+f_Y(y) = 
+\begin{cases} 
+\frac{1}{2} e^{-y/2}, & y > 0, \\
+0, & y \leq 0.
+\end{cases}
+\]
+\begin{enumerate}
+    \item 求 \( X \) 和 \( Y \) 的联合概率密度。
+    \item 设含有 a 的二次方程为 \( a^2 + 2Xa + Y = 0 \)，试求 \( a \) 有实根的概率。
+\end{enumerate}
+
+\begin{ans}{18}{18}
+    因为 \( X \) 和 \( Y \) 相互独立，故 \( (X, Y) \) 的联合概率密度为
+    \[
+    f(x, y) = f_X(x) f_Y(y) = 
+    \begin{cases}
+    \frac{1}{2} e^{-y/2}, & 0 < x < 1, y > 0, \\
+    0, & \text{其他}.
+    \end{cases}
+    \]
+    
+    (2) 方程 \( a^2 + 2Xa + Y = 0 \) 有实根的充要条件为其判别式 \( 4X^2 - 4Y \geq 0 \)，即 \( X^2 \geq Y \)。所以
+    \[
+    P(X^2 \geq Y) = \iint_G f(x, y) \, dx \, dy = \int_0^1 \int_0^{x^2} \frac{1}{2} e^{-y/2} \, dy \, dx
+    \]
+    \[
+    = \int_0^1 \left[ -e^{-y/2} \right]_0^{x^2} \, dx = \int_0^1 \left( 1 - e^{-x^2/2} \right) \, dx
+    \]
+    
+    令 \( u = x^2/2 \)，则积分结果为：
+    \[
+    P(X^2 \geq Y) = 1 - \sqrt{\frac{\pi}{2}} \approx 0.1445.
+    \]
+\end{ans}
+
+\section{第三章习题 19}
+
+进行打靶，设弹着点 \( A(X, Y) \) 的坐标 \( X \) 和 \( Y \) 相互独立，且都服从 \( N(0, 1) \) 分布，规定
+\begin{itemize}
+    \item 点 \( A \) 落在区域 \( D_1 = \{(x, y) | x^2 + y^2 \leq 1\} \) 得 2 分；
+    \item 点 \( A \) 落在 \( D_2 = \{(x, y) | 1 < x^2 + y^2 \leq 4\} \) 得 1 分；
+    \item 点 \( A \) 落在 \( D_3 = \{(x, y) | x^2 + y^2 > 4\} \) 得 0 分。
+\end{itemize}
+以 \( Z \) 记打靶的得分，写出 \( X, Y \) 的联合概率密度，并求 \( Z \) 的分布律。
+
+\begin{ans}{19}{19}
+    由题意知 \( X, Y \) 的概率密度为
+    \[
+    f_X(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}, \quad -\infty < x < \infty,
+    \]
+    \[
+    f_Y(y) = \frac{1}{\sqrt{2\pi}} e^{-y^2/2}, \quad -\infty < y < \infty.
+    \]
+    
+    且 \( X \) 和 \( Y \) 相互独立，故 \( X \) 和 \( Y \) 的联合概率密度为
+    \[
+    f(x, y) = f_X(x) f_Y(y) = \frac{1}{2\pi} e^{-(x^2 + y^2)/2}, \quad -\infty < x < \infty, -\infty < y < \infty.
+    \]
+    
+    计算得分分布：
+    
+    \[
+    P(Z = 2) = P((X, Y) \in D_1) = \iint_{D_1} f(x, y) \, dx \, dy = 1 - e^{-1/2}.
+    \]
+    
+    \[
+    P(Z = 1) = P((X, Y) \in D_2) = \iint_{D_2} f(x, y) \, dx \, dy = e^{-1/2} - e^{-2}.
+    \]
+    
+    \[
+    P(Z = 0) = P((X, Y) \in D_3) = 1 - (1 - e^{-1/2}) - (e^{-1/2} - e^{-2}) = e^{-2}.
+    \]
+    
+    因此，\( Z \) 的分布律为
+    
+    \[
+    \begin{array}{c|c|c|c}
+    Z & 0 & 1 & 2 \\
+    \hline
+    P(Z = z) & e^{-2} & e^{-1/2} - e^{-2} & 1 - e^{-1/2} \\
+    \end{array}
+    \]
+\end{ans}
+
+\end{document}

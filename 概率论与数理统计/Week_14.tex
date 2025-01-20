@@ -1,0 +1,317 @@
+\documentclass[twoside]{article}
+\input{Template Head.tex}
+% ————————————————————————————————————————————————————————————————————————
+\begin{document}
+
+\maketitle
+\vspace{-3.5em}
+\garis{Kite}{Kite}
+
+\tableofcontents
+
+\section{第七章习题 5}
+
+\begin{ans}{5}{5}
+(1) 最大似然估计计算：
+
+概率密度函数为：
+\[
+f(t) = 
+\begin{cases} 
+\frac{1}{\theta} e^{-\frac{(t-c)}{\theta}}, & t \geq c, \\
+0, & t < c,
+\end{cases}
+\]
+
+由题意，失效时间为 \( x_1, x_2, \ldots, x_n \)，因此似然函数为：
+\[
+L(\theta, c) = \prod_{i=1}^n f(x_i) = \prod_{i=1}^n \frac{1}{\theta} e^{-\frac{(x_i-c)}{\theta}} = \frac{1}{\theta^n} e^{-\frac{\sum_{i=1}^n (x_i-c)}{\theta}}, \quad c \leq x_1.
+\]
+
+取对数，得对数似然函数：
+\[
+\ln L(\theta, c) = -n \ln \theta - \frac{\sum_{i=1}^n (x_i-c)}{\theta}.
+\]
+
+对 \(\theta\) 和 \(c\) 分别求偏导并令其为 0：
+\[
+\frac{\partial \ln L}{\partial \theta} = -\frac{n}{\theta} + \frac{\sum_{i=1}^n (x_i-c)}{\theta^2} = 0,
+\]
+解得：
+\[
+\hat{\theta} = \frac{\sum_{i=1}^n (x_i-c)}{n}.
+\]
+
+似然函数在 \(c = x_1\) 处取得最大值：
+\[
+\hat{c} = x_1.
+\]
+
+将 \(\hat{c}\) 代入 \(\hat{\theta}\)，得：
+\[
+\hat{\theta} = \frac{\sum_{i=1}^n x_i - n x_1}{n} = \bar{x} - x_1.
+\]
+
+故最大似然估计为：
+\[
+\hat{c} = x_1, \quad \hat{\theta} = \bar{x} - x_1.
+\]
+
+(2) 矩估计计算：
+
+一阶矩为：
+\[
+\mu_1 = \int_{c}^\infty t f(t) dt = \int_{c}^\infty t \frac{1}{\theta} e^{-\frac{(t-c)}{\theta}} dt.
+\]
+令 \(u = \frac{t-c}{\theta}\)，则 \(t = \theta u + c\)，代入得：
+\[
+\mu_1 = \int_{0}^\infty (\theta u + c) e^{-u} du = c + \theta \Gamma(2) = c + \theta.
+\]
+
+二阶矩为：
+\[
+\mu_2 = \int_{c}^\infty t^2 f(t) dt = \int_{c}^\infty t^2 \frac{1}{\theta} e^{-\frac{(t-c)}{\theta}} dt.
+\]
+同样令 \(u = \frac{t-c}{\theta}\)，代入得：
+\[
+\mu_2 = \int_{0}^\infty (\theta u + c)^2 e^{-u} du = \theta^2 \Gamma(3) + 2c\theta \Gamma(2) + c^2 \Gamma(1),
+\]
+化简得：
+\[
+\mu_2 = 2\theta^2 + 2c\theta + c^2.
+\]
+
+由矩估计公式，结合样本的中心矩：
+\[
+\mu_1 = \bar{x}, \quad \mu_2 = \frac{1}{n} \sum_{i=1}^n x_i^2,
+\]
+可解得：
+\[
+\theta = \sqrt{\mu_2 - \mu_1^2}, \quad c = \mu_1 - \sqrt{\mu_2 - \mu_1^2}.
+\]
+
+所以样本矩估计为：
+\[
+\hat{\theta} = \sqrt{\frac{1}{n} \sum_{i=1}^n x_i^2 - \bar{x}^2}, \quad \hat{c} = \bar{x} - \sqrt{\frac{1}{n} \sum_{i=1}^n x_i^2 - \bar{x}^2}.
+\]
+
+\end{ans}
+
+\section{第七章习题 9}
+
+\begin{ans}{9}{9}
+(1) 验证 \( S_w^2 \) 是总体方差 \(\sigma^2\) 的无偏估计量：
+
+由定义，合并估计公式为：
+\[
+S_w^2 = \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1 + n_2 - 2}.
+\]
+
+由 \(\mathbb{E}[S_1^2] = \mathbb{E}[S_2^2] = \sigma^2\) 得：
+\[
+\mathbb{E}[S_w^2] = \mathbb{E} \left[ \frac{(n_1-1)S_1^2 + (n_2-1)S_2^2}{n_1 + n_2 - 2} \right].
+\]
+
+将期望分配：
+\[
+\mathbb{E}[S_w^2] = \frac{(n_1-1)\mathbb{E}[S_1^2] + (n_2-1)\mathbb{E}[S_2^2]}{n_1 + n_2 - 2}.
+\]
+
+由 \(\mathbb{E}[S_1^2] = \sigma^2\) 且 \(\mathbb{E}[S_2^2] = \sigma^2\)，代入得到：
+\[
+\mathbb{E}[S_w^2] = \frac{(n_1-1)\sigma^2 + (n_2-1)\sigma^2}{n_1 + n_2 - 2}.
+\]
+
+化简得：
+\[
+\mathbb{E}[S_w^2] = \sigma^2.
+\]
+
+故 \( S_w^2 \) 是总体方差 \(\sigma^2\) 的无偏估计量。
+
+(2) 验证 \(\frac{\sum_{i=1}^n a_i X_i}{\sum_{i=1}^n a_i}\) 是总体均值 \(\mu\) 的无偏估计量：
+
+令：
+\[
+\hat{\mu} = \frac{\sum_{i=1}^n a_i X_i}{\sum_{i=1}^n a_i},
+\]
+其中 \( a_i \) 是常数，且 \(\sum_{i=1}^n a_i \neq 0\)。
+
+计算 \(\mathbb{E}[\hat{\mu}]\)：
+\[
+\mathbb{E}[\hat{\mu}] = \mathbb{E} \left[ \frac{\sum_{i=1}^n a_i X_i}{\sum_{i=1}^n a_i} \right].
+\]
+
+将期望运算分配到求和内，得：
+\[
+\mathbb{E}[\hat{\mu}] = \frac{\sum_{i=1}^n a_i \mathbb{E}[X_i]}{\sum_{i=1}^n a_i}.
+\]
+
+由于每个 \( X_i \) 的期望为 \(\mu\)，即 \(\mathbb{E}[X_i] = \mu\)，所以：
+\[
+\mathbb{E}[\hat{\mu}] = \frac{\sum_{i=1}^n a_i \mu}{\sum_{i=1}^n a_i}.
+\]
+
+化简得：
+\[
+\mathbb{E}[\hat{\mu}] = \mu.
+\]
+
+因此 \(\frac{\sum_{i=1}^n a_i X_i}{\sum_{i=1}^n a_i}\) 是总体均值 \(\mu\) 的无偏估计量。
+
+
+\end{ans}
+
+\section{第七章习题 10}
+
+\begin{ans}{10}{10}
+    \section*{解答}
+
+(1) 确定常数 \( c \)，使 \( c \sum_{i=1}^{n-1}(X_{i+1} - X_i)^2 \) 是 \(\sigma^2\) 的无偏估计量：
+
+\[
+\mathbb{E} \left[ c \sum_{i=1}^{n-1} (X_{i+1} - X_i)^2 \right] = c \sum_{i=1}^{n-1} \mathbb{E}[(X_{i+1} - X_i)^2].
+\]
+
+\[
+\mathbb{E}[(X_{i+1} - X_i)^2] = \text{Var}(X_{i+1}) + \text{Var}(X_i) = 2\sigma^2,
+\]
+因此：
+\[
+\mathbb{E} \left[ c \sum_{i=1}^{n-1} (X_{i+1} - X_i)^2 \right] = c \cdot 2\sigma^2 (n-1).
+\]
+
+令其等于 \(\sigma^2\)，即：
+\[
+c \cdot 2\sigma^2 (n-1) = \sigma^2.
+\]
+
+\[
+c = \frac{1}{2(n-1)}.
+\]
+
+(2) 确定常数 \( c \)，使 \( \bar{X}^2 - cS^2 \) 是 \(\mu^2\) 的无偏估计量：
+
+样本均值的平方的期望为：
+\[
+\mathbb{E}[\bar{X}^2] = \mathbb{E}\left[\left(\frac{1}{n} \sum_{i=1}^n X_i\right)^2\right] = \frac{\sigma^2}{n} + \mu^2.
+\]
+
+样本方差的期望为：
+\[
+\mathbb{E}[S^2] = \sigma^2.
+\]
+
+\[
+\mathbb{E}[\bar{X}^2 - cS^2] = \mathbb{E}[\bar{X}^2] - c\mathbb{E}[S^2].
+\]
+
+\[
+\mathbb{E}[\bar{X}^2 - cS^2] = \left(\frac{\sigma^2}{n} + \mu^2\right) - c\sigma^2.
+\]
+
+令其等于 \(\mu^2\)，即：
+\[
+\frac{\sigma^2}{n} + \mu^2 - c\sigma^2 = \mu^2.
+\]
+
+\[
+c = \frac{1}{n}.
+\]
+
+\end{ans}
+
+\section{第七章习题 13}
+
+\begin{ans}{13}{13}
+    (1) 证明 \(\hat{\theta}^2 = (\hat{\theta})^2\) 不是 \(\theta^2\) 的无偏估计量：
+
+已知 \(\hat{\theta}\) 是参数 \(\theta\) 的无偏估计量，且 \(\text{Var}(\hat{\theta}) > 0\)，因此：
+\[
+\mathbb{E}[\hat{\theta}] = \theta.
+\]
+
+由平方的期望性质可得：
+\[
+\mathbb{E}[\hat{\theta}^2] = \text{Var}(\hat{\theta}) + \mathbb{E}[\hat{\theta}]^2.
+\]
+
+将 \(\mathbb{E}[\hat{\theta}] = \theta\) 代入，得：
+\[
+\mathbb{E}[\hat{\theta}^2] = \text{Var}(\hat{\theta}) + \theta^2.
+\]
+
+显然，当 \(\text{Var}(\hat{\theta}) > 0\) 时：
+\[
+\mathbb{E}[\hat{\theta}^2] > \theta^2.
+\]
+
+因此，\(\hat{\theta}^2\) 不是 \(\theta^2\) 的无偏估计量。
+
+(2) 验证 \(\hat{\theta} = \max\{X_1, X_2, \dots, X_n\}\) 的最大似然估计量不是无偏估计量：
+
+概率密度函数为：
+\[
+f(x; \theta) = 
+\begin{cases} 
+\frac{1}{\theta}, & 0 < x \leq \theta, \\
+0, & \text{其他}.
+\end{cases}
+\]
+
+对应的似然函数为：
+\[
+L(\theta) = 
+\begin{cases} 
+\frac{1}{\theta^n}, & \theta \geq x_{(n)}, \\
+0, & \theta < x_{(n)},
+\end{cases}
+\]
+其中 \(x_{(n)} = \max\{X_1, X_2, \dots, X_n\}\)。
+
+当 \(\theta \geq x_{(n)}\) 时，\(L(\theta)\) 随 \(\theta\) 的增加而减小；当 \(\theta < x_{(n)}\) 时，\(L(\theta) = 0\)。因此，\(L(\theta)\) 在 \(\theta = x_{(n)}\) 处取得最大值。
+
+由此可得，\(\hat{\theta} = x_{(n)}\) 是参数 \(\theta\) 的最大似然估计量。
+
+现在计算 \(\mathbb{E}[\hat{\theta}]\)：
+
+累积分布函数为：
+\[
+F(x) = 
+\begin{cases} 
+0, & x < 0, \\
+\frac{x}{\theta}, & 0 \leq x \leq \theta, \\
+1, & x > \theta.
+\end{cases}
+\]
+
+由最大值的分布性质，\(\hat{\theta} = \max\{X_1, X_2, \dots, X_n\}\) 的分布函数为：
+\[
+F_{\hat{\theta}}(z) = [F(z)]^n = \left(\frac{z}{\theta}\right)^n, \quad 0 \leq z \leq \theta.
+\]
+
+概率密度函数为：
+\[
+f_{\hat{\theta}}(z) = \frac{d}{dz} F_{\hat{\theta}}(z) = n \frac{z^{n-1}}{\theta^n}, \quad 0 \leq z \leq \theta.
+\]
+
+计算期望值：
+\[
+\mathbb{E}[\hat{\theta}] = \int_0^\theta z f_{\hat{\theta}}(z) \, dz = \int_0^\theta z \cdot n \frac{z^{n-1}}{\theta^n} \, dz.
+\]
+
+化简得：
+\[
+\mathbb{E}[\hat{\theta}] = n \int_0^\theta \frac{z^n}{\theta^n} \, dz = n \cdot \frac{1}{\theta^n} \cdot \frac{\theta^{n+1}}{n+1}.
+\]
+
+进一步化简：
+\[
+\mathbb{E}[\hat{\theta}] = \frac{n}{n+1} \theta.
+\]
+
+由于 \(\mathbb{E}[\hat{\theta}] \neq \theta\)，因此 \(\hat{\theta}\) 不是 \(\theta\) 的无偏估计量。
+
+\end{ans}
+
+\end{document}

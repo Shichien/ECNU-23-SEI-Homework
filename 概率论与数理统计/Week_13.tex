@@ -1,0 +1,306 @@
+\documentclass[twoside]{article}
+\input{Template Head.tex}
+% ————————————————————————————————————————————————————————————————————————
+\begin{document}
+
+\maketitle
+\vspace{-3.5em}
+\garis{Kite}{Kite}
+
+\tableofcontents
+
+\section{第六章习题 2}
+
+\begin{ans}{2}{2}
+    已知总体 \( X \sim N(12, 4) \)，从中随机抽取容量为5的样本 \( X_1, X_2, X_3, X_4, X_5 \)。
+
+    \subsection*{(1) 求样本均值与总体均值之差的绝对值大于1的概率}
+    
+    样本均值：
+    \[
+    \bar{X} = \frac{1}{5} \sum_{i=1}^{5} X_i, \bar{X} \sim N\left( \mu, \frac{\sigma^2}{n} \right) = N\left( 12, \frac{4}{5} \right),
+    \]
+    
+    其标准差为：
+    \[
+    \sqrt{\frac{\sigma^2}{n}} = \sqrt{\frac{4}{5}} = \frac{2}{\sqrt{5}}.
+    \]
+    
+    目标概率为：
+    \[
+    P(|\bar{X} - \mu| > 1).
+    \]
+    
+    \[
+    P(|\bar{X} - \mu| > 1) = 2P\left(Z > \frac{\sqrt{5}}{2}\right).
+    \]
+    
+    查正态分布表得：
+    \[
+    P(Z > \frac{\sqrt{5}}{2}) = P(Z > 1.118) \approx 0.131.
+    \]
+    
+    \[
+    P(|\bar{X} - \mu| > 1) = 2 \cdot 0.131 = 0.262.
+    \]
+    
+    \subsection*{(2) 求 \( P\{\max(X_1, X_2, X_3, X_4, X_5) > 15\} \) 和 \( P\{\min(X_1, X_2, X_3, X_4, X_5) < 10\} \)}
+    
+    1. 
+    
+    记 \( Y = \max(X_1, X_2, X_3, X_4, X_5) \)，则：
+    \[
+    P(Y \leq 15) = [P(X \leq 15)]^5.
+    \]
+    
+    计算单个样本：
+    \[
+    P(X \leq 15) = P\left(Z \leq \frac{15 - 12}{2}\right) = P(Z \leq 1.5) \approx 0.9332.
+    \]
+    
+    \[
+    P(Y \leq 15) = (0.9332)^5 \approx 0.705.
+    \]
+    
+    \[
+    P(Y > 15) = 1 - P(Y \leq 15) = 1 - 0.705 = 0.295.
+    \]
+    
+    2.
+    
+    记 \( Z = \min(X_1, X_2, X_3, X_4, X_5) \)，则：
+    \[
+    P(Z \geq 10) = [P(X \geq 10)]^5.
+    \]
+    
+    计算单个样本：
+    \[
+    P(X \geq 10) = 1 - P(Z \leq \frac{10 - 12}{2}) = 1 - P(Z \leq -1) = 1 - 0.1587 = 0.8413.
+    \]
+    
+    \[
+    P(Z \geq 10) = (0.8413)^5 \approx 0.418.
+    \]
+    
+    \[
+    P(Z < 10) = 1 - P(Z \geq 10) = 1 - 0.418 = 0.582.
+    \]
+
+\end{ans}
+
+\section{第六章习题 3}
+
+\begin{ans}{3}{3}
+
+已知总体 \( N(20, 3) \)，抽取容量分别为 10 和 15 的两个独立样本，样本均值分别记为 \( \bar{X} \) 和 \( \bar{Y} \)。
+
+\subsection*{1. 样本均值的分布}
+
+\[
+\bar{X} \sim N\left( 20, \frac{3}{10} \right), \quad \bar{Y} \sim N\left( 20, \frac{3}{15} \right).
+\]
+
+由于 \( \bar{X} \) 和 \( \bar{Y} \) 独立，样本均值差的分布为：
+\[
+\bar{X} - \bar{Y} \sim N\left( 0, \frac{1}{2} \right).
+\]
+
+所求概率为：
+\[
+p = 2P\left( \bar{X} - \bar{Y} > 0.3 \right).
+\]
+
+\[
+P\left( \bar{X} - \bar{Y} > 0.3 \right) = P\left( Z > \frac{0.3}{\sqrt{\frac{1}{2}}} \right) = P(Z > 0.42).
+\]
+
+查正态分布表得：
+\[
+P(Z > 0.42) = 1 - P(Z \leq 0.42) \approx 1 - 0.6628 = 0.3372.
+\]
+
+\[
+p = 2 \cdot 0.3372 = 0.6744.
+\]
+
+\end{ans}
+
+\section{第六章习题 4(2)}
+
+
+设样本 \( X_1, X_2, \dots, X_5 \) 来自总体 \( N(0, 1) \)，随机变量 \( Y \) 定义为：
+\[
+Y = \frac{C(X_1 + X_2)}{\sqrt{X_3^2 + X_4^2 + X_5^2}}.
+\]
+
+要求确定常数 \( C \)，使得 \( Y \) 服从 \( t \) 分布。
+
+\begin{ans}{4(2)}{4(2)}
+
+1. \( X_1, X_2 \) 是来自 \( N(0, 1) \) 的独立同分布随机变量，则：
+\[
+X_1 + X_2 \sim N(0, 2).
+\]
+
+因此，\( \frac{X_1 + X_2}{\sqrt{2}} \sim N(0, 1) \)。
+
+2. \( X_3^2 + X_4^2 + X_5^2 \) 是 3 个来自 \( N(0, 1) \) 的独立同分布随机变量平方和，因此：
+\[
+X_3^2 + X_4^2 + X_5^2 \sim \chi_3^2.
+\]
+
+3. \( \sqrt{X_3^2 + X_4^2 + X_5^2} \sim \sqrt{\chi_3^2} \)，即自由度为 3 的卡方分布的平方根。
+
+\subsection*{2. 构造 \( t \) 分布}
+
+根据 \( t \) 分布的定义：
+\[
+t = \frac{Z}{\sqrt{V / k}}, \quad Z \sim N(0, 1), \quad V \sim \chi_k^2,
+\]
+其中 \( k \) 为自由度。
+
+比较题目中的 \( Y \) 和 \( t \) 分布的形式，将 \( Y \) 写为：
+\[
+Y = \frac{C (X_1 + X_2)}{\sqrt{X_3^2 + X_4^2 + X_5^2}}.
+\]
+
+当自由度为 3 时，可以得到：$C = \sqrt{\frac{3}{2}} $.
+\end{ans}
+
+\section{第六章习题 6}
+\begin{ans}{6}{6}
+
+    已知总体 \( X \sim b(1, p) \)，即 \( X \) 服从参数为 \( p \) 的伯努利分布。随机样本为 \( X_1, X_2, \dots, X_n \)。
+
+\subsection*{(1) 求 \( (X_1, X_2, \dots, X_n) \) 的分布律}
+
+由于 \( X_1, X_2, \dots, X_n \) 是从总体 \( X \) 中独立抽取的样本，且 \( X_i \sim b(1, p) \, (i = 1, 2, \dots, n) \)，因此每个样本的分布为：
+\[
+P(X_i = x_i) = p^{x_i}(1 - p)^{1 - x_i}, \quad x_i = 0 \text{ 或 } 1.
+\]
+
+由于样本是相互独立的，因此联合分布为：
+\[
+P(X_1 = x_1, X_2 = x_2, \dots, X_n = x_n) = \prod_{i=1}^n P(X_i = x_i).
+\]
+
+将每个样本的概率代入得：
+\[
+P(X_1 = x_1, X_2 = x_2, \dots, X_n = x_n) = \prod_{i=1}^n p^{x_i}(1 - p)^{1 - x_i}.
+\]
+
+将幂次化简后得：
+\[
+P(X_1 = x_1, X_2 = x_2, \dots, X_n = x_n) = p^{\sum_{i=1}^n x_i}(1 - p)^{n - \sum_{i=1}^n x_i}.
+\]
+
+\subsection*{(2) 求 \( \sum_{i=1}^n X_i \) 的分布律}
+
+由于 \( X_1, X_2, \dots, X_n \) 是独立同分布的随机变量，且 \( X_i \sim b(1, p) \)，因此其和：
+\[
+\sum_{i=1}^n X_i \sim b(n, p).
+\]
+
+即：
+\[
+P\left(\sum_{i=1}^n X_i = k\right) = \binom{n}{k} p^k (1 - p)^{n - k}, \quad k = 0, 1, 2, \dots, n.
+\]
+
+\subsection*{最终结果}
+
+1. \( (X_1, X_2, \dots, X_n) \) 的联合分布为：
+\[
+P(X_1 = x_1, X_2 = x_2, \dots, X_n = x_n) = p^{\sum_{i=1}^n x_i}(1 - p)^{n - \sum_{i=1}^n x_i}.
+\]
+
+2. \( \sum_{i=1}^n X_i \sim b(n, p) \)，其分布律为：
+\[
+P\left(\sum_{i=1}^n X_i = k\right) = \binom{n}{k} p^k (1 - p)^{n - k}, \quad k = 0, 1, 2, \dots, n.
+\]
+
+3. 样本均值和样本方差的期望与方差为：
+\[
+\mathbb{E}(\bar{X}) = p, \quad D(\bar{X}) = \frac{p(1 - p)}{n}, \quad \mathbb{E}(S^2) = p(1 - p).
+\]
+
+\end{ans}
+
+\section{第六章习题 9}
+
+已知总体 \( N(\mu, \sigma^2) \)，样本容量 \( n = 16 \)，样本方差记为 \( S^2 \)，目标是：
+
+\begin{enumerate}
+    \item 求 \( P\left(\frac{S^2}{\sigma^2} \leq 2.041\right) \)。
+    \item 求 \( D(S^2) \)。
+\end{enumerate}
+
+\begin{ans}{9}{9}
+
+\subsection*{(1) 求 \( P\left(\frac{S^2}{\sigma^2} \leq 2.041\right) \)}
+
+由样本方差的统计性质可知：
+\[
+\frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1),
+\]
+其中自由度为 \( n-1 = 15 \)。
+
+因此，有：
+\[
+P\left(\frac{S^2}{\sigma^2} \leq 2.041\right) = P\left(\frac{15S^2}{\sigma^2} \leq 15 \cdot 2.041\right) = P\left(\frac{15S^2}{\sigma^2} \leq 30.615\right).
+\]
+
+定义变量：
+\[
+Y = \frac{15S^2}{\sigma^2}, \quad Y \sim \chi^2(15).
+\]
+
+\[
+P\left(\frac{S^2}{\sigma^2} \leq 2.041\right) = P\left(Y \leq 30.615\right).
+\]
+
+查 \( \chi^2 \) 分布表得：
+\[
+P(Y \leq 30.615) = 1 - P(Y > 30.615).
+\]
+
+\[
+P(Y \leq 30.615) \approx 1 - 0.01 = 0.99.
+\]
+
+\[
+P\left(\frac{S^2}{\sigma^2} \leq 2.041\right) \approx 0.99.
+\]
+
+\subsection*{(2) 求 \( D(S^2) \)}
+
+\[
+\frac{(n-1)S^2}{\sigma^2} \sim \chi^2(n-1).
+\]
+
+记：
+\[
+Y = \frac{(n-1)S^2}{\sigma^2}, \quad Y \sim \chi^2(15).
+\]
+
+根据 \( \chi^2 \) 分布的性质，有：
+\[
+D(Y) = 2 \cdot (n-1) = 2 \cdot 15 = 30.
+\]
+
+结合 \( Y = \frac{15S^2}{\sigma^2} \)，得：
+\[
+D\left(\frac{15S^2}{\sigma^2}\right) = 30.
+\]
+
+由方差的缩放性质：
+\[
+D(S^2) = \frac{\sigma^4}{15^2} \cdot D\left(\frac{15S^2}{\sigma^2}\right).
+\]
+
+\[
+D(S^2) = \frac{\sigma^4}{15^2} \cdot 30 = \frac{2\sigma^4}{15}.
+\]
+
+\end{ans}
+
+\end{document}

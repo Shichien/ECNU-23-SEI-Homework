@@ -1,0 +1,338 @@
+\documentclass[twoside]{article}
+\input{Template Head.tex}
+% ————————————————————————————————————————————————————————————————————————
+\begin{document}
+
+\maketitle
+\vspace{-3.5em}
+\garis{Kite}{Kite}
+
+\tableofcontents
+
+\section{第四章习题 6}
+
+Given the following probability distribution for the random variable \( X \):
+
+\[
+\begin{array}{c|ccc}
+X & -2 & 0 & 2 \\
+\hline
+P(X) & 0.4 & 0.3 & 0.3 \\
+\end{array}
+\]
+
+1. Calculate \( E(X) \), \( E(X^2) \), and \( E(3X^2 + 5) \).
+2. If \( X \sim \pi(\lambda) \), find \( E\left(\frac{1}{X+1}\right) \).
+
+\begin{ans}{6}{6}
+
+    1.
+    \[
+    E(X) = \sum_{i} x_i \cdot P(X = x_i)
+    \]
+    代入值计算：
+    \[
+    E(X) = (-2) \cdot 0.4 + 0 \cdot 0.3 + 2 \cdot 0.3 = -0.8 + 0 + 0.6 = -0.2
+    \]
+ 
+    2.
+    \[
+    E(X^2) = \sum_{i} x_i^2 \cdot P(X = x_i)
+    \]
+    代入值计算：
+    \[
+    E(X^2) = (-2)^2 \cdot 0.4 + 0^2 \cdot 0.3 + 2^2 \cdot 0.3 = 4 \cdot 0.4 + 0 + 4 \cdot 0.3 = 1.6 + 0 + 1.2 = 2.8
+    \]
+
+    3.
+    根据期望的线性性质，有：
+    \[
+    E(3X^2 + 5) = 3E(X^2) + 5
+    \]
+    代入 \( E(X^2) = 2.8 \)：
+    \[
+    E(3X^2 + 5) = 3 \cdot 2.8 + 5 = 8.4 + 5 = 13.4
+    \]
+\end{ans}
+
+\section{第四章习题 7}
+
+7. (1) 设随机变量 \( X \) 的概率密度为：
+   \[
+   f(x) = 
+   \begin{cases}
+      e^{-x}, & x > 0, \\
+      0, & x \leq 0.
+   \end{cases}
+   \]
+   求以下的数学期望：
+   \begin{itemize}
+       \item[(i)] \( Y = 2X \)
+       \item[(ii)] \( Y = e^{-2X} \)
+   \end{itemize}
+
+   (2) 设随机变量 \( X_1, X_2, \dots, X_n \) 相互独立，且都服从 \( (0,1) \) 上的均匀分布。
+   \begin{itemize}
+       \item[(i)] 求 \( U = \max\{X_1, X_2, \dots, X_n\} \) 的数学期望。
+       \item[(ii)] 求 \( V = \min\{X_1, X_2, \dots, X_n\} \) 的数学期望。
+   \end{itemize}
+
+\begin{ans}{7}{7}
+
+    1. 计算 \( Y = 2X \) 的数学期望：
+
+   由于 \( Y = 2X \)，我们有：
+   \[
+   E(Y) = E(2X) = 2E(X)
+   \]
+   对于参数为 \( \lambda = 1 \) 的指数分布，期望值 \( E(X) = \frac{1}{\lambda} = 1 \)。因此，
+   \[
+   E(Y) = 2 \cdot 1 = 2
+   \]
+
+2. 计算 \( Y = e^{-2X} \) 的数学期望：
+
+   要计算 \( E(Y) = E(e^{-2X}) \)，我们可以这样求解：
+   \[
+   E(e^{-2X}) = \int_{0}^{\infty} e^{-2x} f(x) \, dx = \int_{0}^{\infty} e^{-2x} \cdot e^{-x} \, dx = \int_{0}^{\infty} e^{-3x} \, dx
+   \]
+   计算该积分：
+   \[
+   E(e^{-2X}) = \int_{0}^{\infty} e^{-3x} \, dx = \left[ -\frac{1}{3} e^{-3x} \right]_{0}^{\infty} = \frac{1}{3}
+   \]
+
+\subsection*{第(2)问}
+
+1. 计算 \( U = \max\{X_1, X_2, \dots, X_n\} \) 的数学期望：
+
+   对于 \( X_i \sim \text{Uniform}(0,1) \)， \( U = \max\{X_1, X_2, \dots, X_n\} \) 的累积分布函数（CDF）为：
+   \[
+   P(U \leq u) = P(X_1 \leq u, X_2 \leq u, \dots, X_n \leq u) = P(X_i \leq u)^n = u^n
+   \]
+   因此，\( U \) 的概率密度函数（PDF）为：
+   \[
+   f_U(u) = \frac{d}{du} P(U \leq u) = \frac{d}{du} u^n = n u^{n-1}, \quad 0 < u < 1
+   \]
+   \( U \) 的数学期望为：
+   \[
+   E(U) = \int_{0}^{1} u \cdot f_U(u) \, du = \int_{0}^{1} u \cdot n u^{n-1} \, du = n \int_{0}^{1} u^n \, du
+   \]
+   计算该积分：
+   \[
+   E(U) = n \cdot \frac{1}{n+1} = \frac{n}{n+1}
+   \]
+
+2. 计算 \( V = \min\{X_1, X_2, \dots, X_n\} \) 的数学期望：
+
+   对于 \( X_i \sim \text{Uniform}(0,1) \)，\( V = \min\{X_1, X_2, \dots, X_n\} \) 的累积分布函数为：
+   \[
+   P(V > v) = P(X_1 > v, X_2 > v, \dots, X_n > v) = P(X_i > v)^n = (1 - v)^n
+   \]
+   因此，\( V \) 的概率密度函数为：
+   \[
+   f_V(v) = \frac{d}{dv} (1 - v)^n = -n (1 - v)^{n-1}, \quad 0 < v < 1
+   \]
+   \( V \) 的数学期望为：
+   \[
+   E(V) = \int_{0}^{1} v \cdot f_V(v) \, dv = \int_{0}^{1} v \cdot n (1 - v)^{n-1} \, dv
+   \]
+   使用分部积分或 Beta 函数的已知结果，我们得到：
+   \[
+   E(V) = \frac{1}{n+1}
+   \]
+\end{ans}
+
+\section{第四章习题 9}
+
+9. (1) 设随机变量 \( (X, Y) \) 的概率密度为
+   \[
+   f(x, y) = 
+   \begin{cases}
+      12y^2, & 0 \leq y \leq x \leq 1, \\
+      0, & \text{其他}.
+   \end{cases}
+   \]
+   求 \( E(X) \), \( E(Y) \), \( E(XY) \), \( E(X^2 + Y^2) \)。
+
+   (2) 设随机变量 \( X, Y \) 的联合概率密度为
+   \[
+   f(x, y) = 
+   \begin{cases}
+      \frac{1}{y} e^{-(x + \frac{y}{y})}, & x > 0, y > 0, \\
+      0, & \text{其他}.
+   \end{cases}
+   \]
+   求 \( E(X) \), \( E(Y) \), \( E(XY) \)。
+
+\begin{ans}{9}{9}
+
+   根据期望的定义，\( E(X) \) 的表达式为：
+   \[
+   E(X) = \iint_{D} x f(x, y) \, dx \, dy,
+   \]
+   其中区域 \( D \) 满足 \( 0 \leq y \leq x \leq 1 \)。将密度函数 \( f(x, y) = 12y^2 \) 代入，得到：
+   \[
+   E(X) = \int_{0}^{1} \int_{y}^{1} x \cdot 12y^2 \, dx \, dy = \frac{4}{5}
+   \]
+
+
+   同理，\( E(Y) \), \( E(XY) \) 的计算公式为：
+   \[
+   E(Y) = \iint_{D} y f(x, y) \, dx \, dy = \int_{0}^{1} \int_{y}^{1} y \cdot 12y^2 \, dx \, dy = \frac{3}{5}
+   \]
+
+   \[
+   E(XY) = \iint_{D} x y f(x, y) \, dx \, dy = \int_{0}^{1} \int_{y}^{1} x y \cdot 12y^2 \, dx \, dy = \frac{1}{2}
+   \]
+
+   使用期望的线性性质，\( E(X^2 + Y^2) = E(X^2) + E(Y^2) \)，其中：
+   \[
+   E(X^2) = \iint_{D} x^2 f(x, y) \, dx \, dy = \int_{0}^{1} \int_{y}^{1} x^2 \cdot 12y^2 \, dx \, dy,
+   \]
+   \[
+   E(Y^2) = \iint_{D} y^2 f(x, y) \, dx \, dy = \int_{0}^{1} \int_{y}^{1} y^2 \cdot 12y^2 \, dx \, dy.
+   \]
+   代入相加可得：
+   \[
+   E(X^2 + Y^2) = E(X^2) + E(Y^2) = \frac{16}{15}
+   \]
+
+\subsection*{第(2)问}
+
+    1.
+   对于联合密度函数 \( f(x, y) = \frac{1}{y} e^{-(x + \frac{y}{y})} \)，我们可以计算 \( E(X) \)：
+   \[
+   E(X) = \int_{0}^{\infty} \int_{0}^{\infty} x f(x, y) \, dx \, dy = \int_{0}^{\infty} \int_{0}^{\infty} x \cdot \frac{1}{y} e^{-(y + \frac{x}{y})} \, dx \, dy.
+   \]
+
+    2.与上同理
+   \[
+   E(Y) = \int_{0}^{\infty} \int_{0}^{\infty} y f(x, y) \, dx \, dy = \int_{0}^{\infty} \int_{0}^{\infty} y \cdot \frac{1}{y} e^{-(y + \frac{x}{y})} \, dx \, dy.
+   \]
+
+    3.
+   \[
+   E(XY) = \int_{0}^{\infty} \int_{0}^{\infty} x y f(x, y) \, dx \, dy = \int_{0}^{\infty} \int_{0}^{\infty} x y \cdot \frac{1}{y} e^{-(x + \frac{y}{y})} \, dx \, dy.
+   \]
+\end{ans}
+
+\section{第四章习题 12}
+
+某车间生产的圆盘直径在区间 (a,b) 上服从均匀分布，试求圆盘面积的数学期望。
+
+\begin{ans}{12}{12}
+
+   设圆盘的直径为随机变量 \( D \)，其在区间 \( (a, b) \) 上服从均匀分布。因此，概率密度函数 \( f(D) \) 为：
+   \[
+   f(D) = \frac{1}{b - a}, \quad a \leq D \leq b.
+   \]
+
+   圆盘的面积 \( A \) 可以表示为：
+   \[
+   A = \pi \left( \frac{D}{2} \right)^2 = \frac{\pi}{4} D^2.
+   \]
+
+   则：
+   \[
+   E(A) = E\left( \frac{\pi}{4} D^2 \right) = \frac{\pi}{4} E(D^2).
+   \]
+
+
+   因为 \( D \) 在 \( (a, b) \) 上均匀分布，所以：
+   \[
+   E(D^2) = \int_{a}^{b} D^2 \cdot f(D) \, dD = \int_{a}^{b} D^2 \cdot \frac{1}{b - a} \, dD.
+   \]
+   计算该积分：
+   \[
+   E(D^2) = \frac{1}{b - a} \int_{a}^{b} D^2 \, dD.
+   \]
+   对 \( D^2 \) 积分，得到：
+   \[
+   \int D^2 \, dD = \frac{D^3}{3},
+   \]
+   因此，
+   \[
+   E(D^2) = \frac{1}{b - a} \left[ \frac{D^3}{3} \right]_{a}^{b} = \frac{1}{b - a} \cdot \frac{b^3 - a^3}{3} = \frac{b^3 - a^3}{3(b - a)}.
+   \]
+
+
+   代入 \( E(D^2) \) 的值，我们得到：
+   \[
+   E(A) = \frac{\pi}{4} \cdot \frac{b^3 - a^3}{3(b - a)} = \frac{\pi (b^3 - a^3)}{12(b - a)}.
+   \]
+
+   通过分解 \( b^3 - a^3 \) 为 \( (b - a)(b^2 + ab + a^2) \)，可以进一步简化：
+   \[
+   E(A) = \frac{\pi}{12} (b^2 + ab + a^2).
+   \]
+\end{ans}
+
+\section{第四章习题 14}
+
+设随机变量 \( X_1, X_2 \) 的概率密度分别为
+\[
+f_1(x) = 
+\begin{cases}
+2e^{-2x}, & x > 0, \\
+0, & x \leq 0,
+\end{cases}
+\]
+\[
+f_2(x) = 
+\begin{cases}
+4e^{-4x}, & x > 0, \\
+0, & x \leq 0.
+\end{cases}
+\]
+
+\begin{ans}{14}{14}
+
+    1. 计算 \( E(X_1 + X_2) \)：
+
+    根据期望的线性性质，\( E(X_1 + X_2) = E(X_1) + E(X_2) \)。
+ 
+    - \( X_1 \) 服从指数分布，概率密度为 \( f_1(x) = 2e^{-2x} \)，因此 \( X_1 \) 的期望为：
+      \[
+      E(X_1) = \int_0^{\infty} x \cdot 2e^{-2x} \, dx = \frac{1}{2}.
+      \]
+ 
+    - \( X_2 \) 也服从指数分布，概率密度为 \( f_2(x) = 4e^{-4x} \)，因此 \( X_2 \) 的期望为：
+      \[
+      E(X_2) = \int_0^{\infty} x \cdot 4e^{-4x} \, dx = \frac{1}{4}.
+      \]
+ 
+    所以，
+    \[
+    E(X_1 + X_2) = E(X_1) + E(X_2) = \frac{1}{2} + \frac{1}{4} = \frac{3}{4}.
+    \]
+ 
+ 2. 计算 \( E(2X_1 - 3X_2^2) \)：
+ 
+    根据期望的线性性质，\( E(2X_1 - 3X_2^2) = 2E(X_1) - 3E(X_2^2) \)。
+ 
+    - 已知 \( E(X_1) = \frac{1}{2} \)，所以 \( 2E(X_1) = 2 \times \frac{1}{2} = 1 \)。
+    
+    - 计算 \( E(X_2^2) \)。对于指数分布的 \( X_2 \)（参数为 4），我们有：
+      \[
+      E(X_2^2) = \int_0^{\infty} x^2 \cdot 4e^{-4x} \, dx = \frac{2}{16} = \frac{1}{8}.
+      \]
+ 
+    所以，
+    \[
+    E(2X_1 - 3X_2^2) = 1 - 3 \cdot \frac{1}{8} = 1 - \frac{3}{8} = \frac{5}{8}.
+    \]
+ 
+ \subsection*{第(2)问}
+ 
+ 若 \( X_1 \) 和 \( X_2 \) 相互独立，则 \( E(X_1 X_2) = E(X_1) \cdot E(X_2) \)。
+ 
+ - 已知 \( E(X_1) = \frac{1}{2} \) 和 \( E(X_2) = \frac{1}{4} \)。
+ 
+ 因此，
+ \[
+ E(X_1 X_2) = E(X_1) \cdot E(X_2) = \frac{1}{2} \cdot \frac{1}{4} = \frac{1}{8}.
+ \]
+
+\end{ans}
+
+\end{document}

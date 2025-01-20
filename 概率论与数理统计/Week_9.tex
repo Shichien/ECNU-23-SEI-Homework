@@ -1,0 +1,267 @@
+\documentclass[twoside]{article}
+\input{Template Head.tex}
+% ————————————————————————————————————————————————————————————————————————
+\begin{document}
+
+\maketitle
+\vspace{-3.5em}
+\garis{Kite}{Kite}
+
+\tableofcontents
+
+\section{第三章习题 20}
+
+设 $X$ 和 $Y$ 是相互独立的随机变量，其概率密度分别为
+\[
+f_X(x) = 
+\begin{cases} 
+ae^{-ax}, & x > 0, \\ 
+0, & x \leq 0 
+\end{cases}, \quad 
+f_Y(y) = 
+\begin{cases} 
+\mu e^{-\mu y}, & y > 0, \\ 
+0, & y \leq 0 
+\end{cases}
+\]
+其中 $a > 0, \mu > 0$ 是常数。引入随机变量
+\[
+Z = 
+\begin{cases} 
+1, & \text{当 } X \leq Y, \\ 
+0, & \text{当 } X > Y 
+\end{cases}
+\]
+
+\begin{enumerate}
+    \item 求条件概率密度 $f_{X|Y}(x|y)$。
+    \item 求 $Z$ 的分布律和分布函数。
+\end{enumerate}
+
+
+\begin{ans}{20}{20}
+    \textbf{解:} 由于 $X$ 和 $Y$ 相互独立，$(X,Y)$ 的联合概率密度为 
+\[
+f(x,y) = f_X(x)f_Y(y) =
+\begin{cases} 
+\mu ae^{-ax-\mu y}, & x > 0, y > 0, \\ 
+0, & \text{其他情况} 
+\end{cases}
+\]
+
+\begin{enumerate}
+    \item 当 $y > 0$ 时，有
+    \[
+    f_{X|Y}(x|y) = f_X(x) = 
+    \begin{cases} 
+    ae^{-ax}, & x > 0, \\ 
+    0, & \text{其他情况} 
+    \end{cases}
+    \]
+    
+    \item 
+    \[
+    P(X \leq Y) = \int_{G: x \leq y} f(x,y)dxdy = \int_{0}^{\infty} \int_{0}^{y} f(x,y)dxdy 
+    \]
+    \[
+    = \int_{0}^{\infty} \left[-\lambda e^{-ax-\mu y}\right]_{x=0}^{x=y} dy = \int_{0}^{\infty} -\lambda e^{-ay-\mu y} dy
+    \]
+    \[
+    = \int_{0}^{\infty} ae^{-(\lambda + \mu)y} dy = \frac{\lambda}{\lambda + \mu}
+    \]
+
+    而且 
+    \[
+    P(X > Y) = 1 - P(X \leq Y) = \frac{\mu}{\lambda + \mu}
+    \]
+
+    故 $Z$ 的分布律为
+    \[
+    \begin{array}{|c|c|}
+    \hline
+    Z & P_Z \\
+    \hline
+    0 & \frac{\mu}{\lambda + \mu} \\
+    1 & \frac{\lambda}{\lambda + \mu} \\
+    \hline
+    \end{array}
+    \]
+
+    $Z$ 的分布函数为
+    \[
+    F_Z(z) = 
+    \begin{cases} 
+    0, & z < 0, \\ 
+    \frac{\mu}{\lambda + \mu}, & 0 \leq z < 1, \\ 
+    1, & z \geq 1 
+    \end{cases}
+    \]
+\end{enumerate}
+
+\end{ans}
+
+\section{第二章习题 22}
+
+\section*{22. 设 $X$ 和 $Y$ 是两个相互独立的随机变量，其概率密度分别为}
+\[
+f_X(x) = 
+\begin{cases} 
+1, & 0 \leq x \leq 1, \\ 
+0, & \text{其他情况} 
+\end{cases}, \quad 
+f_Y(y) = 
+\begin{cases} 
+e^{-y}, & y > 0, \\ 
+0, & \text{其他情况} 
+\end{cases}
+\]
+
+\textbf{求随机变量} $Z = X + Y$ \textbf{的概率密度}。
+
+\begin{ans}{22}{22}
+
+    \textbf{解：} 利用公示：
+\[
+f_{Z}(z) = \int_{-\infty}^{\infty} f_X(x) f_Y(z - x) dx
+\]
+
+\textbf{因此，} $f_{Z}(z)$ 的定义如下：
+\[
+f_Z(z) = \int_{0}^{1} f_X(x) f_Y(z - x) dx = \int_{0}^{1} f_X(x) e^{-(z-x)} dx
+\]
+\[
+= \int_{0}^{1} 1 \cdot e^{-(z-x)} dx = \int_{0}^{1} e^{-z+x} dx
+\]
+
+\textbf{则有：}
+\[
+f_Z(z) = 
+\begin{cases} 
+\left(1 - e^{-z}\right), & 0 < z < 1, \\ 
+0, & z \leq 0 \text{ 或 } z \geq 1 
+\end{cases}
+\]
+
+若利用公式
+\[
+f_Z(z) = \int_{0}^{1} f_X(x) f_Y(z - x) dx
+\]
+可以得出：
+\[
+f_Z(z) = \int_{0}^{1} f_Y(z-x)dx
+\]
+
+\textbf{条件：}
+\begin{itemize}
+    \item 当 $0 < z < 1$ 时，
+    \[
+    F_Z(z) = P(Z \leq z) = P(X + Y \leq z) = \int_{0}^{z} f_X(x)dxdy = \int_{0}^{z} 1 \cdot dy = z
+    \]
+    
+    \item 当 $z \geq 1$ 时，
+    \[
+    F_Z(z) = P(Z \leq z) = P(X + Y \leq z) = \int_{0}^{z} e^{-(z-x)}dx
+    \]
+\end{itemize}
+
+\textbf{得到：}
+\[
+F_Z(z) = 
+\begin{cases} 
+0, & z < 0, \\ 
+1 - e^{-z}, & 0 < z < 1, \\ 
+1 - (1 - e^{-1}), & z \geq 1 
+\end{cases}
+\]
+
+\end{ans}
+
+\section{第一章习题 23}
+
+某种商品周围的需求量是一个随机变量，其概率密度为
+\[
+f(t) = 
+\begin{cases} 
+te^{-t}, & t > 0, \\ 
+0, & t \leq 0 
+\end{cases}
+\]
+
+设各周的需求量是相互独立的。求 (1) 两周，(2) 三周的需求量的概率密度。
+
+\begin{ans}{23}{23}
+    \textbf{解：} 设某种商品在第 $i$ 周的需求量为 $X_i\,(i=1,2,3)$，由题设 $X_1, X_2, X_3$ 相互独立，并且
+
+    \[
+    f_{X_i}(t) = f(t) =
+    \begin{cases} 
+    te^{-t}, & t > 0, \\ 
+    0, & t \leq 0 
+    \end{cases}
+    \]
+    
+    (1) 记两周的需求量 $Z$，即 $Z = X_1 + X_2$，则 $Z$ 的概率密度为
+    \[
+    f_Z(z) = \int_0^{\infty} f(x) f(z-x) dx.
+    \]
+    
+    由 $f(t)$ 的定义，知
+    \[
+    f_Z(z) = 
+    \begin{cases} 
+    \int_0^{z} f(x) f(z-x) dx, & z > 0, \\ 
+    0, & \text{其他情况} 
+    \end{cases}
+    \]
+    
+    计算 $f_Z(z)$ 时，上述积分的被积函数不等于零，于是
+    \[
+    f_Z(z) = \int_0^{z} xe^{-(z-x)}e^{-x} dx = e^{-z} \int_0^{z} x e^{-2x} dx.
+    \]
+    
+    此时，可以利用分部积分法求解，得到
+    \[
+    f_Z(z) = e^{-z} \left[-\frac{1}{2}e^{-2x}\right]_{0}^{z} = e^{-z} \cdot \frac{1}{2}(1 - e^{-2z}).
+    \]
+    
+    (2) 记三周的需求量 $W$，即 $W = Z + X_3$，因 $X_1, X_2, X_3$ 相互独立，故 $Z = X_1 + X_2$ 也相互独立，从而 $W$ 的概率密度为
+    \[
+    f_W(u) = \int_0^{\infty} f_Z(z) f_{X_3}(u - z) dz.
+    \]
+    
+    由上述 $f_Z(z)$ 及 $f(t)$ 的定义，知
+    \[
+    f_W(u) = 
+    \begin{cases} 
+    \int_0^{u} f_Z(z) f_{X_3}(u - z) dz, & u > 0, \\ 
+    0, & \text{其他情况} 
+    \end{cases}
+    \]
+    
+    在计算时，上述积分的被积函数不等于零，因此 $W$ 的概率密度为
+    \[
+    f_W(u) = \int_0^{u} \left[\frac{1}{2}e^{-z}(1 - e^{-2z})\right]e^{-(u-z)} dz = e^{-u} \int_0^{u} \frac{1}{2} (1 - e^{-2z}) dz.
+    \]
+    
+    计算这个积分，得到：
+    \[
+    f_W(u) = e^{-u} \left[\frac{u}{2} + \frac{1}{4}(1 - e^{-2u})\right] = e^{-u} \cdot \frac{u}{2}, \quad u > 0.
+    \]
+\end{ans}
+
+\section{第三章习题 30}
+
+设某种型号的电子元件的寿命（以 h 计）近似地服从正态分布 $N(160, 20^2)$，随机地选择 4 只，求其中没有一只寿命小于 180 h 的概率。
+
+\textbf{解：} 以 $X_i\,(i = 1,2,3,4)$ 记所选取的第 $i$ 只元件的寿命，由题设一只元件寿命小于 180 h 的概率为
+\[
+P\{X_i \leq 180\} = P\left(\frac{X_i - 160}{20} \leq \frac{180 - 160}{20}\right) = \Phi\left(\frac{180 - 160}{20}\right) = \Phi(1) \approx 0.8413.
+\]
+
+\begin{ans}{30}{30}
+可认为 $X_1, X_2, X_3, X_4$ 相互独立，故选取的 4 只元件没有一只寿命小于 180 h 的概率为
+\[
+P\left(\bigcap_{i=1}^{4} \{X_i > 180\}\right) = \prod_{i=1}^{4} (1 - P\{X_i \leq 180\}) = (1 - 0.8413)^4 \approx 0.000063.
+\]
+\end{ans}
+\end{document}
