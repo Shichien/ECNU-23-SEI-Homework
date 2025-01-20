@@ -1,0 +1,1 @@
+docker run -it --rm --name pintos --mount type=bind,source=/c/Users/26421/Desktop/src(Copy),target=/home/PKUOS/pintos pkuflyingpig/pintos bash
